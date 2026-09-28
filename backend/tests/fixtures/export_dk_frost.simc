@@ -1,0 +1,97 @@
+# Frostbyte - Frost - 2026-09-21 12:34 - US/Area 52
+# SimC Addon 12.1.0-01
+# WoW 12.1.0.69875, TOC 120100
+# Requires SimulationCraft 1000-01 or newer
+
+deathknight="Frostbyte"
+level=90
+race=human
+region=us
+server=area_52
+role=attack
+professions=blacksmithing=100/mining=75
+spec=frost
+# loot_spec=frost
+
+talents=CsPAAAAAAAAAAAAAAAAAAAAAAMAGAADYYYMiBjhZGDmZmZmZmZmBAAAAAAAAgxYgBAsMMhMWwMjhBGAGmBAwA
+
+# Saved Loadout: Raid ST
+# talents=CsPAAAAAAAAAAAAAAAAAAAAAAMAGAADYYYMiBjhZGDmZmZmZmZmBAAAAAAAAgxYgBAsMMhMWwMjhBGAGmBAwA
+# Saved Loadout: M+ Cleave
+# talents=CsPAAAAAAAAAAAAAAAAAAAAAAMAGAADYYYMiBjhZGDmZmZmZmZmBAAAAAAAAgxYgBAsMMhMWwMjhBGAGmBAwB
+
+omnium_talents=136822:1/136819:1/136817:1
+
+# Baleful Graveknight's Casque (334)
+head=,id=271474,bonus_id=4786/12854/13692/13698/13750,gem_id=240983,redirected_base_stats=251126
+# Aqirbane Reliquary (344)
+neck=,id=268265,bonus_id=13335/13708/13848,gem_id=240908/240908
+# Baleful Graveknight's Gibbets (334)
+shoulder=,id=271472,bonus_id=4786/12854/13691/13697,redirected_base_stats=251138
+# Silken Voodoo Drape (344)
+back=,id=268253,bonus_id=13335/13848,content_tuning=883
+# Reckless Spirit Breastplate (344)
+chest=,id=268222,enchant_id=7987,bonus_id=13335/13848,content_tuning=883
+# Spellbreaker's Bracers (344)
+wrist=,id=237834,bonus_id=8793/8960/12384/13750/13751/13836/12497,gem_id=240908,crafted_stats=32/49,crafting_quality=5
+# Baleful Graveknight's Deathgrips (334)
+hands=,id=271475,bonus_id=4786/12854/13691/13697
+# Girdle of Toxic Regret (344)
+waist=,id=268259,bonus_id=13335/13750/13848,gem_id=240908,content_tuning=883
+# Baleful Graveknight's Greaves (344)
+legs=,id=271473,enchant_id=8159,bonus_id=40/13693/13698/13846,ilevel=344,content_tuning=8078
+# Spellbreaker's March (344)
+feet=,id=237828,bonus_id=8790/8960/12384/13751/13836/12497
+# Sickening Signet of Atroxus (344)
+finger1=,id=252258,enchant_id=7967,gem_id=240908,bonus_id=12854/13335,content_tuning=883
+# Vile Alchemist's Band (344)
+finger2=,id=268249,enchant_id=7967,gem_id=240908,bonus_id=12854/13335,content_tuning=883
+# Voracious Heart of Ulatek (344)
+trinket1=,id=270175,bonus_id=13335/13848
+# Zul'jin's Guillotine Technique (344)
+trinket2=,id=270173,bonus_id=13335/13848,content_tuning=883
+# Amanmuso Warlord's Vengeance (344)
+main_hand=,id=268209,enchant_id=3368,bonus_id=13335/13848,content_tuning=883
+# Jaw of the Shackled Goddess (344)
+off_hand=,id=268202,enchant_id=3847,bonus_id=13847/13848
+
+### Gear from Bags
+#
+# Apex Brute's Claw Ring (334)
+# finger1=,id=268252,bonus_id=13534,ilevel=334,gem_id=240908,enchant_id=7967
+#
+# Font of Venomous Rage (344)
+# trinket1=,id=270168,ilevel=344
+#
+# Zathatek, Breath of Corruption (344)
+# main_hand=,id=271093,bonus_id=13662/13848,enchant_id=8689
+#
+# Sharpened Lightwood Slasher (334)
+# off_hand=,id=275070,ilevel=334,enchant_id=8689
+#
+# Chosen Bloodslayer's Fanged Grips (334)
+# hands=,id=271511,bonus_id=12854/13691/13697
+
+### Weekly Reward Choices
+#
+# Silvermoon Agent's Sneakers (344)
+# feet=,id=244569,bonus_id=8790/8960/12214/12384,ilevel=344
+#
+# Sash of the Forlorn Vessel (344)
+# waist=,id=268256,bonus_id=13662/13750/13848
+#
+### End of Weekly Reward Choices
+
+### Additional Character Info
+#
+# catalyst_currencies=3116:2:0
+#
+# upgrade_currencies=c:3110:120,c:3111:30
+#
+# slot_high_watermarks=1:344:344
+#
+# upgrade_achievements=
+#
+# bonus_roll_currencies=
+
+# Checksum: 1a2b3c4d

@@ -1,0 +1,102 @@
+  : start=  8.5 refresh= 17.1 interval= 36.0 trigger= 11.5 duration= 26.7 uptime= 75.23%
+    venomcursed_critical_strike         : start=  7.3 refresh=  3.9 interval= 39.2 trigger= 24.7 duration= 15.9 uptime= 38.79%
+    venomcursed_haste                   : start=  7.4 refresh=  3.7 interval= 38.8 trigger= 24.9 duration= 15.7 uptime= 38.59%
+    venomcursed_mastery                 : start=  7.4 refresh=  3.8 interval= 39.3 trigger= 24.9 duration= 15.8 uptime= 38.93%
+    voracious_heart_of_ulatek           : start=  3.7 refresh=  0.0 interval= 91.2 trigger= 91.2 duration= 19.6 uptime= 24.31%
+  Up-Times:
+     10.95% : Runic Power Cap               
+  Procs:
+    186.17718 |   2.42495sec : Killing Machine spent on Obliterate
+     13.06406 |  22.90784sec : Killing Machine wasted: Critical auto attacks
+      2.01702 |  75.55110sec : Killing Machine wasted: Empower Rune Weapon
+      0.20220 | 152.26012sec : Killing Machine wasted: Exterminate
+      3.17718 |  59.45286sec : Killing Machine wasted: Frost Strike
+      0.89690 | 101.64649sec : Killing Machine wasted: Grim Reaper
+      1.50350 |  84.99026sec : Killing Machine wasted: Howling Blast
+     95.81582 |   3.27178sec : Killing Machine: Critical auto attacks
+     24.27427 |  12.51836sec : Killing Machine: Empower Rune Weapon
+     20.64364 |  14.17059sec : Killing Machine: Exterminate
+     25.15716 |  11.51807sec : Killing Machine: Frost Strike
+      6.16316 |  51.97540sec : Killing Machine: Grim Reaper
+     14.74975 |  19.79346sec : Killing Machine: Howling Blast
+    123.48248 |   2.42479sec : Razorice from Arctic Assault
+    230.64064 |   1.42665sec : Rune ready
+     48.79780 |   6.02345sec : Skyfury (Main Hand)
+     41.04304 |   7.13169sec : Skyfury (Off Hand)
+  Gains:
+         6.5 : Breath of Sindragosa        (rune)           (overflow=5.47%)
+       844.9 : Empower Rune Weapon         (runic_power)    (overflow=19.68%)
+       185.8 : Frost Fever                 (runic_power)    (overflow=11.24%)
+        37.2 : Murderous Efficiency        (rune)         
+         8.9 : Obliteration                (rune)         
+       440.0 : Rage of the Frozen Champion (runic_power)    (overflow=7.25%)
+       111.5 : Rune Regeneration           (rune)         
+       241.2 : Runic Attenuation           (runic_power)    (overflow=11.43%)
+        66.5 : Runic Empowerment           (rune)         
+         0.3 : howling_blast               (runic_power)  
+      1933.7 : obliterate                  (runic_power)    (overflow=12.17%)
+       135.3 : reapers_mark                (runic_power)    (overflow=4.21%)
+  Scale Factors:
+    Weights :  Str=71.37107311429735(4.559063493879467)  AP=0(0)  Crit=66.3726806781928(4.36865609453718)  Haste=48.285360003784135(4.432613253356119)  Mastery=43.6393314155445(4.4845146024102975)  Vers=37.39993099778227(4.419369428216484)  Wdps=0(0)  WOHdps=0(0)
+    Wowhead : https://www.wowhead.com/?items&filter=ub=6;gm=3;gb=1;minle=250;ro=3;wt=20:96:103:170:215;wtv=71.37:66.37:48.29:43.64:37.40;
+  Waiting:  1.49%
+
+
+ *** Targets *** 
+
+Target: Fluffy_Pillow humanoid tank_dummy unknown 93
+  DTPS=249594.06359087015 DTPS-Error=483.7227570474409/0.19% DTPS-Range=27216.444114041384/10.90%
+  DPR=0 RPS-Out=247268.3280576015 RPS-In=0 Resource=health Waiting=0 ApM=0
+  Core Stats:    strength=0|0(0)  agility=0|0(0)  stamina=0|0(0)  intellect=0|0(0)  spirit=0|0(0)  health=0|89719186  mana=0|0
+  Generic Stats: mastery=0.00%|0.00%(0)  versatility=0.00%|0.00%(0)  leech=0.00%|0.00%(0)  runspeed=7.00%|7.00%(0)
+  Spell Stats:   power=0|0(0)  hit=0.00%|0.00%(0)  crit=0.00%|0.00%(0)  haste=0.00%|0.00%(0)  speed=0.00%|0.00%  manareg=0|0(0)
+  Attack Stats:  power=0|0(0)  hit=0.00%|0.00%(0)  crit=5.00%|5.00%(0)  expertise=0.00%|0.00%(0)  haste=0.00%|0.00%(0)  speed=0.00%|0.00%
+  Defense Stats: armor=1470|1470(1470) miss=3.00%|3.00%  dodge=3.00%|3.00%(0)  parry=3.00%|3.00%(0)  block=0.00%|0.00%(0) crit=0.00%|0.00%  versatility=0.00%|0.00%(0)
+  Priorities (actions.precombat):
+    snapshot_stats
+  Priorities (actions.default):
+
+  Actions:
+
+  Constant Buffs:
+    arcane_intellect/battle_shout/bleeding/chaos_brand/hunters_mark/mark_of_the_wild/mortal_wounds/mystic_touch/power_word_fortitude/skyfury
+  Dynamic Buffs:
+    brittle              : start= 18.9 refresh=  7.2 interval= 15.4 trigger= 11.0 duration=  5.9 uptime= 37.13%
+    everfrost            : start=  6.1 refresh=257.0 interval= 53.7 trigger=  1.1 duration= 40.8 uptime= 83.56%
+    frostreaper          : start= 35.2 refresh=  3.8 interval=  8.4 trigger=  7.6 duration=  2.0 uptime= 23.31%  benefit= 34.98%
+    razorice             : start=  1.0 refresh=122.5 interval=  1.4 trigger=  2.4 duration=298.6 uptime= 99.51%
+    reapers_mark_debuff  : start=  7.1 refresh= 95.4 interval= 45.5 trigger= 45.6 duration=  1.9 uptime=  4.51%
+    venomfang_debuff     : start= 18.4 refresh= 49.9 interval= 10.6 trigger=  4.3 duration= 12.4 uptime= 76.10%
+    wave_of_souls_debuff : start=  7.0 refresh=  2.4 interval= 45.5 trigger= 32.8 duration= 15.0 uptime= 35.39%
+  Scale Factors:
+    Weights :
+    Wowhead : 
+  Waiting:  0.00%
+
+
+Baseline Performance:
+  Networking    = enabled
+  RNG Engine    = xoshiro256+
+  Iterations    = 1007 (126, 126, 125, 128, 127, 127, 124, 124)
+  TotalEvents   = 11567268
+  MaxEventQueue = 121
+  TargetHealth  = 89719186
+  SimSeconds    = 299738.458
+  CpuSeconds    = 6.765625
+  WallSeconds   = 0.9107152000000001
+  InitSeconds   = 0.033655000000000004
+  MergeSeconds  = 0.0024844000000000003
+  AnalyzeSeconds= 0.0051877
+  SpeedUp       = 44658
+  EndTime       = 2026-09-21 13:56:37-0700
+
+
+Waiting:
+     1.49% : MID2_Death_Knight_Frost
+
+Scale Factors:
+  MID2_Death_Knight_Frost  Str=71.371073(4.559063)  AP=0.000000(0.000000)  Crit=66.372681(4.368656)  Haste=48.285360(4.432613)  Mastery=43.639331(4.484515)  Vers=37.399931(4.419369)  Wdps=0.000000(0.000000)  WOHdps=0.000000(0.000000)
+
+text report took 0.002425 seconds.
+JSON report version 2.0.0 took 0.0082237 seconds.
+html report took 0.052754600000000006 seconds.

@@ -1,0 +1,2946 @@
+{
+  "season": "Midnight Season 2 (12.1)",
+  "season_id": 37,
+  "build": "12.1.0.69933",
+  "generated_at": "2026-09-27T22:29:07+00:00",
+  "verified_against": "DB2 12.1.0.69875: MythicPlusSeasonTrackedMap.DisplaySeasonID=37 pool = Kings' Rest, Temple of Sethraliss, Ruby Life Pools, The Blinding Vale, Voidscar Arena, Den of Nalorakk, Murder Row, Altar of Fangs; JournalTier 505 condition group 156363 holds that pool plus The Tidebound Grotto / The Venomous Abyss; Raidbots bonuses.json upgrade seasonId 37 (groups 614-618); simc profiles/MID2 gear carries 12854/13848 (Myth 6/6 334, Voidforged 344); cross-checked with localbots data/season.json (Midnight Season 2, upgradeSeasonId 37, same 8 keystone dungeons).",
+  "notes": {
+    "raids": "Per-boss drop levels come from DungeonEncounter.ItemSequenceLevel + the item's bonus tree (see droplevels.py); instance-level 'ilevel' is the first boss, 'max_ilevel' the last.",
+    "key_levels": "M+ table from localbots (season 2), track split cross-checked against the 12.1 keystone bonus-tree nodes.",
+    "delves": "Tier 8+ from localbots' season-2 notes; tiers 1-7 extrapolated along the track ladders, not verified in game.",
+    "world_bosses": "302 (Champion 4/6) from localbots; not verified in game.",
+    "consumables": "Defaults per spec from simulationcraft/simc profiles/MID2; specs without a profile fall back by primary stat / role.",
+    "tier_sets": "Tier pieces are not in the raid loot journal for these raids (obtained through the Catalyst); see data/README.md limitations."
+  },
+  "mplus_season_id": 37,
+  "raids": [
+    {
+      "instance_id": 1317,
+      "journal_instance_id": 1317,
+      "name": "The Tidebound Grotto",
+      "map_id": 2987,
+      "bosses": [
+        {
+          "encounter_id": 2849,
+          "name": "Nymrissa Wavecaller",
+          "order": 0,
+          "dungeon_encounter_id": 3379,
+          "sequence": 1,
+          "item_count": 13,
+          "drops": {
+            "lfr": {
+              "ilevel": 282,
+              "track": "Veteran",
+              "step": 2,
+              "max": 6,
+              "bonus_id": 12826
+            },
+            "normal": {
+              "ilevel": 295,
+              "track": "Champion",
+              "step": 2,
+              "max": 6,
+              "bonus_id": 12834
+            },
+            "heroic": {
+              "ilevel": 308,
+              "track": "Hero",
+              "step": 2,
+              "max": 6,
+              "bonus_id": 12842
+            },
+            "mythic": {
+              "ilevel": 321,
+              "track": "Myth",
+              "step": 2,
+              "max": 6,
+              "bonus_id": 12850
+            }
+          }
+        }
+      ],
+      "difficulties": {
+        "lfr": {
+          "ilevel": 282,
+          "track": "Veteran",
+          "rank": 2,
+          "bonus_ids": [
+            13332,
+            12826
+          ],
+          "max_ilevel": 282
+        },
+        "normal": {
+          "ilevel": 295,
+          "track": "Champion",
+          "rank": 2,
+          "bonus_ids": [
+            13333,
+            12834
+          ],
+          "max_ilevel": 295
+        },
+        "heroic": {
+          "ilevel": 308,
+          "track": "Hero",
+          "rank": 2,
+          "bonus_ids": [
+            13334,
+            12842
+          ],
+          "max_ilevel": 308
+        },
+        "mythic": {
+          "ilevel": 321,
+          "track": "Myth",
+          "rank": 2,
+          "bonus_ids": [
+            13335,
+            12850
+          ],
+          "max_ilevel": 321
+        }
+      }
+    },
+    {
+      "instance_id": 1320,
+      "journal_instance_id": 1320,
+      "name": "The Venomous Abyss",
+      "map_id": 3004,
+      "bosses": [
+        {
+          "encounter_id": 2888,
+          "name": "Nek'zali the Soulcoiler",
+          "order": 0,
+          "dungeon_encounter_id": 3470,
+          "sequence": 1,
+          "item_count": 16,
+          "drops": {
+            "lfr": {
+              "ilevel": 282,
+              "track": "Veteran",
+              "step": 2,
+              "max": 6,
+              "bonus_id": 12826
+            },
+            "normal": {
+              "ilevel": 295,
+              "track": "Champion",
+              "step": 2,
+              "max": 6,
+              "bonus_id": 12834
+            },
+            "heroic": {
+              "ilevel": 308,
+              "track": "Hero",
+              "step": 2,
+              "max": 6,
+              "bonus_id": 12842
+            },
+            "mythic": {
+              "ilevel": 321,
+              "track": "Myth",
+              "step": 2,
+              "max": 6,
+              "bonus_id": 12850
+            }
+          }
+        },
+        {
+          "encounter_id": 2874,
+          "name": "Entombed Sentinels",
+          "order": 1,
+          "dungeon_encounter_id": 3445,
+          "sequence": 2,
+          "item_count": 13,
+          "drops": {
+            "lfr": {
+              "ilevel": 285,
+              "track": "Veteran",
+              "step": 3,
+              "max": 6,
+              "bonus_id": 12827
+            },
+            "normal": {
+              "ilevel": 298,
+              "track": "Champion",
+              "step": 3,
+              "max": 6,
+              "bonus_id": 12835
+            },
+            "heroic": {
+              "ilevel": 311,
+              "track": "Hero",
+              "step": 3,
+              "max": 6,
+              "bonus_id": 12843
+            },
+            "mythic": {
+              "ilevel": 324,
+              "track": "Myth",
+              "step": 3,
+              "max": 6,
+              "bonus_id": 12851
+            }
+          }
+        },
+        {
+          "encounter_id": 2894,
+          "name": "The Lost Explorers",
+          "order": 2,
+          "dungeon_encounter_id": 3497,
+          "sequence": 2,
+          "item_count": 14,
+          "drops": {
+            "lfr": {
+              "ilevel": 285,
+              "track": "Veteran",
+              "step": 3,
+              "max": 6,
+              "bonus_id": 12827
+            },
+            "normal": {
+              "ilevel": 298,
+              "track": "Champion",
+              "step": 3,
+              "max": 6,
+              "bonus_id": 12835
+            },
+            "heroic": {
+              "ilevel": 311,
+              "track": "Hero",
+              "step": 3,
+              "max": 6,
+              "bonus_id": 12843
+            },
+            "mythic": {
+              "ilevel": 324,
+              "track": "Myth",
+              "step": 3,
+              "max": 6,
+              "bonus_id": 12851
+            }
+          }
+        },
+        {
+          "encounter_id": 2882,
+          "name": "Vashnik the Malignant",
+          "order": 3,
+          "dungeon_encounter_id": 3455,
+          "sequence": 3,
+          "item_count": 13,
+          "drops": {
+            "lfr": {
+              "ilevel": 289,
+              "track": "Veteran",
+              "step": 4,
+              "max": 6,
+              "bonus_id": 12828
+            },
+            "normal": {
+              "ilevel": 302,
+              "track": "Champion",
+              "step": 4,
+              "max": 6,
+              "bonus_id": 12836
+            },
+            "heroic": {
+              "ilevel": 315,
+              "track": "Hero",
+              "step": 4,
+              "max": 6,
+              "bonus_id": 12844
+            },
+            "mythic": {
+              "ilevel": 328,
+              "track": "Myth",
+              "step": 4,
+              "max": 6,
+              "bonus_id": 12852
+            }
+          }
+        },
+        {
+          "encounter_id": 2871,
+          "name": "Sszorak",
+          "order": 4,
+          "dungeon_encounter_id": 3420,
+          "sequence": 3,
+          "item_count": 13,
+          "drops": {
+            "lfr": {
+              "ilevel": 289,
+              "track": "Veteran",
+              "step": 4,
+              "max": 6,
+              "bonus_id": 12828
+            },
+            "normal": {
+              "ilevel": 302,
+              "track": "Champion",
+              "step": 4,
+              "max": 6,
+              "bonus_id": 12836
+            },
+            "heroic": {
+              "ilevel": 315,
+              "track": "Hero",
+              "step": 4,
+              "max": 6,
+              "bonus_id": 12844
+            },
+            "mythic": {
+              "ilevel": 328,
+              "track": "Myth",
+              "step": 4,
+              "max": 6,
+              "bonus_id": 12852
+            }
+          }
+        },
+        {
+          "encounter_id": 2887,
+          "name": "The Twin Fangs",
+          "order": 5,
+          "dungeon_encounter_id": 3421,
+          "sequence": 3,
+          "item_count": 14,
+          "drops": {
+            "lfr": {
+              "ilevel": 289,
+              "track": "Veteran",
+              "step": 4,
+              "max": 6,
+              "bonus_id": 12828
+            },
+            "normal": {
+              "ilevel": 302,
+              "track": "Champion",
+              "step": 4,
+              "max": 6,
+              "bonus_id": 12836
+            },
+            "heroic": {
+              "ilevel": 315,
+              "track": "Hero",
+              "step": 4,
+              "max": 6,
+              "bonus_id": 12844
+            },
+            "mythic": {
+              "ilevel": 328,
+              "track": "Myth",
+              "step": 4,
+              "max": 6,
+              "bonus_id": 12852
+            }
+          }
+        },
+        {
+          "encounter_id": 2883,
+          "name": "The Coiled Altar",
+          "order": 6,
+          "dungeon_encounter_id": 3429,
+          "sequence": 4,
+          "item_count": 17,
+          "drops": {
+            "lfr": {
+              "ilevel": 292,
+              "track": "Veteran",
+              "step": 5,
+              "max": 6,
+              "bonus_id": 12829
+            },
+            "normal": {
+              "ilevel": 305,
+              "track": "Champion",
+              "step": 5,
+              "max": 6,
+              "bonus_id": 12837
+            },
+            "heroic": {
+              "ilevel": 318,
+              "track": "Hero",
+              "step": 5,
+              "max": 6,
+              "bonus_id": 12845
+            },
+            "mythic": {
+              "ilevel": 331,
+              "track": "Myth",
+              "step": 5,
+              "max": 6,
+              "bonus_id": 12853
+            }
+          }
+        },
+        {
+          "encounter_id": 2895,
+          "name": "Ula'tek",
+          "order": 7,
+          "dungeon_encounter_id": 3492,
+          "sequence": 4,
+          "item_count": 18,
+          "drops": {
+            "lfr": {
+              "ilevel": 292,
+              "track": "Veteran",
+              "step": 5,
+              "max": 6,
+              "bonus_id": 12829
+            },
+            "normal": {
+              "ilevel": 305,
+              "track": "Champion",
+              "step": 5,
+              "max": 6,
+              "bonus_id": 12837
+            },
+            "heroic": {
+              "ilevel": 318,
+              "track": "Hero",
+              "step": 5,
+              "max": 6,
+              "bonus_id": 12845
+            },
+            "mythic": {
+              "ilevel": 331,
+              "track": "Myth",
+              "step": 5,
+              "max": 6,
+              "bonus_id": 12853
+            }
+          }
+        }
+      ],
+      "difficulties": {
+        "lfr": {
+          "ilevel": 282,
+          "track": "Veteran",
+          "rank": 2,
+          "bonus_ids": [
+            13332,
+            12826
+          ],
+          "max_ilevel": 292
+        },
+        "normal": {
+          "ilevel": 295,
+          "track": "Champion",
+          "rank": 2,
+          "bonus_ids": [
+            13333,
+            12834
+          ],
+          "max_ilevel": 305
+        },
+        "heroic": {
+          "ilevel": 308,
+          "track": "Hero",
+          "rank": 2,
+          "bonus_ids": [
+            13334,
+            12842
+          ],
+          "max_ilevel": 318
+        },
+        "mythic": {
+          "ilevel": 321,
+          "track": "Myth",
+          "rank": 2,
+          "bonus_ids": [
+            13335,
+            12850
+          ],
+          "max_ilevel": 331
+        }
+      }
+    }
+  ],
+  "dungeons": [
+    {
+      "instance_id": 1322,
+      "journal_instance_id": 1322,
+      "name": "Altar of Fangs",
+      "map_id": 2993,
+      "bosses": [
+        {
+          "encounter_id": 2878,
+          "name": "Rav'i",
+          "order": 0,
+          "dungeon_encounter_id": 3456,
+          "sequence": 0,
+          "item_count": 7
+        },
+        {
+          "encounter_id": 2879,
+          "name": "The Writhing Coil",
+          "order": 1,
+          "dungeon_encounter_id": 3457,
+          "sequence": 0,
+          "item_count": 8
+        },
+        {
+          "encounter_id": 2880,
+          "name": "Zul'jan",
+          "order": 2,
+          "dungeon_encounter_id": 3458,
+          "sequence": 0,
+          "item_count": 12
+        }
+      ]
+    },
+    {
+      "instance_id": 1311,
+      "journal_instance_id": 1311,
+      "name": "Den of Nalorakk",
+      "map_id": 2825,
+      "bosses": [
+        {
+          "encounter_id": 2776,
+          "name": "The Hoardmonger",
+          "order": 0,
+          "dungeon_encounter_id": 3207,
+          "sequence": 0,
+          "item_count": 7
+        },
+        {
+          "encounter_id": 2777,
+          "name": "Sentinel of Winter",
+          "order": 1,
+          "dungeon_encounter_id": 3208,
+          "sequence": 0,
+          "item_count": 9
+        },
+        {
+          "encounter_id": 2778,
+          "name": "Nalorakk",
+          "order": 2,
+          "dungeon_encounter_id": 3209,
+          "sequence": 0,
+          "item_count": 10
+        }
+      ]
+    },
+    {
+      "instance_id": 1304,
+      "journal_instance_id": 1304,
+      "name": "Murder Row",
+      "map_id": 2813,
+      "bosses": [
+        {
+          "encounter_id": 2679,
+          "name": "Kystia Manaheart",
+          "order": 0,
+          "dungeon_encounter_id": 3101,
+          "sequence": 0,
+          "item_count": 7
+        },
+        {
+          "encounter_id": 2680,
+          "name": "Zaen Bladesorrow",
+          "order": 1,
+          "dungeon_encounter_id": 3102,
+          "sequence": 0,
+          "item_count": 7
+        },
+        {
+          "encounter_id": 2681,
+          "name": "Xathuux the Annihilator",
+          "order": 2,
+          "dungeon_encounter_id": 3103,
+          "sequence": 0,
+          "item_count": 5
+        },
+        {
+          "encounter_id": 2682,
+          "name": "Lithiel Cinderfury",
+          "order": 3,
+          "dungeon_encounter_id": 3105,
+          "sequence": 0,
+          "item_count": 12
+        }
+      ]
+    },
+    {
+      "instance_id": 1309,
+      "journal_instance_id": 1309,
+      "name": "The Blinding Vale",
+      "map_id": 2859,
+      "bosses": [
+        {
+          "encounter_id": 2769,
+          "name": "Lightblossom Trinity",
+          "order": 0,
+          "dungeon_encounter_id": 3199,
+          "sequence": 0,
+          "item_count": 7
+        },
+        {
+          "encounter_id": 2770,
+          "name": "Ikuzz the Light Hunter",
+          "order": 1,
+          "dungeon_encounter_id": 3200,
+          "sequence": 0,
+          "item_count": 6
+        },
+        {
+          "encounter_id": 2771,
+          "name": "Lightwarden Ruia",
+          "order": 2,
+          "dungeon_encounter_id": 3201,
+          "sequence": 0,
+          "item_count": 6
+        },
+        {
+          "encounter_id": 2772,
+          "name": "Ziekket",
+          "order": 3,
+          "dungeon_encounter_id": 3202,
+          "sequence": 0,
+          "item_count": 11
+        }
+      ]
+    },
+    {
+      "instance_id": 1313,
+      "journal_instance_id": 1313,
+      "name": "Voidscar Arena",
+      "map_id": 2923,
+      "bosses": [
+        {
+          "encounter_id": 2791,
+          "name": "Taz'Rah",
+          "order": 0,
+          "dungeon_encounter_id": 3285,
+          "sequence": 0,
+          "item_count": 7
+        },
+        {
+          "encounter_id": 2792,
+          "name": "Atroxus",
+          "order": 1,
+          "dungeon_encounter_id": 3286,
+          "sequence": 0,
+          "item_count": 8
+        },
+        {
+          "encounter_id": 2793,
+          "name": "Charonus",
+          "order": 2,
+          "dungeon_encounter_id": 3287,
+          "sequence": 0,
+          "item_count": 9
+        }
+      ]
+    },
+    {
+      "instance_id": 1041,
+      "journal_instance_id": 1041,
+      "name": "Kings' Rest",
+      "map_id": 1762,
+      "bosses": [
+        {
+          "encounter_id": 2165,
+          "name": "The Golden Serpent",
+          "order": 0,
+          "dungeon_encounter_id": 2139,
+          "sequence": 0,
+          "item_count": 8
+        },
+        {
+          "encounter_id": 2171,
+          "name": "Mchimba the Embalmer",
+          "order": 1,
+          "dungeon_encounter_id": 2142,
+          "sequence": 0,
+          "item_count": 7
+        },
+        {
+          "encounter_id": 2170,
+          "name": "The Council of Tribes",
+          "order": 2,
+          "dungeon_encounter_id": 2140,
+          "sequence": 0,
+          "item_count": 8
+        },
+        {
+          "encounter_id": 2172,
+          "name": "Dazar, The First King",
+          "order": 3,
+          "dungeon_encounter_id": 2143,
+          "sequence": 0,
+          "item_count": 27
+        }
+      ]
+    },
+    {
+      "instance_id": 1202,
+      "journal_instance_id": 1202,
+      "name": "Ruby Life Pools",
+      "map_id": 2521,
+      "bosses": [
+        {
+          "encounter_id": 2488,
+          "name": "Melidrussa Chillworn",
+          "order": 0,
+          "dungeon_encounter_id": 2609,
+          "sequence": 0,
+          "item_count": 5
+        },
+        {
+          "encounter_id": 2485,
+          "name": "Kokia Blazehoof",
+          "order": 1,
+          "dungeon_encounter_id": 2606,
+          "sequence": 0,
+          "item_count": 6
+        },
+        {
+          "encounter_id": 2503,
+          "name": "Kyrakka and Erkhart Stormvein",
+          "order": 2,
+          "dungeon_encounter_id": 2623,
+          "sequence": 0,
+          "item_count": 13
+        }
+      ]
+    },
+    {
+      "instance_id": 1030,
+      "journal_instance_id": 1030,
+      "name": "Temple of Sethraliss",
+      "map_id": 1877,
+      "bosses": [
+        {
+          "encounter_id": 2142,
+          "name": "Adderis and Aspix",
+          "order": 0,
+          "dungeon_encounter_id": 2124,
+          "sequence": 0,
+          "item_count": 10
+        },
+        {
+          "encounter_id": 2143,
+          "name": "Merektha",
+          "order": 1,
+          "dungeon_encounter_id": 2125,
+          "sequence": 0,
+          "item_count": 10
+        },
+        {
+          "encounter_id": 2144,
+          "name": "Galvazzt",
+          "order": 2,
+          "dungeon_encounter_id": 2126,
+          "sequence": 0,
+          "item_count": 6
+        },
+        {
+          "encounter_id": 2145,
+          "name": "Avatar of Sethraliss",
+          "order": 3,
+          "dungeon_encounter_id": 2127,
+          "sequence": 0,
+          "item_count": 32
+        }
+      ]
+    }
+  ],
+  "world_bosses": [
+    {
+      "instance_id": 1312,
+      "journal_instance_id": 1312,
+      "name": "Midnight",
+      "map_id": 2930,
+      "bosses": [
+        {
+          "encounter_id": 2827,
+          "name": "Lu'ashal",
+          "order": 0,
+          "dungeon_encounter_id": 3454,
+          "sequence": 0,
+          "item_count": 8
+        },
+        {
+          "encounter_id": 2829,
+          "name": "Thorm'belan",
+          "order": 1,
+          "dungeon_encounter_id": 3459,
+          "sequence": 0,
+          "item_count": 8
+        },
+        {
+          "encounter_id": 2828,
+          "name": "Predaxas",
+          "order": 2,
+          "dungeon_encounter_id": 3431,
+          "sequence": 0,
+          "item_count": 8
+        },
+        {
+          "encounter_id": 2782,
+          "name": "Cragpine",
+          "order": 3,
+          "dungeon_encounter_id": 3436,
+          "sequence": 0,
+          "item_count": 8
+        }
+      ],
+      "ilevel": 302,
+      "track": "Champion",
+      "rank": 4,
+      "bonus_ids": [
+        12836
+      ]
+    }
+  ],
+  "key_levels": [
+    {
+      "level": 0,
+      "ilevel": 292,
+      "vault_ilevel": 302,
+      "track": "Champion",
+      "rank": 1,
+      "vault_track": "Champion",
+      "vault_rank": 4,
+      "bonus_ids": [
+        12833
+      ],
+      "vault_bonus_ids": [
+        12836
+      ]
+    },
+    {
+      "level": 2,
+      "ilevel": 295,
+      "vault_ilevel": 305,
+      "track": "Champion",
+      "rank": 2,
+      "vault_track": "Hero",
+      "vault_rank": 1,
+      "bonus_ids": [
+        12834
+      ],
+      "vault_bonus_ids": [
+        12841
+      ]
+    },
+    {
+      "level": 3,
+      "ilevel": 295,
+      "vault_ilevel": 305,
+      "track": "Champion",
+      "rank": 2,
+      "vault_track": "Hero",
+      "vault_rank": 1,
+      "bonus_ids": [
+        12834
+      ],
+      "vault_bonus_ids": [
+        12841
+      ]
+    },
+    {
+      "level": 4,
+      "ilevel": 298,
+      "vault_ilevel": 308,
+      "track": "Champion",
+      "rank": 3,
+      "vault_track": "Hero",
+      "vault_rank": 2,
+      "bonus_ids": [
+        12835
+      ],
+      "vault_bonus_ids": [
+        12842
+      ]
+    },
+    {
+      "level": 5,
+      "ilevel": 302,
+      "vault_ilevel": 308,
+      "track": "Champion",
+      "rank": 4,
+      "vault_track": "Hero",
+      "vault_rank": 2,
+      "bonus_ids": [
+        12836
+      ],
+      "vault_bonus_ids": [
+        12842
+      ]
+    },
+    {
+      "level": 6,
+      "ilevel": 305,
+      "vault_ilevel": 311,
+      "track": "Hero",
+      "rank": 1,
+      "vault_track": "Hero",
+      "vault_rank": 3,
+      "bonus_ids": [
+        12841
+      ],
+      "vault_bonus_ids": [
+        12843
+      ]
+    },
+    {
+      "level": 7,
+      "ilevel": 305,
+      "vault_ilevel": 315,
+      "track": "Hero",
+      "rank": 1,
+      "vault_track": "Hero",
+      "vault_rank": 4,
+      "bonus_ids": [
+        12841
+      ],
+      "vault_bonus_ids": [
+        12844
+      ]
+    },
+    {
+      "level": 8,
+      "ilevel": 308,
+      "vault_ilevel": 315,
+      "track": "Hero",
+      "rank": 2,
+      "vault_track": "Hero",
+      "vault_rank": 4,
+      "bonus_ids": [
+        12842
+      ],
+      "vault_bonus_ids": [
+        12844
+      ]
+    },
+    {
+      "level": 9,
+      "ilevel": 308,
+      "vault_ilevel": 315,
+      "track": "Hero",
+      "rank": 2,
+      "vault_track": "Hero",
+      "vault_rank": 4,
+      "bonus_ids": [
+        12842
+      ],
+      "vault_bonus_ids": [
+        12844
+      ]
+    },
+    {
+      "level": 10,
+      "ilevel": 311,
+      "vault_ilevel": 318,
+      "track": "Hero",
+      "rank": 3,
+      "vault_track": "Myth",
+      "vault_rank": 1,
+      "bonus_ids": [
+        12843
+      ],
+      "vault_bonus_ids": [
+        12849
+      ]
+    },
+    {
+      "level": 11,
+      "ilevel": 311,
+      "vault_ilevel": 318,
+      "track": "Hero",
+      "rank": 3,
+      "vault_track": "Myth",
+      "vault_rank": 1,
+      "bonus_ids": [
+        12843
+      ],
+      "vault_bonus_ids": [
+        12849
+      ]
+    },
+    {
+      "level": 12,
+      "ilevel": 311,
+      "vault_ilevel": 318,
+      "track": "Hero",
+      "rank": 3,
+      "vault_track": "Myth",
+      "vault_rank": 1,
+      "bonus_ids": [
+        12843
+      ],
+      "vault_bonus_ids": [
+        12849
+      ]
+    }
+  ],
+  "delves": [
+    {
+      "tier": 1,
+      "ilevel": 266,
+      "vault_ilevel": 276,
+      "track": "Adventurer",
+      "rank": 1,
+      "vault_track": "Adventurer",
+      "vault_rank": 4,
+      "bonus_ids": [
+        12817
+      ],
+      "vault_bonus_ids": [
+        12820
+      ],
+      "verified": false
+    },
+    {
+      "tier": 2,
+      "ilevel": 269,
+      "vault_ilevel": 279,
+      "track": "Adventurer",
+      "rank": 2,
+      "vault_track": "Veteran",
+      "vault_rank": 1,
+      "bonus_ids": [
+        12818
+      ],
+      "vault_bonus_ids": [
+        12825
+      ],
+      "verified": false
+    },
+    {
+      "tier": 3,
+      "ilevel": 272,
+      "vault_ilevel": 282,
+      "track": "Adventurer",
+      "rank": 3,
+      "vault_track": "Veteran",
+      "vault_rank": 2,
+      "bonus_ids": [
+        12819
+      ],
+      "vault_bonus_ids": [
+        12826
+      ],
+      "verified": false
+    },
+    {
+      "tier": 4,
+      "ilevel": 279,
+      "vault_ilevel": 285,
+      "track": "Veteran",
+      "rank": 1,
+      "vault_track": "Veteran",
+      "vault_rank": 3,
+      "bonus_ids": [
+        12825
+      ],
+      "vault_bonus_ids": [
+        12827
+      ],
+      "verified": false
+    },
+    {
+      "tier": 5,
+      "ilevel": 282,
+      "vault_ilevel": 289,
+      "track": "Veteran",
+      "rank": 2,
+      "vault_track": "Veteran",
+      "vault_rank": 4,
+      "bonus_ids": [
+        12826
+      ],
+      "vault_bonus_ids": [
+        12828
+      ],
+      "verified": false
+    },
+    {
+      "tier": 6,
+      "ilevel": 285,
+      "vault_ilevel": 292,
+      "track": "Veteran",
+      "rank": 3,
+      "vault_track": "Champion",
+      "vault_rank": 1,
+      "bonus_ids": [
+        12827
+      ],
+      "vault_bonus_ids": [
+        12833
+      ],
+      "verified": false
+    },
+    {
+      "tier": 7,
+      "ilevel": 292,
+      "vault_ilevel": 298,
+      "track": "Champion",
+      "rank": 1,
+      "vault_track": "Champion",
+      "vault_rank": 3,
+      "bonus_ids": [
+        12833
+      ],
+      "vault_bonus_ids": [
+        12835
+      ],
+      "verified": false
+    },
+    {
+      "tier": 8,
+      "ilevel": 295,
+      "vault_ilevel": 305,
+      "track": "Champion",
+      "rank": 2,
+      "vault_track": "Hero",
+      "vault_rank": 1,
+      "bonus_ids": [
+        12834
+      ],
+      "vault_bonus_ids": [
+        12841
+      ],
+      "verified": true
+    },
+    {
+      "tier": 9,
+      "ilevel": 295,
+      "vault_ilevel": 305,
+      "track": "Champion",
+      "rank": 2,
+      "vault_track": "Hero",
+      "vault_rank": 1,
+      "bonus_ids": [
+        12834
+      ],
+      "vault_bonus_ids": [
+        12841
+      ],
+      "verified": true
+    },
+    {
+      "tier": 10,
+      "ilevel": 295,
+      "vault_ilevel": 305,
+      "track": "Champion",
+      "rank": 2,
+      "vault_track": "Hero",
+      "vault_rank": 1,
+      "bonus_ids": [
+        12834
+      ],
+      "vault_bonus_ids": [
+        12841
+      ],
+      "verified": true
+    },
+    {
+      "tier": 11,
+      "ilevel": 295,
+      "vault_ilevel": 305,
+      "track": "Champion",
+      "rank": 2,
+      "vault_track": "Hero",
+      "vault_rank": 1,
+      "bonus_ids": [
+        12834
+      ],
+      "vault_bonus_ids": [
+        12841
+      ],
+      "verified": true
+    }
+  ],
+  "upgrade_tracks": {
+    "Adventurer": {
+      "name": "Adventurer",
+      "group": 614,
+      "max": 6,
+      "steps": [
+        {
+          "rank": 1,
+          "bonus_id": 12817,
+          "ilevel": 266
+        },
+        {
+          "rank": 2,
+          "bonus_id": 12818,
+          "ilevel": 269
+        },
+        {
+          "rank": 3,
+          "bonus_id": 12819,
+          "ilevel": 272
+        },
+        {
+          "rank": 4,
+          "bonus_id": 12820,
+          "ilevel": 276
+        },
+        {
+          "rank": 5,
+          "bonus_id": 12821,
+          "ilevel": 279
+        },
+        {
+          "rank": 6,
+          "bonus_id": 12822,
+          "ilevel": 282
+        }
+      ],
+      "crest": {
+        "name": "Adventurer Mistcrest",
+        "currency_id": 3442,
+        "cost": 20,
+        "icon": "inv_121_crest_adventurer",
+        "discounted_cost": 10
+      },
+      "ilevels": [
+        266,
+        269,
+        272,
+        276,
+        279,
+        282
+      ],
+      "bonus_ids": [
+        12817,
+        12818,
+        12819,
+        12820,
+        12821,
+        12822
+      ],
+      "achievement_id": 62410
+    },
+    "Veteran": {
+      "name": "Veteran",
+      "group": 615,
+      "max": 6,
+      "steps": [
+        {
+          "rank": 1,
+          "bonus_id": 12825,
+          "ilevel": 279
+        },
+        {
+          "rank": 2,
+          "bonus_id": 12826,
+          "ilevel": 282
+        },
+        {
+          "rank": 3,
+          "bonus_id": 12827,
+          "ilevel": 285
+        },
+        {
+          "rank": 4,
+          "bonus_id": 12828,
+          "ilevel": 289
+        },
+        {
+          "rank": 5,
+          "bonus_id": 12829,
+          "ilevel": 292
+        },
+        {
+          "rank": 6,
+          "bonus_id": 12830,
+          "ilevel": 295
+        }
+      ],
+      "crest": {
+        "name": "Veteran Mistcrest",
+        "currency_id": 3443,
+        "cost": 20,
+        "icon": "inv_121_crest_veteran",
+        "discounted_cost": 10
+      },
+      "ilevels": [
+        279,
+        282,
+        285,
+        289,
+        292,
+        295
+      ],
+      "bonus_ids": [
+        12825,
+        12826,
+        12827,
+        12828,
+        12829,
+        12830
+      ],
+      "achievement_id": 62411
+    },
+    "Champion": {
+      "name": "Champion",
+      "group": 616,
+      "max": 6,
+      "steps": [
+        {
+          "rank": 1,
+          "bonus_id": 12833,
+          "ilevel": 292
+        },
+        {
+          "rank": 2,
+          "bonus_id": 12834,
+          "ilevel": 295
+        },
+        {
+          "rank": 3,
+          "bonus_id": 12835,
+          "ilevel": 298
+        },
+        {
+          "rank": 4,
+          "bonus_id": 12836,
+          "ilevel": 302
+        },
+        {
+          "rank": 5,
+          "bonus_id": 12837,
+          "ilevel": 305
+        },
+        {
+          "rank": 6,
+          "bonus_id": 12838,
+          "ilevel": 308
+        }
+      ],
+      "crest": {
+        "name": "Champion Mistcrest",
+        "currency_id": 3444,
+        "cost": 20,
+        "icon": "inv_121_crest_champion",
+        "discounted_cost": 10
+      },
+      "ilevels": [
+        292,
+        295,
+        298,
+        302,
+        305,
+        308
+      ],
+      "bonus_ids": [
+        12833,
+        12834,
+        12835,
+        12836,
+        12837,
+        12838
+      ],
+      "achievement_id": 62412
+    },
+    "Hero": {
+      "name": "Hero",
+      "group": 617,
+      "max": 6,
+      "steps": [
+        {
+          "rank": 1,
+          "bonus_id": 12841,
+          "ilevel": 305
+        },
+        {
+          "rank": 2,
+          "bonus_id": 12842,
+          "ilevel": 308
+        },
+        {
+          "rank": 3,
+          "bonus_id": 12843,
+          "ilevel": 311
+        },
+        {
+          "rank": 4,
+          "bonus_id": 12844,
+          "ilevel": 315
+        },
+        {
+          "rank": 5,
+          "bonus_id": 12845,
+          "ilevel": 318
+        },
+        {
+          "rank": 6,
+          "bonus_id": 12846,
+          "ilevel": 321
+        }
+      ],
+      "crest": {
+        "name": "Hero Mistcrest",
+        "currency_id": 3445,
+        "cost": 20,
+        "icon": "inv_121_crest_hero",
+        "discounted_cost": 10
+      },
+      "ilevels": [
+        305,
+        308,
+        311,
+        315,
+        318,
+        321
+      ],
+      "bonus_ids": [
+        12841,
+        12842,
+        12843,
+        12844,
+        12845,
+        12846
+      ],
+      "achievement_id": 62414
+    },
+    "Myth": {
+      "name": "Myth",
+      "group": 618,
+      "max": 6,
+      "steps": [
+        {
+          "rank": 1,
+          "bonus_id": 12849,
+          "ilevel": 318
+        },
+        {
+          "rank": 2,
+          "bonus_id": 12850,
+          "ilevel": 321
+        },
+        {
+          "rank": 3,
+          "bonus_id": 12851,
+          "ilevel": 324
+        },
+        {
+          "rank": 4,
+          "bonus_id": 12852,
+          "ilevel": 328
+        },
+        {
+          "rank": 5,
+          "bonus_id": 12853,
+          "ilevel": 331
+        },
+        {
+          "rank": 6,
+          "bonus_id": 12854,
+          "ilevel": 334
+        }
+      ],
+      "crest": {
+        "name": "Myth Mistcrest",
+        "currency_id": 3446,
+        "cost": 20,
+        "icon": "inv_121_crest_myth",
+        "discounted_cost": 10
+      },
+      "ilevels": [
+        318,
+        321,
+        324,
+        328,
+        331,
+        334
+      ],
+      "bonus_ids": [
+        12849,
+        12850,
+        12851,
+        12852,
+        12853,
+        12854
+      ],
+      "achievement_id": 62416
+    }
+  },
+  "crest_cost": 20,
+  "crest_cost_discounted": 10,
+  "crafted": {
+    "max_ilevel": 331,
+    "crafting_quality": 5,
+    "bonus_ids": [
+      12214,
+      13751,
+      13836,
+      9627
+    ],
+    "voidforged_ilevel": 341,
+    "stats": {
+      "32": "crit",
+      "36": "haste",
+      "40": "versatility",
+      "49": "mastery"
+    },
+    "stat_ids": {
+      "crit": 32,
+      "haste": 36,
+      "versatility": 40,
+      "mastery": 49
+    },
+    "stat_bonus_ids": [
+      8790,
+      8791,
+      8792,
+      8793,
+      8794,
+      8795
+    ],
+    "quality_bonus_max": 12497,
+    "embellish_marker": 8960,
+    "max_embellished": 2,
+    "embellishment_marker_bonus_ids": [
+      8960,
+      13555
+    ],
+    "embellishments": [
+      {
+        "key": "darkmoon_hunt",
+        "label": "Darkmoon Sigil: Hunt",
+        "bonus": 12693
+      },
+      {
+        "key": "arcanoweave",
+        "label": "Arcanoweave Lining",
+        "bonus": 12384
+      },
+      {
+        "key": "darkmoon_void",
+        "label": "Darkmoon Sigil: Void",
+        "bonus": 13640
+      },
+      {
+        "key": "iris",
+        "label": "Prismatic Focusing Iris",
+        "bonus": 13453
+      },
+      {
+        "key": "iris_bandolier",
+        "label": "Iris + Stabilizing Bandolier (pair)",
+        "bonus": 13453,
+        "second_bonus": 13454
+      },
+      {
+        "key": "devouring",
+        "label": "Devouring Banding",
+        "bonus": 12685
+      },
+      {
+        "key": "spore",
+        "label": "Primal Spore Binding",
+        "bonus": 12687
+      },
+      {
+        "key": "sunfire",
+        "label": "Sunfire Silk Lining",
+        "bonus": 12385
+      },
+      {
+        "key": "darkmoon_blood",
+        "label": "Darkmoon Sigil: Blood",
+        "bonus": 12705
+      },
+      {
+        "key": "darkmoon_rot",
+        "label": "Darkmoon Sigil: Rot",
+        "bonus": 12692
+      },
+      {
+        "key": "ammolite",
+        "label": "Polished Ammolite",
+        "bonus": 13768
+      },
+      {
+        "key": "snakeskin",
+        "label": "Snakeskin Lining",
+        "bonus": 13764
+      },
+      {
+        "key": "adorned_fang",
+        "label": "Adorned Fang",
+        "bonus": 13767
+      },
+      {
+        "key": "ritual_stone",
+        "label": "Hunter's Ritual Stone",
+        "bonus": 13771
+      }
+    ],
+    "spark_id": 274476,
+    "spark_name": "Spark of Tides",
+    "tiers": [
+      {
+        "ilevel": 305,
+        "crest": null,
+        "cost": 0,
+        "requires": "spark"
+      },
+      {
+        "ilevel": 318,
+        "crest": "Hero Mistcrest",
+        "cost": 80
+      },
+      {
+        "ilevel": 331,
+        "crest": "Myth Mistcrest",
+        "cost": 80
+      }
+    ]
+  },
+  "voidforged": {
+    "slots": [
+      "main_hand",
+      "off_hand",
+      "trinket1",
+      "trinket2"
+    ],
+    "myth_ilevel": 344,
+    "bonus_id": 13848
+  },
+  "max_ilevel": 344,
+  "catalyst": {
+    "conversion_id": 13,
+    "currency_id": 3465,
+    "currency_name": "Venomblight Manaflux",
+    "marker_bonus_ids": [
+      13662
+    ],
+    "slots": [
+      "head",
+      "shoulder",
+      "chest",
+      "hands",
+      "legs",
+      "back",
+      "wrist",
+      "waist",
+      "feet"
+    ],
+    "tier_slots": [
+      "head",
+      "shoulder",
+      "chest",
+      "hands",
+      "legs"
+    ],
+    "non_tier_slots": [
+      "back",
+      "wrist",
+      "waist",
+      "feet"
+    ],
+    "set_ids": {
+      "warrior": 2067,
+      "paladin": 2062,
+      "hunter": 2059,
+      "rogue": 2064,
+      "priest": 2063,
+      "death_knight": 2055,
+      "shaman": 2065,
+      "mage": 2060,
+      "warlock": 2066,
+      "monk": 2061,
+      "druid": 2057,
+      "demon_hunter": 2056,
+      "evoker": 2058
+    },
+    "items": {
+      "warrior": {
+        "1": 271456,
+        "3": 271454,
+        "5": 271459,
+        "20": 271459,
+        "10": 271457,
+        "7": 271455,
+        "16": 271451,
+        "9": 271452,
+        "6": 271453,
+        "8": 271458
+      },
+      "paladin": {
+        "1": 271465,
+        "3": 271463,
+        "5": 271468,
+        "20": 271468,
+        "10": 271466,
+        "7": 271464,
+        "16": 271460,
+        "9": 271461,
+        "6": 271462,
+        "8": 271467
+      },
+      "hunter": {
+        "1": 271492,
+        "3": 271490,
+        "5": 271495,
+        "20": 271495,
+        "10": 271493,
+        "7": 271491,
+        "16": 271487,
+        "9": 271488,
+        "6": 271489,
+        "8": 271494
+      },
+      "rogue": {
+        "1": 271510,
+        "3": 271508,
+        "5": 271513,
+        "20": 271513,
+        "10": 271511,
+        "7": 271509,
+        "16": 271505,
+        "9": 271506,
+        "6": 271507,
+        "8": 271512
+      },
+      "priest": {
+        "1": 271555,
+        "3": 271553,
+        "5": 271558,
+        "20": 271558,
+        "10": 271556,
+        "7": 271554,
+        "16": 271550,
+        "9": 271551,
+        "6": 271552,
+        "8": 271557
+      },
+      "death_knight": {
+        "1": 271474,
+        "3": 271472,
+        "5": 271477,
+        "20": 271477,
+        "10": 271475,
+        "7": 271473,
+        "16": 271469,
+        "9": 271470,
+        "6": 271471,
+        "8": 271476
+      },
+      "shaman": {
+        "1": 271483,
+        "3": 271481,
+        "5": 271486,
+        "20": 271486,
+        "10": 271484,
+        "7": 271482,
+        "16": 271478,
+        "9": 271479,
+        "6": 271480,
+        "8": 271485
+      },
+      "mage": {
+        "1": 271564,
+        "3": 271562,
+        "5": 271567,
+        "20": 271567,
+        "10": 271565,
+        "7": 271563,
+        "16": 271559,
+        "9": 271560,
+        "6": 271561,
+        "8": 271566
+      },
+      "warlock": {
+        "1": 271546,
+        "3": 271544,
+        "5": 271549,
+        "20": 271549,
+        "10": 271547,
+        "7": 271545,
+        "16": 271541,
+        "9": 271542,
+        "6": 271543,
+        "8": 271548
+      },
+      "monk": {
+        "1": 271519,
+        "3": 271517,
+        "5": 271522,
+        "20": 271522,
+        "10": 271520,
+        "7": 271518,
+        "16": 271514,
+        "9": 271515,
+        "6": 271516,
+        "8": 271521
+      },
+      "druid": {
+        "1": 271528,
+        "3": 271526,
+        "5": 271531,
+        "20": 271531,
+        "10": 271529,
+        "7": 271527,
+        "16": 271523,
+        "9": 271524,
+        "6": 271525,
+        "8": 271530
+      },
+      "demon_hunter": {
+        "1": 271537,
+        "3": 271535,
+        "5": 271540,
+        "20": 271540,
+        "10": 271538,
+        "7": 271536,
+        "16": 271532,
+        "9": 271533,
+        "6": 271534,
+        "8": 271539
+      },
+      "evoker": {
+        "1": 271501,
+        "3": 271499,
+        "5": 271504,
+        "20": 271504,
+        "10": 271502,
+        "7": 271500,
+        "16": 271496,
+        "9": 271497,
+        "6": 271498,
+        "8": 271503
+      }
+    },
+    "set_bonus_spells": {
+      "warrior": {
+        "arms": {
+          "2": 1296643,
+          "4": 1296644
+        },
+        "fury": {
+          "2": 1296645,
+          "4": 1296646
+        },
+        "protection": {
+          "2": 1296647,
+          "4": 1296648
+        }
+      },
+      "paladin": {
+        "holy": {
+          "2": 1296656,
+          "4": 1296657
+        },
+        "protection": {
+          "2": 1296658,
+          "4": 1296659
+        },
+        "retribution": {
+          "2": 1296660,
+          "4": 1296661
+        }
+      },
+      "hunter": {
+        "beast_mastery": {
+          "2": 1296631,
+          "4": 1296632
+        },
+        "marksmanship": {
+          "2": 1296633,
+          "4": 1296634
+        },
+        "survival": {
+          "2": 1296636,
+          "4": 1296635
+        }
+      },
+      "rogue": {
+        "assassination": {
+          "2": 1296590,
+          "4": 1296591
+        },
+        "outlaw": {
+          "2": 1296588,
+          "4": 1296589
+        },
+        "subtlety": {
+          "2": 1296592,
+          "4": 1296593
+        }
+      },
+      "priest": {
+        "discipline": {
+          "2": 1296577,
+          "4": 1296578
+        },
+        "holy": {
+          "2": 1296575,
+          "4": 1296576
+        },
+        "shadow": {
+          "2": 1296579,
+          "4": 1296580
+        }
+      },
+      "death_knight": {
+        "blood": {
+          "2": 1296650,
+          "4": 1296651
+        },
+        "frost": {
+          "2": 1296652,
+          "4": 1296653
+        },
+        "unholy": {
+          "2": 1296654,
+          "4": 1296655
+        }
+      },
+      "shaman": {
+        "elemental": {
+          "2": 1296625,
+          "4": 1296626
+        },
+        "enhancement": {
+          "2": 1296627,
+          "4": 1296628
+        },
+        "restoration": {
+          "2": 1296629,
+          "4": 1296630
+        }
+      },
+      "mage": {
+        "arcane": {
+          "2": 1296581,
+          "4": 1296582
+        },
+        "fire": {
+          "2": 1296583,
+          "4": 1296584
+        },
+        "frost": {
+          "2": 1296585,
+          "4": 1296586
+        }
+      },
+      "warlock": {
+        "affliction": {
+          "2": 1296568,
+          "4": 1296569
+        },
+        "demonology": {
+          "2": 1296573,
+          "4": 1296574
+        },
+        "destruction": {
+          "2": 1296571,
+          "4": 1296572
+        }
+      },
+      "monk": {
+        "brewmaster": {
+          "2": 1296617,
+          "4": 1296618
+        },
+        "windwalker": {
+          "2": 1296621,
+          "4": 1296624
+        },
+        "mistweaver": {
+          "2": 1296619,
+          "4": 1296620
+        }
+      },
+      "druid": {
+        "balance": {
+          "2": 1296603,
+          "4": 1296604
+        },
+        "feral": {
+          "2": 1296605,
+          "4": 1296606
+        },
+        "guardian": {
+          "2": 1296607,
+          "4": 1296608
+        },
+        "restoration": {
+          "2": 1296609,
+          "4": 1296610
+        }
+      },
+      "demon_hunter": {
+        "havoc": {
+          "2": 1296611,
+          "4": 1296612
+        },
+        "vengeance": {
+          "2": 1296613,
+          "4": 1296614
+        },
+        "devourer": {
+          "2": 1296615,
+          "4": 1296616
+        }
+      },
+      "evoker": {
+        "devastation": {
+          "2": 1296639,
+          "4": 1296640
+        },
+        "preservation": {
+          "2": 1296641,
+          "4": 1296642
+        },
+        "augmentation": {
+          "2": 1296637,
+          "4": 1296638
+        }
+      }
+    }
+  },
+  "sockets": {
+    "add_bonus_id": 1808,
+    "two": 8781,
+    "three": 8782,
+    "vault_slots": [
+      "head",
+      "wrist",
+      "waist"
+    ],
+    "jewelbinder_slots": [
+      "neck",
+      "finger1",
+      "finger2"
+    ],
+    "jewelbinder_item": 263897
+  },
+  "omnium": {
+    "tree_id": 1186,
+    "rows": [
+      {
+        "row": 1,
+        "node_id": 110275,
+        "choices": [
+          {
+            "entry_id": 136825,
+            "token": "rune_of_voidtouched_orbs",
+            "name": "Rune of Void-Touched Orbs",
+            "icon": "inv_12_dh_void_ability_soulfragments"
+          },
+          {
+            "entry_id": 136822,
+            "token": "rune_of_unleashed_fire",
+            "name": "Rune of Unleashed Fire",
+            "icon": "inv_summerfest_firespirit"
+          }
+        ]
+      },
+      {
+        "row": 2,
+        "node_id": 110274,
+        "choices": [
+          {
+            "entry_id": 136819,
+            "token": "rune_of_selfmending",
+            "name": "Rune of Self-Mending",
+            "icon": "spell_shadow_felmending"
+          },
+          {
+            "entry_id": 136816,
+            "token": "rune_of_voidtainted_shell",
+            "name": "Rune of Void-Tainted Shell",
+            "icon": "ability_rhyolith_magmaflow_wave"
+          },
+          {
+            "entry_id": 136823,
+            "token": "rune_of_lynxlike_reflexes",
+            "name": "Rune of Lynxlike Reflexes",
+            "icon": "inv_babyarathilynx_gold"
+          }
+        ]
+      },
+      {
+        "row": 3,
+        "node_id": 110273,
+        "choices": [
+          {
+            "entry_id": 136817,
+            "token": "rune_of_lingering",
+            "name": "Rune of Lingering",
+            "icon": "item_shadowcloth"
+          }
+        ]
+      },
+      {
+        "row": 4,
+        "node_id": 110272,
+        "choices": [
+          {
+            "entry_id": 136815,
+            "token": "rune_of_critical_power",
+            "name": "Rune of Critical Power",
+            "icon": "spell_mage_overpowered"
+          },
+          {
+            "entry_id": 136821,
+            "token": "rune_of_burning_haste",
+            "name": "Rune of Burning Haste",
+            "icon": "spell_fire_burningspeed"
+          },
+          {
+            "entry_id": 136818,
+            "token": "rune_of_masterful_cunning",
+            "name": "Rune of Masterful Cunning",
+            "icon": "ability_hunter_fervor"
+          },
+          {
+            "entry_id": 136820,
+            "token": "rune_of_the_versatile_warrior",
+            "name": "Rune of the Versatile Warrior",
+            "icon": "ability_warrior_stalwartprotector"
+          }
+        ]
+      },
+      {
+        "row": 5,
+        "node_id": 110271,
+        "choices": [
+          {
+            "entry_id": 136814,
+            "token": "rune_of_overload",
+            "name": "Rune of Overload",
+            "icon": "ability_siege_engineer_overload"
+          },
+          {
+            "entry_id": 136824,
+            "token": "rune_of_residual_energy",
+            "name": "Rune of Residual Energy",
+            "icon": "inv_112_raidtrinkets_etherealenergystoragesphere_purple"
+          },
+          {
+            "entry_id": 136826,
+            "token": "rune_of_echoes",
+            "name": "Rune of Echoes",
+            "icon": "spell_rogue_shadow_reflection"
+          }
+        ]
+      }
+    ]
+  },
+  "consumables": {
+    "by_spec": {
+      "death_knight_blood": {
+        "flask": "flask_of_thalassian_resistance_2",
+        "food": "silvermoon_parade",
+        "potion": "draught_of_rampant_abandon_2",
+        "augmentation": "void_touched",
+        "temporary_enchant": "main_hand:thalassian_phoenix_oil_2"
+      },
+      "death_knight_frost": {
+        "flask": "flask_of_the_shattered_sun_2",
+        "food": "silvermoon_parade",
+        "potion": "potion_of_recklessness_2",
+        "augmentation": "void_touched",
+        "temporary_enchant": "main_hand:thalassian_phoenix_oil_2/off_hand:thalassian_phoenix_oil_2"
+      },
+      "death_knight_unholy": {
+        "flask": "flask_of_the_blood_knights_2",
+        "food": "silvermoon_parade",
+        "potion": "potion_of_recklessness_2",
+        "augmentation": "void_touched",
+        "temporary_enchant": "main_hand:thalassian_phoenix_oil_2"
+      },
+      "demon_hunter_devourer": {
+        "flask": "flask_of_the_magisters_2",
+        "food": "blooming_feast",
+        "potion": "potion_of_recklessness_2",
+        "augmentation": "void_touched",
+        "temporary_enchant": "main_hand:thalassian_phoenix_oil_2/off_hand:thalassian_phoenix_oil_2"
+      },
+      "demon_hunter_havoc": {
+        "flask": "flask_of_the_shattered_sun_2",
+        "food": "blooming_feast",
+        "potion": "potion_of_recklessness_2",
+        "augmentation": "void_touched",
+        "temporary_enchant": "main_hand:thalassian_phoenix_oil_2/off_hand:thalassian_phoenix_oil_2"
+      },
+      "demon_hunter_vengeance": {
+        "flask": "flask_of_the_magisters_2",
+        "food": "silvermoon_parade",
+        "potion": "lights_potential_2",
+        "augmentation": "void_touched",
+        "temporary_enchant": "main_hand:thalassian_phoenix_oil_2/off_hand:thalassian_phoenix_oil_2"
+      },
+      "druid_feral": {
+        "flask": "flask_of_the_magisters_2",
+        "food": "harandar_celebration",
+        "potion": "liquid_luster_2",
+        "augmentation": "void_touched",
+        "temporary_enchant": "main_hand:thalassian_phoenix_oil_2"
+      },
+      "hunter_beast_mastery": {
+        "flask": "flask_of_the_magisters_2",
+        "food": "silvermoon_parade",
+        "potion": "potion_of_recklessness_2",
+        "augmentation": "void_touched",
+        "temporary_enchant": "main_hand:thalassian_phoenix_oil_2"
+      },
+      "hunter_marksmanship": {
+        "flask": "flask_of_the_shattered_sun_2",
+        "food": "silvermoon_parade",
+        "potion": "potion_of_recklessness_2",
+        "augmentation": "void_touched",
+        "temporary_enchant": "main_hand:thalassian_phoenix_oil_2"
+      },
+      "hunter_survival": {
+        "flask": "flask_of_the_magisters_2",
+        "food": "silvermoon_parade",
+        "potion": "potion_of_recklessness_2",
+        "augmentation": "void_touched",
+        "temporary_enchant": "main_hand:thalassian_phoenix_oil_2/off_hand:thalassian_phoenix_oil_2"
+      },
+      "mage_arcane": {
+        "flask": "flask_of_the_blood_knights_2",
+        "food": "silvermoon_parade",
+        "potion": "lights_potential_2",
+        "augmentation": "void_touched_augment_rune",
+        "temporary_enchant": "main_hand:thalassian_phoenix_oil_2"
+      },
+      "mage_fire": {
+        "flask": "flask_of_thalassian_resistance_2",
+        "food": "silvermoon_parade",
+        "potion": "lights_potential_2",
+        "augmentation": "void_touched_augment_rune",
+        "temporary_enchant": "main_hand:thalassian_phoenix_oil_2"
+      },
+      "mage_frost": {
+        "flask": "flask_of_the_shattered_sun_2",
+        "food": "harandar_celebration",
+        "potion": "potion_of_recklessness_2",
+        "augmentation": "void_touched_augment_rune",
+        "temporary_enchant": "main_hand:thalassian_phoenix_oil_2"
+      },
+      "monk_brewmaster": {
+        "flask": "flask_of_thalassian_resistance_2",
+        "food": "harandar_celebration",
+        "potion": "draught_of_rampant_abandon_2",
+        "augmentation": "void_touched",
+        "temporary_enchant": "main_hand:thalassian_phoenix_oil_2/off_hand:thalassian_phoenix_oil_2"
+      },
+      "monk_windwalker": {
+        "flask": "flask_of_the_blood_knights_2",
+        "food": "harandar_celebration",
+        "potion": "potion_of_recklessness_2",
+        "augmentation": "void_touched",
+        "temporary_enchant": "main_hand:thalassian_phoenix_oil_2/off_hand:thalassian_phoenix_oil_2"
+      },
+      "paladin_protection": {
+        "flask": "flask_of_the_blood_knights_2",
+        "food": "silvermoon_parade",
+        "potion": "liquid_luster_2",
+        "augmentation": "void_touched",
+        "temporary_enchant": "main_hand:thalassian_phoenix_oil_2"
+      },
+      "paladin_retribution": {
+        "flask": "flask_of_the_magisters_2",
+        "food": "royal_roast",
+        "potion": "potion_of_recklessness_2",
+        "augmentation": "void_touched",
+        "temporary_enchant": "main_hand:thalassian_phoenix_oil_2"
+      },
+      "priest_shadow": {
+        "flask": "flask_of_the_magisters_2",
+        "food": "silvermoon_parade",
+        "potion": "lights_potential_2",
+        "augmentation": "void_touched",
+        "temporary_enchant": "main_hand:thalassian_phoenix_oil_2"
+      },
+      "rogue_assassination": {
+        "flask": "flask_of_the_shattered_sun_2",
+        "food": "harandar_celebration",
+        "potion": "lights_potential_2",
+        "augmentation": "void_touched",
+        "temporary_enchant": "main_hand:thalassian_phoenix_oil_2/off_hand:thalassian_phoenix_oil_2"
+      },
+      "rogue_outlaw": {
+        "flask": "flask_of_the_shattered_sun_2",
+        "food": "harandar_celebration",
+        "potion": "lights_potential_2",
+        "augmentation": "void_touched",
+        "temporary_enchant": "main_hand:thalassian_phoenix_oil_2/off_hand:thalassian_phoenix_oil_2"
+      },
+      "rogue_subtlety": {
+        "flask": "flask_of_the_shattered_sun_2",
+        "food": "harandar_celebration",
+        "potion": "lights_potential_2",
+        "augmentation": "void_touched",
+        "temporary_enchant": "main_hand:thalassian_phoenix_oil_2/off_hand:thalassian_phoenix_oil_2"
+      },
+      "shaman_elemental": {
+        "flask": "flask_of_the_magisters_2",
+        "food": "harandar_celebration",
+        "potion": "lights_potential_2",
+        "augmentation": "void_touched",
+        "temporary_enchant": "main_hand:thalassian_phoenix_oil_2"
+      },
+      "shaman_enhancement": {
+        "flask": "flask_of_the_shattered_sun_2",
+        "food": "harandar_celebration",
+        "potion": "potion_of_recklessness_2",
+        "augmentation": "void_touched",
+        "temporary_enchant": ""
+      },
+      "warlock_affliction": {
+        "flask": "flask_of_the_shattered_sun_2",
+        "food": "harandar_celebration",
+        "potion": "liquid_luster_2",
+        "augmentation": "void_touched",
+        "temporary_enchant": "main_hand:thalassian_phoenix_oil_2"
+      },
+      "warlock_demonology": {
+        "flask": "flask_of_the_shattered_sun_2",
+        "food": "harandar_celebration",
+        "potion": "liquid_luster_2",
+        "augmentation": "void_touched",
+        "temporary_enchant": "main_hand:thalassian_phoenix_oil_2"
+      },
+      "warlock_destruction": {
+        "flask": "flask_of_the_magisters_2",
+        "food": "harandar_celebration",
+        "potion": "potion_of_recklessness_2",
+        "augmentation": "void_touched",
+        "temporary_enchant": "main_hand:thalassian_phoenix_oil_2"
+      },
+      "warrior_arms": {
+        "flask": "flask_of_the_blood_knights_2",
+        "food": "harandar_celebration",
+        "potion": "lights_potential_2",
+        "augmentation": "void_touched",
+        "temporary_enchant": "main_hand:thalassian_phoenix_oil_2"
+      },
+      "warrior_fury": {
+        "flask": "flask_of_the_magisters_2",
+        "food": "harandar_celebration",
+        "potion": "lights_potential_2",
+        "augmentation": "void_touched",
+        "temporary_enchant": "main_hand:thalassian_phoenix_oil_2/off_hand:thalassian_phoenix_oil_2"
+      },
+      "warrior_protection": {
+        "flask": "flask_of_the_shattered_sun_2",
+        "food": "harandar_celebration",
+        "potion": "potion_of_recklessness_2",
+        "augmentation": "void_touched",
+        "temporary_enchant": "main_hand:thalassian_phoenix_oil_2"
+      }
+    },
+    "by_primary": {
+      "agility": {
+        "flask": "flask_of_the_shattered_sun_2",
+        "food": "silvermoon_parade",
+        "potion": "potion_of_recklessness_2",
+        "augmentation": "void_touched",
+        "temporary_enchant": "main_hand:thalassian_phoenix_oil_2"
+      },
+      "strength": {
+        "flask": "flask_of_the_blood_knights_2",
+        "food": "silvermoon_parade",
+        "potion": "potion_of_recklessness_2",
+        "augmentation": "void_touched",
+        "temporary_enchant": "main_hand:thalassian_phoenix_oil_2"
+      },
+      "intellect": {
+        "flask": "flask_of_the_magisters_2",
+        "food": "silvermoon_parade",
+        "potion": "lights_potential_2",
+        "augmentation": "void_touched",
+        "temporary_enchant": "main_hand:thalassian_phoenix_oil_2"
+      }
+    },
+    "by_role": {
+      "attack": {
+        "flask": "flask_of_the_shattered_sun_2",
+        "food": "silvermoon_parade",
+        "potion": "potion_of_recklessness_2",
+        "augmentation": "void_touched",
+        "temporary_enchant": "main_hand:thalassian_phoenix_oil_2"
+      },
+      "tank": {
+        "flask": "flask_of_thalassian_resistance_2",
+        "food": "silvermoon_parade",
+        "potion": "draught_of_rampant_abandon_2",
+        "augmentation": "void_touched",
+        "temporary_enchant": "main_hand:thalassian_phoenix_oil_2"
+      },
+      "heal": {
+        "flask": "flask_of_the_magisters_2",
+        "food": "silvermoon_parade",
+        "potion": "lights_potential_2",
+        "augmentation": "void_touched",
+        "temporary_enchant": "main_hand:thalassian_phoenix_oil_2"
+      }
+    },
+    "options": {
+      "flask": [
+        {
+          "value": "flask_of_the_shattered_sun_2",
+          "label": "Flask of the Shattered Sun (Crit)"
+        },
+        {
+          "value": "flask_of_the_blood_knights_2",
+          "label": "Flask of the Blood Knights (Haste)"
+        },
+        {
+          "value": "flask_of_the_magisters_2",
+          "label": "Flask of the Magisters (Mastery)"
+        },
+        {
+          "value": "flask_of_thalassian_resistance_2",
+          "label": "Flask of Thalassian Resistance (Versatility)"
+        }
+      ],
+      "food": [
+        {
+          "value": "silvermoon_parade",
+          "label": "Silvermoon Parade (feast)"
+        },
+        {
+          "value": "harandar_celebration",
+          "label": "Harandar Celebration (feast)"
+        },
+        {
+          "value": "blooming_feast",
+          "label": "Blooming Feast"
+        },
+        {
+          "value": "royal_roast",
+          "label": "Royal Roast (primary stat)"
+        },
+        {
+          "value": "impossibly_royal_roast",
+          "label": "Impossibly Royal Roast (primary stat)"
+        },
+        {
+          "value": "queldorei_medley",
+          "label": "Quel'dorei Medley (highest secondary)"
+        },
+        {
+          "value": "arcano_cutlets",
+          "label": "Arcano Cutlets (Crit)"
+        },
+        {
+          "value": "warped_wise_wings",
+          "label": "Warped Wise Wings (Mastery)"
+        },
+        {
+          "value": "feast_of_knowledge",
+          "label": "Feast of Knowledge"
+        },
+        {
+          "value": "spellfire_filet",
+          "label": "Spellfire Filet"
+        },
+        {
+          "value": "crimson_calamari",
+          "label": "Crimson Calamari"
+        },
+        {
+          "value": "null_and_void_plate",
+          "label": "Null and Void Plate"
+        },
+        {
+          "value": "amani_cornucopia",
+          "label": "Amani Cornucopia"
+        },
+        {
+          "value": "twilight_anglers_medley",
+          "label": "Twilight Anglers Medley"
+        },
+        {
+          "value": "loas_gathering",
+          "label": "Loa's Gathering"
+        },
+        {
+          "value": "champions_bento",
+          "label": "Champions Bento"
+        },
+        {
+          "value": "hearthflame_supper",
+          "label": "Hearthflame Supper"
+        },
+        {
+          "value": "sunwell_delight",
+          "label": "Sunwell Delight"
+        },
+        {
+          "value": "puffer_plate",
+          "label": "Puffer Plate"
+        },
+        {
+          "value": "glitter_skewers",
+          "label": "Glitter Skewers"
+        },
+        {
+          "value": "bloom_skewers",
+          "label": "Bloom Skewers"
+        },
+        {
+          "value": "braised_blood_hunter",
+          "label": "Braised Blood Hunter"
+        },
+        {
+          "value": "buttered_root_crab",
+          "label": "Buttered Root Crab"
+        },
+        {
+          "value": "eversong_pudding",
+          "label": "Eversong Pudding"
+        },
+        {
+          "value": "farstrider_rations",
+          "label": "Farstrider Rations"
+        },
+        {
+          "value": "felberry_figs",
+          "label": "Felberry Figs"
+        },
+        {
+          "value": "flora_frenzy",
+          "label": "Flora Frenzy"
+        },
+        {
+          "value": "foragers_medley",
+          "label": "Foragers Medley"
+        },
+        {
+          "value": "fried_bloomtail",
+          "label": "Fried Bloomtail"
+        },
+        {
+          "value": "portable_snack",
+          "label": "Portable Snack"
+        },
+        {
+          "value": "quick_sandwich",
+          "label": "Quick Sandwich"
+        },
+        {
+          "value": "silvermoon_standard",
+          "label": "Silvermoon Standard"
+        },
+        {
+          "value": "spiced_biscuits",
+          "label": "Spiced Biscuits"
+        },
+        {
+          "value": "tasty_smoked_tetra",
+          "label": "Tasty Smoked Tetra"
+        },
+        {
+          "value": "wise_tails",
+          "label": "Wise Tails"
+        },
+        {
+          "value": "felkissed_filet",
+          "label": "Fel-Kissed Filet (Haste)"
+        },
+        {
+          "value": "voidkissed_fish_rolls",
+          "label": "Void-Kissed Fish Rolls (Versatility)"
+        },
+        {
+          "value": "sunseared_lumifin",
+          "label": "Sun-Seared Lumifin"
+        },
+        {
+          "value": "manainfused_stew",
+          "label": "Mana-Infused Stew"
+        },
+        {
+          "value": "venomspiced_cutlets",
+          "label": "Venom-Spiced Cutlets"
+        },
+        {
+          "value": "sweetandsour_skewers",
+          "label": "Sweet-and-Sour Skewers"
+        },
+        {
+          "value": "bloodthistlewrapped_cutlets",
+          "label": "Bloodthistle-Wrapped Cutlets"
+        }
+      ],
+      "potion": [
+        {
+          "value": "draught_of_rampant_abandon_2",
+          "label": "Draught of Rampant Abandon"
+        },
+        {
+          "value": "lights_potential_2",
+          "label": "Light's Potential"
+        },
+        {
+          "value": "liquid_luster_2",
+          "label": "Liquid Luster"
+        },
+        {
+          "value": "potion_of_recklessness_2",
+          "label": "Potion of Recklessness"
+        },
+        {
+          "value": "potion_of_zealotry_2",
+          "label": "Potion of Zealotry"
+        },
+        {
+          "value": "alluring_nostrum_2",
+          "label": "Alluring Nostrum"
+        }
+      ],
+      "augmentation": [
+        {
+          "value": "void_touched",
+          "label": "Void-Touched Augment Rune"
+        },
+        {
+          "value": "void_touched_augment_rune",
+          "label": "Void-Touched Augment Rune (caster alias)"
+        }
+      ],
+      "temporary_enchant": [
+        {
+          "value": "main_hand:thalassian_phoenix_oil_2",
+          "label": "Thalassian Phoenix Oil"
+        },
+        {
+          "value": "main_hand:oil_of_dawn_2",
+          "label": "Oil of Dawn"
+        },
+        {
+          "value": "main_hand:refulgent_whetstone_2",
+          "label": "Refulgent Whetstone"
+        },
+        {
+          "value": "main_hand:refulgent_weightstone_2",
+          "label": "Refulgent Weightstone"
+        },
+        {
+          "value": "main_hand:refulgent_razorstone_2",
+          "label": "Refulgent Razorstone"
+        }
+      ]
+    }
+  },
+  "enchants": {
+    "head": 8017,
+    "chest": 7987,
+    "legs": 8159,
+    "feet": 7963,
+    "finger1": 7967,
+    "finger2": 7967,
+    "main_hand": 8689,
+    "off_hand": 8689
+  },
+  "enchants_by_stat": {
+    "legs": {
+      "agility": 8159,
+      "strength": 8159,
+      "intellect": 7935
+    },
+    "finger1": {
+      "crit": 7997,
+      "haste": 8025,
+      "mastery": 7969,
+      "versatility": 8027,
+      "default": 7967
+    },
+    "finger2": {
+      "crit": 7997,
+      "haste": 8025,
+      "mastery": 7969,
+      "versatility": 8027,
+      "default": 7967
+    },
+    "main_hand": {
+      "default": 8689,
+      "intellect": 8039,
+      "agility": 7981,
+      "strength": 7979
+    },
+    "off_hand": {
+      "default": 8689,
+      "intellect": 8039,
+      "agility": 7981,
+      "strength": 7979
+    }
+  },
+  "enchant_options": {
+    "weapon": [
+      {
+        "id": 8689,
+        "label": "Rite of the Hash'ey"
+      },
+      {
+        "id": 7979,
+        "label": "Strength of Halazzi"
+      },
+      {
+        "id": 7981,
+        "label": "Jan'alai's Precision"
+      },
+      {
+        "id": 7983,
+        "label": "Berserker's Rage"
+      },
+      {
+        "id": 8011,
+        "label": "Worldsoul Tenacity"
+      },
+      {
+        "id": 8037,
+        "label": "Flames of the Sin'dorei"
+      },
+      {
+        "id": 8039,
+        "label": "Acuity of the Ren'dorei"
+      },
+      {
+        "id": 8041,
+        "label": "Arcane Mastery"
+      },
+      {
+        "id": 8007,
+        "label": "Worldsoul Cradle",
+        "dps": false
+      },
+      {
+        "id": 8009,
+        "label": "Worldsoul Aegis",
+        "dps": false
+      }
+    ],
+    "chest": [
+      {
+        "id": 7987,
+        "label": "Mark of the Worldsoul",
+        "stat": "all"
+      },
+      {
+        "id": 7957,
+        "label": "Mark of Nalorakk",
+        "stat": "strength"
+      },
+      {
+        "id": 7985,
+        "label": "Mark of the Rootwarden",
+        "stat": "agility"
+      },
+      {
+        "id": 8013,
+        "label": "Mark of the Magister",
+        "stat": "intellect"
+      }
+    ],
+    "head": [
+      {
+        "id": 7961,
+        "label": "Empowered Hex of Leeching",
+        "dps": false
+      },
+      {
+        "id": 7991,
+        "label": "Empowered Blessing of Speed",
+        "dps": false
+      },
+      {
+        "id": 8017,
+        "label": "Empowered Rune of Avoidance",
+        "dps": false
+      }
+    ],
+    "feet": [
+      {
+        "id": 7963,
+        "label": "Lynx's Dexterity",
+        "dps": false
+      },
+      {
+        "id": 7993,
+        "label": "Shaladrassil's Roots",
+        "dps": false
+      },
+      {
+        "id": 8019,
+        "label": "Farstrider's Hunt",
+        "dps": false
+      }
+    ],
+    "ring": [
+      {
+        "id": 7967,
+        "label": "Eyes of the Eagle"
+      },
+      {
+        "id": 7965,
+        "label": "Amani Mastery"
+      },
+      {
+        "id": 7969,
+        "label": "Zul'jin's Mastery"
+      },
+      {
+        "id": 7995,
+        "label": "Nature's Wrath"
+      },
+      {
+        "id": 7997,
+        "label": "Nature's Fury"
+      },
+      {
+        "id": 8021,
+        "label": "Thalassian Haste"
+      },
+      {
+        "id": 8025,
+        "label": "Silvermoon's Alacrity"
+      },
+      {
+        "id": 8023,
+        "label": "Thalassian Versatility"
+      },
+      {
+        "id": 8027,
+        "label": "Silvermoon's Tenacity"
+      }
+    ],
+    "legs": [
+      {
+        "id": 8159,
+        "label": "Leg kit: Agi/Str + Stamina",
+        "stat": "attack"
+      },
+      {
+        "id": 8163,
+        "label": "Leg kit: Agi/Str + Armor",
+        "stat": "attack"
+      },
+      {
+        "id": 8161,
+        "label": "Leg kit: Agi/Str",
+        "stat": "attack"
+      },
+      {
+        "id": 7935,
+        "label": "Spellthread: Int + Stamina",
+        "stat": "intellect"
+      },
+      {
+        "id": 7937,
+        "label": "Spellthread: Int + Mana",
+        "stat": "intellect"
+      }
+    ]
+  },
+  "gems": {
+    "default": 240908,
+    "crit": 240898,
+    "haste": 240900,
+    "mastery": 240908,
+    "versatility": 240894,
+    "diamond": 240967
+  },
+  "gem_options": [
+    {
+      "id": 240898,
+      "label": "Flawless Deadly Amethyst"
+    },
+    {
+      "id": 240904,
+      "label": "Flawless Deadly Garnet"
+    },
+    {
+      "id": 240914,
+      "label": "Flawless Deadly Lapis"
+    },
+    {
+      "id": 240890,
+      "label": "Flawless Deadly Peridot"
+    },
+    {
+      "id": 240896,
+      "label": "Flawless Masterful Amethyst"
+    },
+    {
+      "id": 240908,
+      "label": "Flawless Masterful Garnet"
+    },
+    {
+      "id": 240918,
+      "label": "Flawless Masterful Lapis"
+    },
+    {
+      "id": 240892,
+      "label": "Flawless Masterful Peridot"
+    },
+    {
+      "id": 240900,
+      "label": "Flawless Quick Amethyst"
+    },
+    {
+      "id": 240906,
+      "label": "Flawless Quick Garnet"
+    },
+    {
+      "id": 240916,
+      "label": "Flawless Quick Lapis"
+    },
+    {
+      "id": 240888,
+      "label": "Flawless Quick Peridot"
+    },
+    {
+      "id": 240902,
+      "label": "Flawless Versatile Amethyst"
+    },
+    {
+      "id": 240910,
+      "label": "Flawless Versatile Garnet"
+    },
+    {
+      "id": 240912,
+      "label": "Flawless Versatile Lapis"
+    },
+    {
+      "id": 240894,
+      "label": "Flawless Versatile Peridot"
+    }
+  ],
+  "diamonds": {
+    "options": [
+      {
+        "id": 240967,
+        "label": "Powerful Eversong Diamond (main stat)"
+      },
+      {
+        "id": 240969,
+        "label": "Telluric Eversong Diamond"
+      },
+      {
+        "id": 240971,
+        "label": "Stoic Eversong Diamond"
+      },
+      {
+        "id": 240983,
+        "label": "Indecipherable Eversong Diamond"
+      }
+    ],
+    "known_ids": [
+      240966,
+      240967,
+      240968,
+      240969,
+      240970,
+      240971,
+      240982,
+      240983
+    ]
+  }
+}

@@ -1,0 +1,102 @@
+id_luster                   : start=  1.4 refresh=  0.0 interval=304.6 trigger=304.6 duration= 27.6 uptime= 12.83%
+    lustrous_gleam                  : start=  1.4 refresh=  5.3 interval=304.6 trigger= 25.5 duration= 27.6 uptime= 12.83%
+    masterful_ritual                : start=  3.6 refresh=  0.6 interval= 67.7 trigger= 55.3 duration= 15.7 uptime= 18.62%
+    minds_eyes                      : start= 16.5 refresh=  8.7 interval= 17.9 trigger= 11.7 duration= 14.0 uptime= 77.29%
+    nalorakks_rite                  : start=  1.7 refresh=  0.2 interval= 94.5 trigger= 77.3 duration= 15.5 uptime=  8.98%
+    pet_movement                    : start= 64.8 refresh= 67.5 interval=  4.6 trigger=  2.2 duration=  0.5 uptime= 11.19%
+    rotting_voidfin                 : start=  2.7 refresh=  0.3 interval= 68.6 trigger= 59.6 duration= 12.4 uptime= 11.08%
+    ruination                       : start=  8.4 refresh=  0.0 interval= 35.4 trigger= 35.4 duration=  1.9 uptime=  5.40%
+    rune_of_critical_power          : start= 11.4 refresh= 38.7 interval= 20.3 trigger=  5.9 duration= 23.2 uptime= 87.99%
+    seriously_sharp_seashell        : start=  2.6 refresh=  0.2 interval= 74.0 trigger= 64.6 duration= 12.3 uptime= 10.69%
+    slick_and_slimy_gralstone       : start=  2.3 refresh=  0.2 interval= 75.8 trigger= 64.7 duration= 12.5 uptime=  9.40%
+    soul_fang_alacrity              : start=  9.4 refresh=  7.0 interval= 31.4 trigger= 17.3 duration= 15.9 uptime= 49.36%
+    tattered_tortollan_scroll       : start=  2.6 refresh=  0.3 interval= 71.0 trigger= 60.3 duration= 12.3 uptime= 10.46%
+    the_kings_unyielding_wind       : start=  3.0 refresh=  0.0 interval=125.8 trigger=125.8 duration= 19.2 uptime= 18.93%
+    tyrant                          : start=  5.2 refresh=  0.0 interval= 63.3 trigger= 63.3 duration= 19.3 uptime= 33.11%
+    tyrants_oblation                : start=  5.2 refresh=  0.0 interval= 63.3 trigger= 63.3 duration= 19.3 uptime= 33.11%
+    venomcursed_ascendance          : start=  7.5 refresh=  4.0 interval= 38.7 trigger= 24.0 duration= 16.1 uptime= 39.93%
+    venomcursed_mastery             : start=  7.2 refresh=  4.0 interval= 39.7 trigger= 24.8 duration= 16.1 uptime= 39.04%
+    versatile_ritual                : start=  3.4 refresh=  0.7 interval= 66.1 trigger= 52.3 duration= 16.2 uptime= 18.15%
+    vilefiend                       : start= 14.8 refresh=  0.0 interval= 20.8 trigger= 20.8 duration= 14.6 uptime= 72.02%
+    wild_imps                       : start=  1.2 refresh=355.3 interval=154.8 trigger=  0.8 duration=247.5 uptime= 98.29%
+    demonic_tyrant-demonic_power    : start=  5.2 refresh=174.4 interval= 63.3 trigger=  1.6 duration= 19.7 uptime=100.00%
+    vilefiend-mark_of_shatug        : start= 14.8 refresh=  0.0 interval= 20.8 trigger= 20.8 duration= 14.6 uptime=100.00%
+  Up-Times:
+     24.62% : Mana Cap                      
+  Procs:
+     71.54955 |   4.52751sec : carnivorous_stalkers
+     29.58559 |  19.56827sec : demonic_core_dogs
+     22.11712 |  13.47315sec : demonic_core_imps_fade
+      8.25225 |  31.67925sec : demonic_core_imps_implosion
+     83.58559 |   3.50201sec : infernal_rapidity
+     53.91892 |   5.45625sec : isolated_implosion
+  Gains:
+    514799.6 : Mana Regen        (mana)           (overflow=31.36%)
+       114.5 : demonbolt         (soul_shard)   
+        51.4 : dominion_of_argus (soul_shard)   
+        25.2 : infernal_bolt     (soul_shard)   
+        61.6 : shadow_bolt       (soul_shard)   
+    Pet "felguard" Gains:
+      2988.2 : Energy Regen      (energy)       
+    Pet "grimoire_imp_lord" Gains:
+       544.1 : Energy Regen      (energy)         (overflow=6.45%)
+    Pet "dreadstalker" Gains:
+    Pet "vilefiend" Gains:
+    Pet "demonic_tyrant" Gains:
+    Pet "wild_imp" Gains:
+    Pet "antoran_inquisitor" Gains:
+    Pet "lady_sacrolash" Gains:
+    Pet "pit_lord" Gains:
+    Pet "overlord" Gains:
+    Pet "antoran_jailer" Gains:
+    Pet "mother_of_chaos" Gains:
+       280.9 : Energy Regen      (energy)         (overflow=4.23%)
+    Pet "grand_warlock_alythess" Gains:
+  Waiting:  0.00%
+
+
+ *** Targets *** 
+
+Target: Fluffy_Pillow humanoid tank_dummy unknown 93
+  DTPS=233009.86603101666 DTPS-Error=1080.8075033309442/0.46% DTPS-Range=14444.684217648304/6.20%
+  DPR=0 RPS-Out=218065.71128033331 RPS-In=0 Resource=health Waiting=0 ApM=0
+  Core Stats:    strength=0|0(0)  agility=0|0(0)  stamina=0|0(0)  intellect=0|0(0)  spirit=0|0(0)  health=0|69091721  mana=0|0
+  Generic Stats: mastery=0.00%|0.00%(0)  versatility=0.00%|0.00%(0)  leech=0.00%|0.00%(0)  runspeed=7.00%|7.00%(0)
+  Spell Stats:   power=0|0(0)  hit=0.00%|0.00%(0)  crit=0.00%|0.00%(0)  haste=0.00%|0.00%(0)  speed=0.00%|0.00%  manareg=0|0(0)
+  Attack Stats:  power=0|0(0)  hit=0.00%|0.00%(0)  crit=5.00%|5.00%(0)  expertise=0.00%|0.00%(0)  haste=0.00%|0.00%(0)  speed=0.00%|0.00%
+  Defense Stats: armor=1470|1470(1470) miss=3.00%|3.00%  dodge=3.00%|3.00%(0)  parry=3.00%|3.00%(0)  block=0.00%|0.00%(0) crit=0.00%|0.00%  versatility=0.00%|0.00%(0)
+  Priorities (actions.precombat):
+    snapshot_stats
+  Priorities (actions.default):
+
+  Actions:
+
+  Constant Buffs:
+    arcane_intellect/battle_shout/bleeding/chaos_brand/hunters_mark/mark_of_the_wild/mortal_wounds/mystic_touch/power_word_fortitude/skyfury
+  Dynamic Buffs:
+    cloven_soul : start=  8.3 refresh=  0.0 interval= 35.4 trigger= 35.5 duration= 14.7 uptime= 40.43%
+  Waiting:  0.00%
+
+
+Baseline Performance:
+  Networking    = enabled
+  RNG Engine    = xoshiro256+
+  Iterations    = 119 (14, 15, 15, 15, 15, 15, 15, 15)
+  TotalEvents   = 1660558
+  MaxEventQueue = 293
+  TargetHealth  = 69091721
+  SimSeconds    = 33341.680
+  CpuSeconds    = 1.234375
+  WallSeconds   = 0.1997525
+  InitSeconds   = 0.0246029
+  MergeSeconds  = 0.007633600000000001
+  AnalyzeSeconds= 0.00040270000000000003
+  SpeedUp       = 28958
+  EndTime       = 2026-09-21 13:57:49-0700
+
+
+Waiting:
+    All players active 100% of the time.
+
+text report took 0.0024607 seconds.
+JSON report version 2.0.0 took 0.0076822 seconds.

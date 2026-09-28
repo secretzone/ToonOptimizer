@@ -1,0 +1,46 @@
+# runtime artifacts
+runtime/
+data/cache/
+history/
+characters/
+reports/
+*.simc.out
+*.log
+*.pt
+*.part
+
+# python
+backend/.venv/
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/
+*.egg-info/
+.mypy_cache/
+.coverage
+htmlcov/
+
+# node
+frontend/node_modules/
+node_modules/
+frontend/dist/
+frontend/*.local
+npm-debug.log*
+
+# claude code (per-user)
+.claude/settings.local.json
+.claude/launch.json
+.claude/worktrees/
+
+# editors / os
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp
+.env
+.env.*
+!frontend/.env.mock
+data/settings.json

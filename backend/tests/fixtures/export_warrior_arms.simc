@@ -1,0 +1,45 @@
+# Cleavador - Arms - 2026-09-21 12:40 - EU/Draenor
+# SimC Addon 12.1.0-01
+# WoW 12.1.0.69875, TOC 120100
+# Requires SimulationCraft 1000-01 or newer
+
+warrior="Cleavador"
+level=90
+race=orc
+region=eu
+server=draenor
+role=attack
+professions=engineering=100/blacksmithing=100
+spec=arms
+# loot_spec=fury
+
+talents=CcEAAAAAAAAAAAAAAAAAAAAAAAzMzsMzMmZGAAAghphxYmxyMzMzgxMDAAAAgZWmZAhxyyALgBMDTIzgNwMjtx2ALzsMAzMAYGGA
+
+# Warlord's Helm (344)
+head=,id=271520,bonus_id=4786/12854/13692/13698,gem_id=240983
+# Warlord's Pauldrons (344)
+shoulder=,id=271518,bonus_id=4786/12854/13691/13697
+# Warlord's Cuirass (344)
+chest=,id=271523,enchant_id=7987,bonus_id=4786/12854/13690/13698
+# Crushing Ring (334)
+finger1=,id=268252,enchant_id=7967,bonus_id=13534,ilevel=334
+# Heavy Ring (334)
+finger2=,id=252258,enchant_id=7967,bonus_id=13534,ilevel=334
+# Brutal Trinket (344)
+trinket1=,id=270175,bonus_id=13335/13848
+# Greataxe of the Horde (344)
+main_hand=,id=268210,enchant_id=3368,bonus_id=13335/13848
+
+### Gear from Bags
+#
+# Colossal Maul (340)
+# main_hand=,id=268211,bonus_id=13335,ilevel=340
+#
+# Warlord's Gauntlets (344)
+# hands=,id=271521,bonus_id=4786/12854/13691/13697
+
+### Additional Character Info
+#
+# catalyst_currencies=3116:0:0
+
+# Checksum: deadbeef

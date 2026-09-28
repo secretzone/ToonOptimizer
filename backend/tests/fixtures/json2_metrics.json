@@ -1,0 +1,1377 @@
+{
+ "version": "1210-01",
+ "git_revision": "774babd",
+ "sim": {
+  "options": {
+   "debug": false,
+   "max_time": 30.0,
+   "expected_iteration_time": 36.0,
+   "vary_combat_length": 0.2,
+   "iterations": 37,
+   "target_error": 0.0,
+   "threads": 8,
+   "seed": 3374720501284908899,
+   "single_actor_batch": true,
+   "queue_lag": 0.005,
+   "queue_lag_stddev": 0.001,
+   "gcd_lag": 0.15,
+   "gcd_lag_stddev": 0.037,
+   "channel_lag": 0.25,
+   "channel_lag_stddev": 0.062,
+   "queue_gcd_reduction": 0.1,
+   "strict_gcd_queue": false,
+   "confidence": 0.95,
+   "confidence_estimator": 1.9599639854088815,
+   "world_lag": 0.1,
+   "world_lag_stddev": 0.01,
+   "travel_variance": 0.0,
+   "default_skill": 1.0,
+   "reaction_time": 0.5,
+   "regen_periodicity": 0.25,
+   "ignite_sampling_delta": 0.2,
+   "fixed_time": true,
+   "optimize_expressions": 2,
+   "optimal_raid": 0,
+   "log": 0,
+   "debug_each": 0,
+   "stat_cache": 1,
+   "max_aoe_enemies": 20,
+   "enemy_death_pct": 0.0,
+   "challenge_mode": false,
+   "timewalk": -1,
+   "pvp_mode": false,
+   "rng": {
+    "name": "xoshiro256+"
+   },
+   "deterministic": 0,
+   "average_range": 1,
+   "average_gauss": 0,
+   "fight_style": "Patchwerk",
+   "desired_targets": 1,
+   "default_aura_delay": 0.03,
+   "default_aura_delay_stddev": 0.005,
+   "profileset_metric": "dps",
+   "profileset_multiactor_base_name": "Baseline",
+   "dbc": {
+    "Live": {
+     "build_level": 69875,
+     "wow_version": "12.1.0.69875",
+     "hotfix_date": "2026-09-19",
+     "hotfix_build": 69875,
+     "hotfix_hash": "76e55563bb1f4ef8a92132bb3ac7d82394bac7de3143d64120740c5798cea20e"
+    },
+    "PTR": {
+     "build_level": 69848,
+     "wow_version": "12.1.5.69848",
+     "hotfix_date": "2026-09-20",
+     "hotfix_build": 69848,
+     "hotfix_hash": "1ec8513ed276a1acbd49d88daf8e2390eba17ac5570af00c1a1dd961f1279b4c"
+    },
+    "version_used": "Live"
+   }
+  },
+  "statistics": {
+   "elapsed_cpu_seconds": 0.4375,
+   "elapsed_time_seconds": 0.1342459,
+   "init_time_seconds": 0.07911850000000001,
+   "merge_time_seconds": 0.004368400000000001,
+   "analyze_time_seconds": 0.0011429,
+   "simulation_length": {
+    "sum": 888.5970000000001,
+    "count": 29,
+    "mean": 30.64127586206897,
+    "min": 24.2,
+    "max": 35.6,
+    "median": 31.0,
+    "variance": 11.388489510107016,
+    "std_dev": 3.374683616297536,
+    "mean_variance": 0.39270653483127643,
+    "mean_std_dev": 0.6266630153689273
+   },
+   "total_events_processed": 235177,
+   "raid_dps": {
+    "sum": 9166755.523395432,
+    "count": 29,
+    "mean": 316095.01804811833,
+    "min": 265844.0293955864,
+    "max": 374805.23015153455,
+    "median": 312689.42535942385,
+    "variance": 637646751.4806725,
+    "std_dev": 25251.668291039157,
+    "mean_variance": 21987819.01657491,
+    "mean_std_dev": 4689.117082839253
+   },
+   "total_dmg": {
+    "sum": 279948243.66379684,
+    "count": 29,
+    "mean": 9653387.712544719
+   }
+  },
+  "profilesets": {
+   "metric": "Damage per Second",
+   "results": [
+    {
+     "name": "talent_b",
+     "mean": 322916.9683873007,
+     "min": 280799.5436866378,
+     "max": 392769.12714345875,
+     "stddev": 25637.585699846313,
+     "mean_stddev": 4760.7801465761095,
+     "mean_error": 9330.95762973879,
+     "median": 319748.4133512352,
+     "first_quartile": 307380.9406264057,
+     "third_quartile": 330279.3296092712,
+     "iterations": 30,
+     "additional_metrics": [
+      {
+       "metric": "Damage per Second to Priority Target/Boss",
+       "mean": 322916.9683873007,
+       "min": 280799.54368663824,
+       "max": 392769.1271434585,
+       "stddev": 25637.585699846255,
+       "mean_stddev": 4760.7801465760995,
+       "mean_error": 9330.95762973877,
+       "median": 319748.4133512353,
+       "first_quartile": 307380.94062640594,
+       "third_quartile": 330279.32960927126
+      },
+      {
+       "metric": "Damage Taken per Second",
+       "mean": 0.0,
+       "min": 0.0,
+       "max": 0.0,
+       "stddev": 0.0,
+       "mean_stddev": 0.0,
+       "mean_error": 0.0
+      },
+      {
+       "metric": "Healing per Second",
+       "mean": 0.0,
+       "min": 0.0,
+       "max": 0.0,
+       "stddev": 0.0,
+       "mean_stddev": 0.0,
+       "mean_error": 0.0
+      },
+      {
+       "metric": "Damage Taken",
+       "mean": 0.0,
+       "min": 0.0,
+       "max": 0.0,
+       "stddev": 0.0,
+       "mean_stddev": 0.0,
+       "mean_error": 0.0
+      }
+     ]
+    },
+    {
+     "name": "ring_swap",
+     "mean": 322034.1093334182,
+     "min": 277375.65491763013,
+     "max": 381093.5176002375,
+     "stddev": 22360.01049111134,
+     "mean_stddev": 4152.149709789348,
+     "mean_error": 8138.063893213061,
+     "median": 317229.37843969406,
+     "first_quartile": 308932.1388237858,
+     "third_quartile": 336090.39894820977,
+     "iterations": 30,
+     "additional_metrics": [
+      {
+       "metric": "Damage per Second to Priority Target/Boss",
+       "mean": 322034.1093334182,
+       "min": 277375.6549176301,
+       "max": 381093.51760023774,
+       "stddev": 22360.01049111141,
+       "mean_stddev": 4152.149709789362,
+       "mean_error": 8138.063893213088,
+       "median": 317229.3784396939,
+       "first_quartile": 308932.13882378576,
+       "third_quartile": 336090.39894820965
+      },
+      {
+       "metric": "Damage Taken per Second",
+       "mean": 0.0,
+       "min": 0.0,
+       "max": 0.0,
+       "stddev": 0.0,
+       "mean_stddev": 0.0,
+       "mean_error": 0.0
+      },
+      {
+       "metric": "Healing per Second",
+       "mean": 0.0,
+       "min": 0.0,
+       "max": 0.0,
+       "stddev": 0.0,
+       "mean_stddev": 0.0,
+       "mean_error": 0.0
+      },
+      {
+       "metric": "Damage Taken",
+       "mean": 0.0,
+       "min": 0.0,
+       "max": 0.0,
+       "stddev": 0.0,
+       "mean_stddev": 0.0,
+       "mean_error": 0.0
+      }
+     ]
+    },
+    {
+     "name": "no_trinket2",
+     "mean": 284329.0121081423,
+     "min": 235151.17907593457,
+     "max": 340388.7944010708,
+     "stddev": 21345.757094515528,
+     "mean_stddev": 3963.807582311265,
+     "mean_error": 7768.92010642073,
+     "median": 284270.9037957053,
+     "first_quartile": 270453.9748026216,
+     "third_quartile": 293265.95018789417,
+     "iterations": 30,
+     "additional_metrics": [
+      {
+       "metric": "Damage per Second to Priority Target/Boss",
+       "mean": 284329.01210814243,
+       "min": 235151.17907593446,
+       "max": 340388.794401071,
+       "stddev": 21345.757094515608,
+       "mean_stddev": 3963.80758231128,
+       "mean_error": 7768.920106420759,
+       "median": 284270.90379570494,
+       "first_quartile": 270453.97480262164,
+       "third_quartile": 293265.95018789446
+      },
+      {
+       "metric": "Damage Taken per Second",
+       "mean": 0.0,
+       "min": 0.0,
+       "max": 0.0,
+       "stddev": 0.0,
+       "mean_stddev": 0.0,
+       "mean_error": 0.0
+      },
+      {
+       "metric": "Healing per Second",
+       "mean": 0.0,
+       "min": 0.0,
+       "max": 0.0,
+       "stddev": 0.0,
+       "mean_stddev": 0.0,
+       "mean_error": 0.0
+      },
+      {
+       "metric": "Damage Taken",
+       "mean": 0.0,
+       "min": 0.0,
+       "max": 0.0,
+       "stddev": 0.0,
+       "mean_stddev": 0.0,
+       "mean_error": 0.0
+      }
+     ]
+    }
+   ]
+  },
+  "players": [
+   {
+    "name": "Frostbyte",
+    "specialization": "Frost Death Knight",
+    "dbc": {
+     "Live": {
+      "build_level": 69875,
+      "wow_version": "12.1.0.69875",
+      "hotfix_date": "2026-09-19",
+      "hotfix_build": 69875,
+      "hotfix_hash": "76e55563bb1f4ef8a92132bb3ac7d82394bac7de3143d64120740c5798cea20e"
+     },
+     "PTR": {
+      "build_level": 69848,
+      "wow_version": "12.1.5.69848",
+      "hotfix_date": "2026-09-20",
+      "hotfix_build": 69848,
+      "hotfix_hash": "1ec8513ed276a1acbd49d88daf8e2390eba17ac5570af00c1a1dd961f1279b4c"
+     },
+     "version_used": "Live"
+    },
+    "valid_fight_style": true,
+    "collected_data": {
+     "dps": {
+      "sum": 9166755.523395432,
+      "count": 29,
+      "mean": 316095.01804811833,
+      "min": 265844.0293955864,
+      "max": 374805.23015153455,
+      "median": 312689.42535942385,
+      "variance": 637646751.4806725,
+      "std_dev": 25251.668291039157,
+      "mean_variance": 21987819.01657491,
+      "mean_std_dev": 4689.117082839253
+     },
+     "fight_length": {
+      "sum": 888.5970000000001,
+      "count": 29,
+      "mean": 30.64127586206897,
+      "min": 24.2,
+      "max": 35.6,
+      "median": 31.0,
+      "variance": 11.388489510107016,
+      "std_dev": 3.374683616297536,
+      "mean_variance": 0.39270653483127643,
+      "mean_std_dev": 0.6266630153689273
+     }
+    },
+    "buffs": [
+     {
+      "name": "antimagic_shell",
+      "spell_name": "Anti-Magic Shell",
+      "spell_school": "shadow",
+      "spell": 48707,
+      "start_count": 0.9310344827586207,
+      "duration": 4.882971428571428,
+      "uptime": 14.710366954414356,
+      "expire_count": 0.8275862068965517,
+      "stack_uptime": {
+       "mean": 0.1508507173893044,
+       "mean_std_dev": 0.048775152224928724,
+       "min": 0.0,
+       "max": 0.8457241379310345,
+       "data": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.2739655172413793,
+        0.6313793103448276,
+        0.8106896551724138,
+        0.8457241379310345,
+        0.8344827586206897,
+        0.5761428571428572,
+        0.2497857142857143,
+        0.15173913043478263,
+        0.1237,
+        0.10526315789473684,
+        0.0735
+       ]
+      }
+     },
+     {
+      "name": "arcanoweave_insight",
+      "spell_name": "Arcanoweave Insight",
+      "spell_school": "physical",
+      "spell": 1229746,
+      "start_count": 0.7241379310344828,
+      "refresh_count": 0.4482758620689655,
+      "trigger": 5.8894375,
+      "duration": 15.653740740740739,
+      "uptime": 38.212962957011904,
+      "overflow_stacks": 0.4482758620689655,
+      "overflow_total": 0.4482758620689655,
+      "expire_count": 0.27586206896551724,
+      "stack_uptime": {
+       "mean": 0.3794449845856926,
+       "mean_std_dev": 0.031678477819932806,
+       "min": 0.0,
+       "max": 0.625,
+       "data": [
+        0.0,
+        0.0,
+        0.01196551724137931,
+        0.06896551724137931,
+        0.10344827586206896,
+        0.15486206896551724,
+        0.20689655172413793,
+        0.23448275862068965,
+        0.2589310344827586,
+        0.3103448275862069,
+        0.34379310344827585,
+        0.3448275862068966,
+        0.3448275862068966,
+        0.38320689655172413,
+        0.4187586206896552,
+        0.4482758620689655,
+        0.4788965517241379,
+        0.4827586206896552,
+        0.5069655172413793,
+        0.5517241379310345,
+        0.555448275862069,
+        0.5907241379310345,
+        0.6087241379310344,
+        0.5862068965517241,
+        0.5586206896551724,
+        0.5714285714285714,
+        0.5287142857142857,
+        0.5130434782608696,
+        0.5051,
+        0.431578947368421,
+        0.4461111111111112,
+        0.43993333333333334,
+        0.5454545454545454,
+        0.625,
+        0.45,
+        0.05
+       ]
+      }
+     },
+     {
+      "name": "bind_in_darkness",
+      "spell_name": "Bind in Darkness",
+      "spell_school": "shadowfrost",
+      "spell": 443532,
+      "start_count": 7.206896551724138,
+      "interval": 3.6110446428571428,
+      "trigger": 3.6110446428571428,
+      "duration": 1.3086590038314179,
+      "uptime": 31.31247448235144,
+      "stack_uptime": {
+       "mean": 0.2977402180656336,
+       "mean_std_dev": 0.02475447920215342,
+       "min": 0.0,
+       "max": 0.5272068965517241,
+       "data": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.004689655172413793,
+        0.3380344827586207,
+        0.4099655172413793,
+        0.5272068965517241,
+        0.31310344827586206,
+        0.32489655172413795,
+        0.4040344827586207,
+        0.39268965517241383,
+        0.21475862068965518,
+        0.24713793103448278,
+        0.48234482758620695,
+        0.24162068965517242,
+        0.4251724137931035,
+        0.4672068965517241,
+        0.36731034482758623,
+        0.4617586206896552,
+        0.32686206896551734,
+        0.42068965517241375,
+        0.507551724137931,
+        0.43768965517241376,
+        0.2675172413793104,
+        0.36449999999999994,
+        0.2735357142857143,
+        0.3973913043478262,
+        0.32544999999999996,
+        0.33857894736842115,
+        0.2896111111111111,
+        0.28206666666666647,
+        0.2852727272727267,
+        0.133875,
+        0.27687500000000004,
+        0.16924999999999998
+       ]
+      }
+     },
+     {
+      "name": "bonegrinder_crit",
+      "spell_name": "Bonegrinder",
+      "spell_school": "physical",
+      "spell": 377101,
+      "cooldown": {
+       "name": "buff_bonegrinder_crit",
+       "duration": 0.7000000000000001
+      },
+      "start_count": 2.896551724137931,
+      "refresh_count": 4.482758620689655,
+      "interval": 13.149514285714288,
+      "trigger": 5.099278350515464,
+      "duration": 2.7573738317757006,
+      "uptime": 26.047577682831246,
+      "default_value": 0.01,
+      "stack_uptime": {
+       "mean": 0.6875389554283009,
+       "mean_std_dev": 0.14586593264579234,
+       "min": 0.0,
+       "max": 2.839862068965517,
+       "data": [
+        2.839862068965517,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.6742758620689655,
+        1.8304482758620688,
+        2.6358275862068963,
+        2.3016206896551727,
+        1.4475172413793105,
+        0.394344827586207,
+        0.004965517241379311,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.02696551724137931,
+        0.05351724137931035,
+        0.3520714285714286,
+        0.6627142857142859,
+        0.8406086956521739,
+        1.4686499999999998,
+        1.8882631578947366,
+        1.8371666666666664,
+        1.659333333333334,
+        1.292,
+        1.69125,
+        0.75,
+        0.1
+       ]
+      }
+     },
+     {
+      "name": "bonegrinder_frost",
+      "spell_name": "Bonegrinder",
+      "spell_school": "physical",
+      "spell": 377103,
+      "start_count": 2.1724137931034484,
+      "interval": 14.520166666666666,
+      "trigger": 14.520166666666666,
+      "duration": 9.562177215189873,
+      "uptime": 67.60708289133012,
+      "benefit": 41.37931034482759,
+      "expire_count": 2.0,
+      "default_value": 0.2,
+      "stack_uptime": {
+       "mean": 0.6021560241894319,
+       "mean_std_dev": 0.069475224772541,
+       "min": 0.0,
+       "max": 1.0,
+       "data": [
+        0.05337931034482759,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        0.9466206896551724,
+        0.0,
+        0.0,
+        0.04489655172413793,
+        0.2896206896551724,
+        0.6214482758620691,
+        0.9014137931034483,
+        0.9987586206896552,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        0.9551034482758621,
+        0.7103793103448275,
+        0.39207142857142857,
+        0.10210714285714287,
+        0.001565217391304348,
+        0.0,
+        0.02668421052631579,
+        0.093,
+        0.16099999999999995,
+        0.25981818181818184,
+        0.39475,
+        0.475,
+        0.25
+       ]
+      }
+     }
+    ],
+    "stats": [
+     {
+      "id": 48707,
+      "spell_name": "Anti-Magic Shell",
+      "name": "antimagic_shell",
+      "school": "shadow",
+      "type": "absorb",
+      "num_executes": {
+       "sum": 27.0,
+       "count": 29,
+       "mean": 0.9310344827586207
+      },
+      "compound_amount": 0.0,
+      "num_direct_results": {
+       "sum": 27.0,
+       "count": 29,
+       "mean": 0.9310344827586207
+      },
+      "direct_results": {
+       "hit": {
+        "actual_amount": {
+         "sum": 0.0,
+         "count": 35,
+         "mean": 0.0,
+         "min": 0.0,
+         "max": 0.0
+        },
+        "avg_actual_amount": {
+         "sum": 0.0,
+         "count": 29,
+         "mean": 0.0,
+         "min": 0.0,
+         "max": 0.0
+        },
+        "total_amount": {
+         "sum": 0.0,
+         "count": 35,
+         "mean": 0.0
+        },
+        "fight_actual_amount": {
+         "sum": 0.0,
+         "count": 29,
+         "mean": 0.0
+        },
+        "fight_total_amount": {
+         "sum": 0.0,
+         "count": 29,
+         "mean": 0.0
+        },
+        "overkill_pct": {
+         "sum": 0.0,
+         "count": 29,
+         "mean": 0.0
+        },
+        "count": {
+         "sum": 27.0,
+         "count": 29,
+         "mean": 0.9310344827586207,
+         "min": 0.0,
+         "max": 1.0
+        },
+        "pct": 100.0
+       }
+      }
+     },
+     {
+      "id": 0,
+      "spell_name": "",
+      "name": "auto_attack_mh",
+      "school": "physical",
+      "type": "damage",
+      "num_executes": {
+       "sum": 1314.0,
+       "count": 29,
+       "mean": 45.310344827586206
+      },
+      "compound_amount": 753786.8084218072,
+      "total_execute_time": {
+       "sum": 1040.498,
+       "count": 29,
+       "mean": 35.87924137931034
+      },
+      "portion_aps": {
+       "sum": 712575.99458363,
+       "count": 29,
+       "mean": 24571.58602012517,
+       "min": 18239.205301736147,
+       "max": 32116.179741138592
+      },
+      "portion_apse": {
+       "sum": 712575.99458363,
+       "count": 29,
+       "mean": 24571.58602012517,
+       "min": 18239.205301736147,
+       "max": 32116.179741138592
+      },
+      "portion_amount": 0.07808521017365233,
+      "actual_amount": {
+       "sum": 21859817.44423241,
+       "count": 29,
+       "mean": 753786.8084218072,
+       "min": 474219.3378451398,
+       "max": 1057281.1966745402
+      },
+      "total_amount": {
+       "sum": 31228310.634617735,
+       "count": 29,
+       "mean": 1076838.2977454392,
+       "min": 677456.1969216282,
+       "max": 1510401.7095350586
+      },
+      "total_intervals": {
+       "sum": 116.25600000000001,
+       "count": 150,
+       "mean": 0.7750400000000001
+      },
+      "num_direct_results": {
+       "sum": 1314.0,
+       "count": 29,
+       "mean": 45.310344827586206
+      },
+      "direct_results": {
+       "miss": {
+        "actual_amount": {
+         "sum": 0.0,
+         "count": 290,
+         "mean": 0.0,
+         "min": 0.0,
+         "max": 0.0
+        },
+        "avg_actual_amount": {
+         "sum": 0.0,
+         "count": 29,
+         "mean": 0.0,
+         "min": 0.0,
+         "max": 0.0
+        },
+        "total_amount": {
+         "sum": 0.0,
+         "count": 290,
+         "mean": 0.0
+        },
+        "fight_actual_amount": {
+         "sum": 0.0,
+         "count": 29,
+         "mean": 0.0
+        },
+        "fight_total_amount": {
+         "sum": 0.0,
+         "count": 29,
+         "mean": 0.0
+        },
+        "overkill_pct": {
+         "sum": 0.0,
+         "count": 29,
+         "mean": 0.0
+        },
+        "count": {
+         "sum": 232.0,
+         "count": 29,
+         "mean": 8.0,
+         "min": 3.0,
+         "max": 13.0
+        },
+        "pct": 17.65601217656012
+       },
+       "crit": {
+        "actual_amount": {
+         "sum": 13738887.4941978,
+         "count": 436,
+         "mean": 31511.209849077524,
+         "min": 20403.566217763968,
+         "max": 42744.069319333576
+        },
+        "avg_actual_amount": {
+         "sum": 903670.3362294668,
+         "count": 29,
+         "mean": 31161.046076878167,
+         "min": 25806.441018594054,
+         "max": 35163.773059106265
+        },
+        "total_amount": {
+         "sum": 19626982.13456829,
+         "count": 436,
+         "mean": 45016.01407011075
+        },
+        "fight_actual_amount": {
+         "sum": 10762665.390687395,
+         "count": 29,
+         "mean": 371126.39278232394
+        },
+        "fight_total_amount": {
+         "sum": 15375236.272410562,
+         "count": 29,
+         "mean": 530180.5611176055
+        },
+        "overkill_pct": {
+         "sum": 870.0,
+         "count": 29,
+         "mean": 30.0
+        },
+        "count": {
+         "sum": 345.0,
+         "count": 29,
+         "mean": 11.89655172413793,
+         "min": 6.0,
+         "max": 24.0
+        },
+        "pct": 26.255707762557076
+       },
+       "hit": {
+        "actual_amount": {
+         "sum": 14212163.531684618,
+         "count": 940,
+         "mean": 15119.322906047466,
+         "min": 9858.372809594937,
+         "max": 20611.213144063797
+        },
+        "avg_actual_amount": {
+         "sum": 438408.5066326823,
+         "count": 29,
+         "mean": 15117.534711471802,
+         "min": 13764.136213469417,
+         "max": 17113.023343140303
+        },
+        "total_amount": {
+         "sum": 20303090.759549458,
+         "count": 940,
+         "mean": 21599.032722924956
+        },
+        "fight_actual_amount": {
+         "sum": 11097152.053545017,
+         "count": 29,
+         "mean": 382660.4156394833
+        },
+        "fight_total_amount": {
+         "sum": 15853074.362207167,
+         "count": 29,
+         "mean": 546657.7366278333
+        },
+        "overkill_pct": {
+         "sum": 870.0000000000002,
+         "count": 29,
+         "mean": 30.000000000000007
+        },
+        "count": {
+         "sum": 737.0,
+         "count": 29,
+         "mean": 25.413793103448278,
+         "min": 15.0,
+         "max": 43.0
+        },
+        "pct": 56.08828006088281
+       }
+      }
+     },
+     {
+      "id": 1,
+      "spell_name": "",
+      "name": "auto_attack_oh",
+      "school": "physical",
+      "type": "damage",
+      "num_executes": {
+       "sum": 1250.0,
+       "count": 29,
+       "mean": 43.10344827586207
+      },
+      "compound_amount": 352060.68347032566,
+      "total_execute_time": {
+       "sum": 988.6510000000002,
+       "count": 29,
+       "mean": 34.091413793103456
+      },
+      "portion_aps": {
+       "sum": 334359.8908569034,
+       "count": 29,
+       "mean": 11529.651408858737,
+       "min": 8741.888623855892,
+       "max": 15277.36691368888
+      },
+      "portion_apse": {
+       "sum": 334359.8908569034,
+       "count": 29,
+       "mean": 11529.651408858737,
+       "min": 8741.888623855892,
+       "max": 15277.36691368888
+      },
+      "portion_amount": 0.03647016922492584,
+      "actual_amount": {
+       "sum": 10209759.820639445,
+       "count": 29,
+       "mean": 352060.68347032566,
+       "min": 248547.91428513976,
+       "max": 531652.368596373
+      },
+      "total_amount": {
+       "sum": 14585371.172342062,
+       "count": 29,
+       "mean": 502943.8335290366,
+       "min": 355068.4489787712,
+       "max": 759503.3837091045
+      },
+      "total_intervals": {
+       "sum": 116.25600000000001,
+       "count": 150,
+       "mean": 0.7750400000000001
+      },
+      "num_direct_results": {
+       "sum": 1250.0,
+       "count": 29,
+       "mean": 43.10344827586207
+      },
+      "direct_results": {
+       "miss": {
+        "actual_amount": {
+         "sum": 0.0,
+         "count": 292,
+         "mean": 0.0,
+         "min": 0.0,
+         "max": 0.0
+        },
+        "avg_actual_amount": {
+         "sum": 0.0,
+         "count": 29,
+         "mean": 0.0,
+         "min": 0.0,
+         "max": 0.0
+        },
+        "total_amount": {
+         "sum": 0.0,
+         "count": 292,
+         "mean": 0.0
+        },
+        "fight_actual_amount": {
+         "sum": 0.0,
+         "count": 29,
+         "mean": 0.0
+        },
+        "fight_total_amount": {
+         "sum": 0.0,
+         "count": 29,
+         "mean": 0.0
+        },
+        "overkill_pct": {
+         "sum": 0.0,
+         "count": 29,
+         "mean": 0.0
+        },
+        "count": {
+         "sum": 227.0,
+         "count": 29,
+         "mean": 7.827586206896552,
+         "min": 4.0,
+         "max": 15.0
+        },
+        "pct": 18.16
+       },
+       "crit": {
+        "actual_amount": {
+         "sum": 6115597.1333330395,
+         "count": 386,
+         "mean": 15843.515889463833,
+         "min": 10198.955066007355,
+         "max": 21440.503149260756
+        },
+        "avg_actual_amount": {
+         "sum": 459535.9078061716,
+         "count": 29,
+         "mean": 15846.065786419711,
+         "min": 13257.127226311028,
+         "max": 19163.346640806496
+        },
+        "total_amount": {
+         "sum": 8736567.333332915,
+         "count": 386,
+         "mean": 22633.594127805478
+        },
+        "fight_actual_amount": {
+         "sum": 4752337.574806298,
+         "count": 29,
+         "mean": 163873.70947607924
+        },
+        "fight_total_amount": {
+         "sum": 6789053.678294711,
+         "count": 29,
+         "mean": 234105.29925154176
+        },
+        "overkill_pct": {
+         "sum": 870.0,
+         "count": 29,
+         "mean": 30.0
+        },
+        "count": {
+         "sum": 300.0,
+         "count": 29,
+         "mean": 10.344827586206897,
+         "min": 4.0,
+         "max": 17.0
+        },
+        "pct": 24.000000000000004
+       },
+       "hit": {
+        "actual_amount": {
+         "sum": 6939244.861840905,
+         "count": 919,
+         "mean": 7550.864920392714,
+         "min": 4775.605821128747,
+         "max": 10378.214537890084
+        },
+        "avg_actual_amount": {
+         "sum": 219527.7418864533,
+         "count": 29,
+         "mean": 7569.922134015631,
+         "min": 6752.200640702493,
+         "max": 8999.144455310588
+        },
+        "total_amount": {
+         "sum": 9913206.945487007,
+         "count": 919,
+         "mean": 10786.949886275308
+        },
+        "fight_actual_amount": {
+         "sum": 5457422.245833145,
+         "count": 29,
+         "mean": 188186.9739942464
+        },
+        "fight_total_amount": {
+         "sum": 7796317.494047351,
+         "count": 29,
+         "mean": 268838.5342774949
+        },
+        "overkill_pct": {
+         "sum": 870.0,
+         "count": 29,
+         "mean": 30.0
+        },
+        "count": {
+         "sum": 723.0,
+         "count": 29,
+         "mean": 24.93103448275862,
+         "min": 14.0,
+         "max": 34.0
+        },
+        "pct": 57.84
+       }
+      }
+     },
+     {
+      "id": 1249658,
+      "spell_name": "Breath of Sindragosa",
+      "name": "breath_of_sindragosa",
+      "school": "frost",
+      "type": "damage",
+      "resource_gain": {
+       "name": "breath_of_sindragosa",
+       "runic_power": {
+        "actual": 76.55172413793103,
+        "overflow": 0.0,
+        "count": 1.2758620689655173
+       }
+      },
+      "num_executes": {
+       "sum": 29.0,
+       "count": 29,
+       "mean": 1.0
+      },
+      "compound_amount": 819011.7848514963,
+      "num_ticks": {
+       "sum": 261.0,
+       "count": 29,
+       "mean": 9.0
+      },
+      "total_tick_time": {
+       "sum": 232.0,
+       "count": 29,
+       "mean": 8.0
+      },
+      "children": [
+       {
+        "id": 155166,
+        "spell_name": "Breath of Sindragosa",
+        "name": "breath_of_sindragosa_damage",
+        "school": "frost",
+        "type": "damage",
+        "num_executes": {
+         "sum": 897.0,
+         "count": 29,
+         "mean": 30.93103448275862
+        },
+        "compound_amount": 819011.7848514963,
+        "portion_aps": {
+         "sum": 775310.1852143813,
+         "count": 29,
+         "mean": 26734.8339729097,
+         "min": 23840.117150502694,
+         "max": 32999.44921202114
+        },
+        "portion_apse": {
+         "sum": 775310.1852143813,
+         "count": 29,
+         "mean": 26734.8339729097,
+         "min": 23840.117150502694,
+         "max": 32999.44921202114
+        },
+        "portion_amount": 0.08484190309555044,
+        "actual_amount": {
+         "sum": 23751341.760693394,
+         "count": 29,
+         "mean": 819011.7848514963,
+         "min": 650870.6495538387,
+         "max": 1036430.7188299651
+        },
+        "total_amount": {
+         "sum": 23751341.760693394,
+         "count": 29,
+         "mean": 819011.7848514963,
+         "min": 650870.6495538387,
+         "max": 1036430.7188299651
+        },
+        "total_intervals": {
+         "sum": 117.0,
+         "count": 117,
+         "mean": 1.0
+        },
+        "num_direct_results": {
+         "sum": 897.0,
+         "count": 29,
+         "mean": 30.93103448275862
+        },
+        "direct_results": {
+         "crit": {
+          "actual_amount": {
+           "sum": 12486782.99219433,
+           "count": 294,
+           "mean": 42472.05099385827,
+           "min": 26755.847452226535,
+           "max": 66368.99868692266
+          },
+          "avg_actual_amount": {
+           "sum": 1231240.2837443713,
+           "count": 29,
+           "mean": 42456.561508426596,
+           "min": 35438.12061055414,
+           "max": 50257.61851765043
+          },
+          "total_amount": {
+           "sum": 12486782.99219433,
+           "count": 294,
+           "mean": 42472.05099385827
+          },
+          "fight_actual_amount": {
+           "sum": 9847867.076315282,
+           "count": 29,
+           "mean": 339581.6233212166
+          },
+          "fight_total_amount": {
+           "sum": 9847867.076315282,
+           "count": 29,
+           "mean": 339581.6233212166
+          },
+          "overkill_pct": {
+           "sum": 0.0,
+           "count": 29,
+           "mean": 0.0
+          },
+          "count": {
+           "sum": 232.0,
+           "count": 29,
+           "mean": 8.0,
+           "min": 4.0,
+           "max": 12.0
+          },
+          "pct": 25.863991081382387
+         },
+         "hit": {
+          "actual_amount": {
+           "sum": 17576630.848304015,
+           "count": 840,
+           "mean": 20924.560533695254,
+           "min": 12711.82207651114,
+           "max": 32383.82515417192
+          },
+          "avg_actual_amount": {
+           "sum": 607789.6734695362,
+           "count": 29,
+           "mean": 20958.2646023978,
+           "min": 17440.355976209677,
+           "max": 23761.8554067797
+          },
+          "total_amount": {
+           "sum": 17576630.848304015,
+           "count": 840,
+           "mean": 20924.560533695254
+          },
+          "fight_actual_amount": {
+           "sum": 13903474.684378108,
+           "count": 29,
+           "mean": 479430.1615302796
+          },
+          "fight_total_amount": {
+           "sum": 13903474.684378108,
+           "count": 29,
+           "mean": 479430.1615302796
+          },
+          "overkill_pct": {
+           "sum": 0.0,
+           "count": 29,
+           "mean": 0.0
+          },
+          "count": {
+           "sum": 665.0,
+           "count": 29,
+           "mean": 22.93103448275862,
+           "min": 18.0,
+           "max": 28.0
+          },
+          "pct": 74.13600891861762
+         }
+        }
+       }
+      ]
+     },
+     {
+      "id": 1305374,
+      "spell_name": "Devour Morsel",
+      "item_id": 270175,
+      "name": "devour_morsel",
+      "school": "physical",
+      "type": "damage",
+      "num_executes": {
+       "sum": 367.0,
+       "count": 29,
+       "mean": 12.655172413793103
+      },
+      "compound_amount": 216853.07031727524,
+      "portion_aps": {
+       "sum": 206228.74847437895,
+       "count": 29,
+       "mean": 7111.33615428893,
+       "min": 4694.204835761367,
+       "max": 10138.235389155965
+      },
+      "portion_apse": {
+       "sum": 206228.74847437895,
+       "count": 29,
+       "mean": 7111.33615428893,
+       "min": 4694.204835761367,
+       "max": 10138.235389155965
+      },
+      "portion_amount": 0.022463934607689227,
+      "actual_amount": {
+       "sum": 6288739.039200982,
+       "count": 29,
+       "mean": 216853.07031727524,
+       "min": 153579.98101088067,
+       "max": 320358.10006193933
+      },
+      "total_amount": {
+       "sum": 8983912.91314426,
+       "count": 29,
+       "mean": 309790.10045325034,
+       "min": 219399.9728726867,
+       "max": 457654.4286599134
+      },
+      "total_intervals": {
+       "sum": 66.489,
+       "count": 36,
+       "mean": 1.8469166666666668
+      },
+      "num_direct_results": {
+       "sum": 367.0,
+       "count": 29,
+       "mean": 12.655172413793103
+      },
+      "direct_results": {
+       "crit": {
+        "actual_amount": {
+         "sum": 4268682.202051722,
+         "count": 163,
+         "mean": 26188.234368415477,
+         "min": 25944.218389908005,
+         "max": 26452.654169214
+        },
+        "avg_actual_amount": {
+         "sum": 760918.9345024633,
+         "count": 29,
+         "mean": 26238.583948360803,
+         "min": 25972.205680512,
+         "max": 26452.65416921401
+        },
+        "total_amount": {
+         "sum": 6098117.43150246,
+         "count": 163,
+         "mean": 37411.76338345067
+        },
+        "fight_actual_amount": {
+         "sum": 3197655.236120982,
+         "count": 29,
+         "mean": 110263.9736593442
+        },
+        "fight_total_amount": {
+         "sum": 4568078.908744261,
+         "count": 29,
+         "mean": 157519.96237049176
+        },
+        "overkill_pct": {
+         "sum": 870.0,
+         "count": 29,
+         "mean": 30.0
+        },
+        "count": {
+         "sum": 122.0,
+         "count": 29,
+         "mean": 4.206896551724138,
+         "min": 1.0,
+         "max": 8.0
+        },
+        "pct": 33.2425068119891
+       },
+       "hit": {
+        "actual_amount": {
+         "sum": 4010484.9504416646,
+         "count": 318,
+         "mean": 12611.587894470644,
+         "min": 12468.386385000002,
+         "max": 12712.732684166665
+        },
+        "avg_actual_amount": {
+         "sum": 365863.36137183016,
+         "count": 29,
+         "mean": 12615.977978338971,
+         "min": 12499.129825000002,
+         "max": 12712.732684166665
+        },
+        "total_amount": {
+         "sum": 5729264.214916668,
+         "count": 318,
+         "mean": 18016.554134958074
+        },
+        "fight_actual_amount": {
+         "sum": 3091083.80308,
+         "count": 29,
+         "mean": 106589.09665793103
+        },
+        "fight_total_amount": {
+         "sum": 4415834.004400001,
+         "count": 29,
+         "mean": 152270.13808275864
+        },
+        "overkill_pct": {
+         "sum": 870.0,
+         "count": 29,
+         "mean": 30.0
+        },
+        "count": {
+         "sum": 245.0,
+         "count": 29,
+         "mean": 8.448275862068966,
+         "min": 5.0,
+         "max": 12.0
+        },
+        "pct": 66.75749318801091
+       }
+      }
+     }
+    ]
+   }
+  ]
+ }
+}

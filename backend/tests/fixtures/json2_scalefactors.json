@@ -1,0 +1,515 @@
+{
+ "version": "1210-01",
+ "git_revision": "774babd",
+ "report_version": "2.0.0",
+ "sim": {
+  "options": {
+   "iterations": 1007,
+   "target_error": 0.0,
+   "max_time": 300.0,
+   "fight_style": "Patchwerk",
+   "threads": 8,
+   "desired_targets": 1
+  },
+  "overrides": {
+   "arcane_intellect": 1,
+   "battle_shout": 1,
+   "power_word_fortitude": 1,
+   "chaos_brand": 1,
+   "mystic_touch": 1,
+   "mortal_wounds": 1,
+   "bleeding": 1,
+   "bloodlust": 1
+  },
+  "statistics": {
+   "elapsed_time_seconds": 0.9107152000000001,
+   "raid_dps": {
+    "sum": 249344469.52727962,
+    "count": 999,
+    "mean": 249594.06359087047,
+    "min": 223294.1777097715,
+    "max": 277727.06593785435,
+    "median": 249596.8061130771,
+    "variance": 60850246.92010499,
+    "std_dev": 7800.656826197714,
+    "mean_variance": 60911.15807818317,
+    "mean_std_dev": 246.80185995689573
+   }
+  },
+  "players": [
+   {
+    "name": "MID2_Death_Knight_Frost",
+    "race": "human",
+    "level": 90,
+    "role": "attack",
+    "specialization": "Frost Death Knight",
+    "talents": "CsPAAAAAAAAAAAAAAAAAAAAAAMAGAADYYYMiBjhZGDmZmZmZmZmBAAAAAAAAgxYgBAsMMhMWwMjhBGAGmBAwA",
+    "dbc": {
+     "Live": {
+      "build_level": 69875,
+      "wow_version": "12.1.0.69875",
+      "hotfix_date": "2026-09-19",
+      "hotfix_build": 69875,
+      "hotfix_hash": "76e55563bb1f4ef8a92132bb3ac7d82394bac7de3143d64120740c5798cea20e"
+     },
+     "PTR": {
+      "build_level": 69848,
+      "wow_version": "12.1.5.69848",
+      "hotfix_date": "2026-09-20",
+      "hotfix_build": 69848,
+      "hotfix_hash": "1ec8513ed276a1acbd49d88daf8e2390eba17ac5570af00c1a1dd961f1279b4c"
+     },
+     "version_used": "Live"
+    },
+    "collected_data": {
+     "dps": {
+      "sum": 249344469.52727962,
+      "count": 999,
+      "mean": 249594.06359087047,
+      "min": 223294.1777097715,
+      "max": 277727.06593785435,
+      "median": 249596.8061130771,
+      "variance": 60850246.92010499,
+      "std_dev": 7800.656826197714,
+      "mean_variance": 60911.15807818317,
+      "mean_std_dev": 246.80185995689573
+     },
+     "fight_length": {
+      "mean": 300.03849649649646
+     }
+    },
+    "stats": [
+     {
+      "id": 49184,
+      "spell_name": "Howling Blast",
+      "name": "howling_blast",
+      "school": "frost",
+      "type": "damage",
+      "num_executes": {
+       "sum": 59257.0,
+       "count": 999,
+       "mean": 59.31631631631632
+      },
+      "portion_aps": {
+       "sum": 27178948.150152415,
+       "count": 999,
+       "mean": 27206.15430445687,
+       "min": 19892.18192663689,
+       "max": 34665.8177471332
+      },
+      "portion_amount": 0.10902948614467667,
+      "direct_results": {
+       "crit": {
+        "count": {
+         "sum": 18711.0,
+         "count": 999,
+         "mean": 18.72972972972973,
+         "min": 9.0,
+         "max": 35.0
+        },
+        "pct": 31.576016335622796
+       },
+       "hit": {
+        "count": {
+         "sum": 40546.0,
+         "count": 999,
+         "mean": 40.586586586586584,
+         "min": 24.0,
+         "max": 59.0
+        },
+        "pct": 68.4239836643772
+       }
+      }
+     },
+     {
+      "id": 0,
+      "spell_name": "",
+      "name": "auto_attack_mh",
+      "school": "physical",
+      "type": "damage",
+      "num_executes": {
+       "sum": 349727.0,
+       "count": 999,
+       "mean": 350.0770770770771
+      },
+      "portion_aps": {
+       "sum": 18714009.474695973,
+       "count": 999,
+       "mean": 18732.742216912888,
+       "min": 15402.663085566295,
+       "max": 22251.239089961826
+      },
+      "portion_amount": 0.0750503305032934,
+      "direct_results": {
+       "miss": {
+        "count": {
+         "sum": 57165.0,
+         "count": 999,
+         "mean": 57.22222222222222,
+         "min": 33.0,
+         "max": 91.0
+        },
+        "pct": 16.345606716095695
+       },
+       "crit": {
+        "count": {
+         "sum": 110744.0,
+         "count": 999,
+         "mean": 110.85485485485485,
+         "min": 68.0,
+         "max": 174.0
+        },
+        "pct": 31.66584221406983
+       },
+       "hit": {
+        "count": {
+         "sum": 181818.0,
+         "count": 999,
+         "mean": 182.0,
+         "min": 121.0,
+         "max": 242.0
+        },
+        "pct": 51.98855106983447
+       }
+      }
+     },
+     {
+      "id": 439539,
+      "spell_name": "Icy Death Torrent",
+      "name": "icy_death_torrent",
+      "school": "frost",
+      "type": "damage",
+      "num_executes": {
+       "sum": 109387.0,
+       "count": 999,
+       "mean": 109.49649649649649
+      },
+      "portion_aps": {
+       "sum": 16446756.849829996,
+       "count": 999,
+       "mean": 16463.220069899897,
+       "min": 10767.670986677682,
+       "max": 23462.540748911313
+      },
+      "portion_amount": 0.06598543610316744,
+      "direct_results": {
+       "crit": {
+        "count": {
+         "sum": 35637.0,
+         "count": 999,
+         "mean": 35.672672672672675,
+         "min": 12.0,
+         "max": 67.0
+        },
+        "pct": 32.57882563741578
+       },
+       "hit": {
+        "count": {
+         "sum": 73750.0,
+         "count": 999,
+         "mean": 73.82382382382383,
+         "min": 41.0,
+         "max": 117.0
+        },
+        "pct": 67.42117436258422
+       }
+      }
+     },
+     {
+      "id": 49143,
+      "spell_name": "Frost Strike",
+      "name": "frost_strike",
+      "school": "frost",
+      "type": "damage",
+      "num_executes": {
+       "sum": 99781.0,
+       "count": 999,
+       "mean": 99.88088088088088
+      },
+      "portion_aps": {
+       "sum": 14935551.474853806,
+       "count": 999,
+       "mean": 14950.501976830637,
+       "min": 12752.150349493926,
+       "max": 17847.070042634346
+      },
+      "portion_amount": 0.05992714777645047,
+      "direct_results": {
+       "crit": {
+        "count": {
+         "sum": 31714.0,
+         "count": 999,
+         "mean": 31.745745745745747,
+         "min": 16.0,
+         "max": 51.0
+        },
+        "pct": 31.783606097353207
+       },
+       "hit": {
+        "count": {
+         "sum": 68067.0,
+         "count": 999,
+         "mean": 68.13513513513513,
+         "min": 47.0,
+         "max": 91.0
+        },
+        "pct": 68.2163939026468
+       }
+      }
+     },
+     {
+      "id": 49020,
+      "spell_name": "Obliterate",
+      "name": "obliterate",
+      "school": "physical",
+      "type": "damage",
+      "num_executes": {
+       "sum": 127112.0,
+       "count": 999,
+       "mean": 127.23923923923924
+      },
+      "portion_aps": {
+       "sum": 13462170.647954017,
+       "count": 999,
+       "mean": 13475.646294248265,
+       "min": 11918.090024177618,
+       "max": 15059.218906743228
+      },
+      "portion_amount": 0.05397271155350872,
+      "direct_results": {
+       "crit": {
+        "count": {
+         "sum": 124650.0,
+         "count": 999,
+         "mean": 124.77477477477477,
+         "min": 91.0,
+         "max": 158.0
+        },
+        "pct": 98.06312543268928
+       },
+       "hit": {
+        "count": {
+         "sum": 2462.0,
+         "count": 999,
+         "mean": 2.4644644644644647,
+         "min": 0.0,
+         "max": 10.0
+        },
+        "pct": 1.9368745673107182
+       }
+      }
+     },
+     {
+      "id": 1,
+      "spell_name": "",
+      "name": "auto_attack_oh",
+      "school": "physical",
+      "type": "damage",
+      "num_executes": {
+       "sum": 341980.0,
+       "count": 999,
+       "mean": 342.32232232232235
+      },
+      "portion_aps": {
+       "sum": 9111079.07683355,
+       "count": 999,
+       "mean": 9120.199276109659,
+       "min": 7679.224054901473,
+       "max": 10508.437576666482
+      },
+      "portion_amount": 0.03653901955681706,
+      "direct_results": {
+       "miss": {
+        "count": {
+         "sum": 57249.0,
+         "count": 999,
+         "mean": 57.306306306306304,
+         "min": 31.0,
+         "max": 85.0
+        },
+        "pct": 16.740452658050177
+       },
+       "crit": {
+        "count": {
+         "sum": 107955.0,
+         "count": 999,
+         "mean": 108.06306306306307,
+         "min": 63.0,
+         "max": 165.0
+        },
+        "pct": 31.567635534241774
+       },
+       "hit": {
+        "count": {
+         "sum": 176776.0,
+         "count": 999,
+         "mean": 176.95295295295296,
+         "min": 120.0,
+         "max": 244.0
+        },
+        "pct": 51.69191180770805
+       }
+      }
+     },
+     {
+      "id": 55095,
+      "spell_name": "Frost Fever",
+      "name": "frost_fever",
+      "school": "frost",
+      "type": "damage",
+      "num_executes": {
+       "sum": 80061.0,
+       "count": 999,
+       "mean": 80.14114114114115
+      },
+      "portion_aps": {
+       "sum": 8967534.545289733,
+       "count": 999,
+       "mean": 8976.511056346078,
+       "min": 8067.792390706082,
+       "max": 10040.660833499911
+      },
+      "portion_amount": 0.0360005670038895,
+      "tick_results": {
+       "crit": {
+        "count": {
+         "sum": 54890.0,
+         "count": 999,
+         "mean": 54.94494494494494,
+         "min": 30.0,
+         "max": 82.0
+        },
+        "pct": 31.632694224973058
+       },
+       "hit": {
+        "count": {
+         "sum": 118633.0,
+         "count": 999,
+         "mean": 118.75175175175175,
+         "min": 82.0,
+         "max": 156.0
+        },
+        "pct": 68.36730577502695
+       }
+      }
+     },
+     {
+      "id": 1306624,
+      "spell_name": "Perfected Guillotine",
+      "name": "perfected_guillotine",
+      "school": "physical",
+      "type": "damage",
+      "num_executes": {
+       "sum": 25583.0,
+       "count": 999,
+       "mean": 25.60860860860861
+      },
+      "portion_aps": {
+       "sum": 8914585.157535028,
+       "count": 999,
+       "mean": 8923.508666201229,
+       "min": 4486.342801828986,
+       "max": 16183.579577866692
+      },
+      "portion_amount": 0.035722040034366194,
+      "direct_results": {
+       "crit": {
+        "count": {
+         "sum": 8137.0,
+         "count": 999,
+         "mean": 8.145145145145145,
+         "min": 1.0,
+         "max": 17.0
+        },
+        "pct": 31.91606197293587
+       },
+       "hit": {
+        "count": {
+         "sum": 17358.0,
+         "count": 999,
+         "mean": 17.375375375375377,
+         "min": 6.0,
+         "max": 30.0
+        },
+        "pct": 68.08393802706414
+       }
+      }
+     }
+    ],
+    "stats_pets": {},
+    "buffs": [
+     {
+      "name": "antimagic_shell",
+      "spell_name": "Anti-Magic Shell",
+      "uptime": 8.094407398118033
+     },
+     {
+      "name": "arcanoweave_insight",
+      "spell_name": "Arcanoweave Insight",
+      "uptime": 52.51464894206038
+     },
+     {
+      "name": "bind_in_darkness",
+      "spell_name": "Bind in Darkness",
+      "uptime": 34.97371588623584
+     },
+     {
+      "name": "bloodlust",
+      "spell_name": "Bloodlust",
+      "uptime": 13.513648748683185
+     },
+     {
+      "name": "bonegrinder_crit",
+      "spell_name": "Bonegrinder",
+      "uptime": 35.41866134081708
+     },
+     {
+      "name": "bonegrinder_frost",
+      "spell_name": "Bonegrinder",
+      "uptime": 58.83818641452532
+     },
+     {
+      "name": "breath_of_sindragosa",
+      "spell_name": "Breath of Sindragosa",
+      "uptime": 41.718722892265646
+     },
+     {
+      "name": "chosen_of_frostbrood_fwf",
+      "spell_name": "Chosen of Frostbrood",
+      "uptime": 8.895640687515645
+     },
+     {
+      "name": "chosen_of_frostbrood_haste",
+      "spell_name": "Chosen of Frostbrood",
+      "uptime": 21.822286961470752
+     },
+     {
+      "name": "cryogenic_chamber",
+      "spell_name": "Cryogenic Chamber",
+      "uptime": 84.2103226692178
+     },
+     {
+      "name": "dark_talons",
+      "spell_name": "Dark Talons",
+      "uptime": 62.89032552092823
+     },
+     {
+      "name": "devoured_strength",
+      "spell_name": "Devoured Strength",
+      "uptime": 23.13472133227786
+     }
+    ],
+    "scale_factors": {
+     "Str": 71.37107311429735,
+     "AP": 0.0,
+     "Crit": 66.3726806781928,
+     "Haste": 48.285360003784135,
+     "Mastery": 43.6393314155445,
+     "Vers": 37.39993099778227,
+     "Wdps": 0.0,
+     "WOHdps": 0.0
+    }
+   }
+  ]
+ }
+}

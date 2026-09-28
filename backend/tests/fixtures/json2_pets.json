@@ -1,0 +1,505 @@
+{
+ "version": "1210-01",
+ "git_revision": "774babd",
+ "report_version": "2.0.0",
+ "sim": {
+  "options": {
+   "iterations": 119,
+   "target_error": 0.5,
+   "max_time": 300.0,
+   "fight_style": "Patchwerk",
+   "threads": 8,
+   "desired_targets": 1
+  },
+  "overrides": {
+   "arcane_intellect": 1,
+   "battle_shout": 1,
+   "power_word_fortitude": 1,
+   "chaos_brand": 1,
+   "mystic_touch": 1,
+   "mortal_wounds": 1,
+   "bleeding": 1,
+   "bloodlust": 1
+  },
+  "statistics": {
+   "elapsed_time_seconds": 0.1997525,
+   "raid_dps": {
+    "sum": 25864095.12944283,
+    "count": 111,
+    "mean": 233009.86603101649,
+    "min": 217409.45266848645,
+    "max": 246298.8211037834,
+    "median": 233290.17388074956,
+    "variance": 33753864.1736841,
+    "std_dev": 5809.807584910545,
+    "mean_variance": 304088.8664295865,
+    "mean_std_dev": 551.442532300136
+   }
+  },
+  "players": [
+   {
+    "name": "MID2_Warlock_Demonology_Diabolist",
+    "race": "orc",
+    "level": 90,
+    "role": "spell",
+    "specialization": "Demonology Warlock",
+    "talents": "CoQAAAAAAAAAAAAAAAAAAAAAAYmxMzoZjZ2mZGzyAAAAAAAAGzYYBGYb0CNsYMGLzyMzMmBAmZMzMzMDgZGzAAAYMzMjhhlZMgB",
+    "dbc": {
+     "Live": {
+      "build_level": 69875,
+      "wow_version": "12.1.0.69875",
+      "hotfix_date": "2026-09-19",
+      "hotfix_build": 69875,
+      "hotfix_hash": "76e55563bb1f4ef8a92132bb3ac7d82394bac7de3143d64120740c5798cea20e"
+     },
+     "PTR": {
+      "build_level": 69848,
+      "wow_version": "12.1.5.69848",
+      "hotfix_date": "2026-09-20",
+      "hotfix_build": 69848,
+      "hotfix_hash": "1ec8513ed276a1acbd49d88daf8e2390eba17ac5570af00c1a1dd961f1279b4c"
+     },
+     "version_used": "Live"
+    },
+    "collected_data": {
+     "dps": {
+      "sum": 25864095.12944283,
+      "count": 111,
+      "mean": 233009.86603101649,
+      "min": 217409.4526684865,
+      "max": 246298.8211037834,
+      "median": 233290.17388074956,
+      "variance": 33753864.17368403,
+      "std_dev": 5809.807584910539,
+      "mean_variance": 304088.86642958585,
+      "mean_std_dev": 551.4425323001353
+     },
+     "fight_length": {
+      "mean": 300.3754954954955
+     }
+    },
+    "stats": [
+     {
+      "id": 264178,
+      "spell_name": "Demonbolt",
+      "name": "demonbolt",
+      "school": "shadowflame",
+      "type": "damage",
+      "num_executes": {
+       "sum": 6249.0,
+       "count": 111,
+       "mean": 56.2972972972973
+      },
+      "portion_aps": {
+       "sum": 1373380.3278281647,
+       "count": 111,
+       "mean": 12372.795746199681,
+       "min": 9783.616624616458,
+       "max": 15137.230721317503
+      },
+      "portion_amount": 0.05307923475846534,
+      "direct_results": {
+       "crit": {
+        "count": {
+         "sum": 2747.0,
+         "count": 111,
+         "mean": 24.74774774774775,
+         "min": 15.0,
+         "max": 34.0
+        },
+        "pct": 43.30075662042875
+       },
+       "hit": {
+        "count": {
+         "sum": 3597.0,
+         "count": 111,
+         "mean": 32.4054054054054,
+         "min": 22.0,
+         "max": 44.0
+        },
+        "pct": 56.69924337957125
+       }
+      }
+     },
+     {
+      "id": 434506,
+      "spell_name": "Infernal Bolt",
+      "name": "infernal_bolt",
+      "school": "fire",
+      "type": "damage",
+      "num_executes": {
+       "sum": 932.0,
+       "count": 111,
+       "mean": 8.396396396396396
+      },
+      "portion_aps": {
+       "sum": 891613.7693489903,
+       "count": 111,
+       "mean": 8032.556480621534,
+       "min": 5429.955297203358,
+       "max": 11307.370792807402
+      },
+      "portion_amount": 0.03454230550744958,
+      "direct_results": {
+       "crit": {
+        "count": {
+         "sum": 403.0,
+         "count": 111,
+         "mean": 3.630630630630631,
+         "min": 1.0,
+         "max": 7.0
+        },
+        "pct": 43.33333333333334
+       },
+       "hit": {
+        "count": {
+         "sum": 527.0,
+         "count": 111,
+         "mean": 4.747747747747748,
+         "min": 1.0,
+         "max": 8.0
+        },
+        "pct": 56.666666666666664
+       }
+      }
+     },
+     {
+      "id": 686,
+      "spell_name": "Shadow Bolt",
+      "name": "shadow_bolt",
+      "school": "shadow",
+      "type": "damage",
+      "num_executes": {
+       "sum": 6830.0,
+       "count": 111,
+       "mean": 61.531531531531535
+      },
+      "portion_aps": {
+       "sum": 782095.0117712809,
+       "count": 111,
+       "mean": 7045.901006948477,
+       "min": 4858.101729582127,
+       "max": 8828.11234744478
+      },
+      "portion_amount": 0.030273766243022488,
+      "direct_results": {
+       "crit": {
+        "count": {
+         "sum": 2871.0,
+         "count": 111,
+         "mean": 25.864864864864863,
+         "min": 11.0,
+         "max": 41.0
+        },
+        "pct": 42.20817406645104
+       },
+       "hit": {
+        "count": {
+         "sum": 3931.0,
+         "count": 111,
+         "mean": 35.414414414414416,
+         "min": 21.0,
+         "max": 50.0
+        },
+        "pct": 57.791825933548964
+       }
+      }
+     },
+     {
+      "id": 1276960,
+      "spell_name": "Blighted Maw",
+      "name": "blighted_maw",
+      "school": "shadowstorm",
+      "type": "damage",
+      "num_executes": {
+       "sum": 0.0,
+       "count": 111,
+       "mean": 0.0
+      },
+      "portion_aps": {
+       "sum": 485905.43750554667,
+       "count": 111,
+       "mean": 4377.526464013934,
+       "min": 2884.3036724130784,
+       "max": 5778.608491384306
+      },
+      "portion_amount": 0.01879122358978253,
+      "direct_results": {
+       "hit": {
+        "count": {
+         "sum": 11218.0,
+         "count": 111,
+         "mean": 101.06306306306307,
+         "min": 64.0,
+         "max": 140.0
+        },
+        "pct": 100.0
+       }
+      }
+     },
+     {
+      "id": 1286970,
+      "spell_name": "Rune of Unleashed Fire",
+      "name": "rune_of_unleashed_fire",
+      "school": "fire",
+      "type": "damage",
+      "num_executes": {
+       "sum": 2523.0,
+       "count": 111,
+       "mean": 22.72972972972973
+      },
+      "portion_aps": {
+       "sum": 55931.267510693804,
+       "count": 111,
+       "mean": 503.8852928891334,
+       "min": 291.539417161324,
+       "max": 770.9183456780898
+      },
+      "portion_amount": 0.002158752723871023,
+      "direct_results": {
+       "hit": {
+        "count": {
+         "sum": 2523.0,
+         "count": 111,
+         "mean": 22.72972972972973,
+         "min": 13.0,
+         "max": 34.0
+        },
+        "pct": 100.0
+       }
+      }
+     },
+     {
+      "id": 1264426,
+      "spell_name": "Void-Touched",
+      "name": "augmentation",
+      "type": "damage",
+      "num_executes": {
+       "sum": 111.0,
+       "count": 111,
+       "mean": 1.0
+      }
+     },
+     {
+      "id": 33702,
+      "spell_name": "Blood Fury",
+      "name": "blood_fury",
+      "school": "physical",
+      "type": "damage",
+      "num_executes": {
+       "sum": 324.0,
+       "count": 111,
+       "mean": 2.918918918918919
+      }
+     },
+     {
+      "id": 104316,
+      "spell_name": "Call Dreadstalkers",
+      "name": "call_dreadstalkers",
+      "school": "shadow",
+      "type": "damage",
+      "num_executes": {
+       "sum": 1642.0,
+       "count": 111,
+       "mean": 14.792792792792794
+      }
+     }
+    ],
+    "stats_pets": {
+     "felguard": [
+      {
+       "id": 89751,
+       "spell_name": "Felstorm",
+       "name": "felstorm",
+       "school": "physical",
+       "type": "damage",
+       "num_executes": {
+        "sum": 1159.0,
+        "count": 111,
+        "mean": 10.441441441441441
+       },
+       "portion_aps": {
+        "sum": 152856.17842245454,
+        "count": 111,
+        "mean": 1377.0826884905814,
+        "min": 1142.0540121882248,
+        "max": 1749.4473732952342
+       },
+       "portion_amount": 0.005908054053130687,
+       "tick_results": {
+        "crit": {
+         "count": {
+          "sum": 2929.0,
+          "count": 111,
+          "mean": 26.38738738738739,
+          "min": 17.0,
+          "max": 39.0
+         },
+         "pct": 42.357194504699926
+        },
+        "hit": {
+         "count": {
+          "sum": 3986.0,
+          "count": 111,
+          "mean": 35.909909909909906,
+          "min": 22.0,
+          "max": 48.0
+         },
+         "pct": 57.64280549530007
+        }
+       }
+      },
+      {
+       "id": 30213,
+       "spell_name": "Legion Strike",
+       "name": "legion_strike",
+       "school": "physical",
+       "type": "damage",
+       "num_executes": {
+        "sum": 4628.0,
+        "count": 111,
+        "mean": 41.693693693693696
+       },
+       "portion_aps": {
+        "sum": 254235.66333765347,
+        "count": 111,
+        "mean": 2290.4113814203015,
+        "min": 1912.4301329850073,
+        "max": 2717.160117240171
+       },
+       "portion_amount": 0.009834190856325352,
+       "direct_results": {
+        "crit": {
+         "count": {
+          "sum": 1896.0,
+          "count": 111,
+          "mean": 17.08108108108108,
+          "min": 10.0,
+          "max": 28.0
+         },
+         "pct": 40.96802074330164
+        },
+        "hit": {
+         "count": {
+          "sum": 2732.0,
+          "count": 111,
+          "mean": 24.61261261261261,
+          "min": 15.0,
+          "max": 34.0
+         },
+         "pct": 59.03197925669836
+        }
+       }
+      }
+     ],
+     "grimoire_imp_lord": [
+      {
+       "id": 1277116,
+       "spell_name": "Greater Felbolt",
+       "name": "greater_felbolt",
+       "school": "fire",
+       "type": "damage",
+       "num_executes": {
+        "sum": 2270.0,
+        "count": 111,
+        "mean": 20.45045045045045
+       },
+       "portion_aps": {
+        "sum": 5629144.621815301,
+        "count": 111,
+        "mean": 50713.01461094865,
+        "min": 35161.77070064202,
+        "max": 65433.34001426673
+       },
+       "portion_amount": 0.042142579604600654,
+       "direct_results": {
+        "crit": {
+         "count": {
+          "sum": 966.0,
+          "count": 111,
+          "mean": 8.702702702702704,
+          "min": 3.0,
+          "max": 15.0
+         },
+         "pct": 42.76228419654714
+        },
+        "hit": {
+         "count": {
+          "sum": 1293.0,
+          "count": 111,
+          "mean": 11.64864864864865,
+          "min": 5.0,
+          "max": 18.0
+         },
+         "pct": 57.237715803452865
+        }
+       }
+      }
+     ]
+    },
+    "buffs": [
+     {
+      "name": "50lb_midnight_salmon",
+      "spell_name": "50-Lb Midnight Salmon",
+      "uptime": 10.179284022086694
+     },
+     {
+      "name": "abyssal_dominion",
+      "spell_name": "Abyssal Dominion",
+      "uptime": 33.10634345622088
+     },
+     {
+      "name": "akilzons_rite",
+      "spell_name": "Akil'zon's Rite",
+      "uptime": 9.641576254624333
+     },
+     {
+      "name": "arcanoweave_insight",
+      "spell_name": "Arcanoweave Insight",
+      "uptime": 52.51793569262523
+     },
+     {
+      "name": "blood_fury",
+      "spell_name": "Blood Fury",
+      "uptime": 14.284000608735353
+     },
+     {
+      "name": "bloodlust",
+      "spell_name": "Bloodlust",
+      "uptime": 13.47689121610434
+     },
+     {
+      "name": "brittle_torga_totem",
+      "spell_name": "Brittle Torga Totem",
+      "uptime": 12.77181762713995
+     },
+     {
+      "name": "critical_ritual",
+      "spell_name": "Critical Ritual",
+      "uptime": 18.582546710608174
+     },
+     {
+      "name": "demonic_art_mother_of_chaos",
+      "spell_name": "Demonic Art: Mother of Chaos",
+      "uptime": 8.0641340258038
+     },
+     {
+      "name": "demonic_art_overlord",
+      "spell_name": "Demonic Art: Overlord",
+      "uptime": 7.690741724583302
+     },
+     {
+      "name": "demonic_art_pit_lord",
+      "spell_name": "Demonic Art: Pit Lord",
+      "uptime": 8.237119984832024
+     },
+     {
+      "name": "demonic_core",
+      "spell_name": "Demonic Core",
+      "uptime": 46.764842785903475
+     }
+    ]
+   }
+  ]
+ }
+}

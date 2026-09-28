@@ -1,0 +1,88 @@
+# Testhunter - Marksmanship - 2026-01-01 00:00 - US/Testrealm
+# SimC Addon 12.1.0-03
+# WoW 12.1.0.69933, TOC 120100
+# Requires SimulationCraft 1000-01 or newer
+
+hunter="Testhunter"
+level=90
+race=night_elf
+region=us
+server=testrealm
+role=attack
+professions=mining=95/engineering=35
+spec=marksmanship
+# loot_spec=marksmanship
+
+talents=C4PAAAAAAAAAAAAAAAAAAAAAAwCMwMGzYZAjZwGAAAAAAAAYGzYmFzYmZMDGTzYwYbZmZmZmZmZWYmlBzAAAGzMjBwM22gBYjZ2mxAA
+
+# Saved Loadout: Raid ST
+# talents=C4PAAAAAAAAAAAAAAAAAAAAAAwCMwMGzYZAjZwGAAAAAAAAYGzYmFzYmZMDGTzYwYbZmZmZmZmZWYmlBzAAAGzMjBwM22gBYjZ2mxAA
+# Saved Loadout: Raid Cleave
+# talents=C4PAAAAAAAAAAAAAAAAAAAAAAwCMwMGzYZAjZwGAAAAAAAAYGzYmFzYmZMDGTzYwstZmZmZmZmZWYmlhZAAAGzMjBwM22gBYjZ2mxAA
+# Saved Loadout: M+
+# talents=C4PAAAAAAAAAAAAAAAAAAAAAAwGMwMGzYZAjZwGAAAAAAAAYGzMzYbGzMjZYZMNjBzy22MzMzMzMzswMLDzAAA4BGjBgZsBGgNmZbGD
+
+omnium_talents=136822:1/136819:1/136817:1/136818:1/136814:1
+
+# Skulking Viper's Weeping Fangs (334)
+head=,id=271492,bonus_id=1808/13662,ilevel=334,gem_id=240967,enchant_id=7961,redirected_base_stats=268230
+# Aqirbane Reliquary (344)
+neck=,id=268265,bonus_id=13668/13708,ilevel=344,gem_id=240914/240898
+# Jaws of the Skulking Viper (344)
+shoulder=,id=271490,bonus_id=13662,ilevel=344,redirected_base_stats=268231
+# Silken Voodoo Drape (344)
+back=,id=268253,ilevel=344
+# Skulking Viper's Scuteplate (344)
+chest=,id=271495,bonus_id=13662/13708,ilevel=344,enchant_id=7987,redirected_base_stats=271876
+# Farstrider's Plated Bracers (331)
+wrist=,id=244584,bonus_id=1808/8960/12214/12384/13751/13836/9627,ilevel=331,gem_id=240890,crafted_stats=32/49
+# Skulking Viper's Hidepiercers (334)
+hands=,id=271493,bonus_id=13662,ilevel=334,redirected_base_stats=193752
+# Farstrider's Trophy Belt (331)
+waist=,id=244581,bonus_id=1808/8960/12214/12384/13751/13836/9627,ilevel=331,gem_id=240908,crafted_stats=32/49
+# Skulking Viper's Coiled Legwraps (344)
+legs=,id=271491,bonus_id=13662,ilevel=344,enchant_id=8159,redirected_base_stats=268237
+# Boots of the Reckless Wayfarer (295)
+feet=,id=268258,enchant_id=8019,bonus_id=6652/13662/13332/12830,content_tuning=7359
+# Signet of Snarling Servitude (334)
+finger1=,id=251136,bonus_id=13668,ilevel=334,gem_id=240908,enchant_id=7967
+# Vile Alchemist's Band (334)
+finger2=,id=268249,bonus_id=13668,ilevel=334,gem_id=240908,enchant_id=7967
+# Voracious Heart of Ula'tek (344)
+trinket1=,id=270175,ilevel=344
+# Zul'jin's Guillotine Technique (344)
+trinket2=,id=270173,ilevel=344
+# Caustic Repose Greatbow (344)
+main_hand=,id=268207,bonus_id=13708,ilevel=344,enchant_id=8041
+
+### Gear from Bags
+#
+# Sickening Signet of Atroxus (334)
+# finger1=,id=252258,bonus_id=13668,ilevel=334,gem_id=240898,enchant_id=7967
+#
+# Gebbo's Bottomless Bag (334)
+# trinket1=,id=270164,ilevel=334
+#
+# Mazeroa, Warlord's Fury (344)
+# main_hand=,id=268213,ilevel=344,enchant_id=7983
+
+### Weekly Reward Choices
+#
+# Skulking Viper's Scuteplate (331)
+# chest=,id=271495,bonus_id=13662,ilevel=331
+#
+### End of Weekly Reward Choices
+
+### Additional Character Info
+#
+# catalyst_currencies=2813:0/3269:0/3116:0/3378:0/3465:2
+#
+# upgrade_currencies=c:3442:150/c:3443:100/c:3444:60/c:3445:20/c:3446:40/i:274476:2/i:204276:3
+#
+# slot_high_watermarks=0:334:334/1:344:344/2:344:344/3:344:344/4:331:331/5:344:344/6:305:305/7:331:331/8:334:334/9:334:334/10:344:344/11:344:344/12:344:344
+#
+# upgrade_achievements=62410/62411/62412
+#
+# bonus_roll_currencies=
+
+# Checksum: 5e6f7a8b

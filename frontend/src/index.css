@@ -1,0 +1,118 @@
+@import "tailwindcss";
+
+@theme {
+  --color-bg: #0d0f13;
+  --color-bg-soft: #13161c;
+  --color-surface: #181c24;
+  --color-surface-2: #1f242e;
+  --color-surface-3: #262c38;
+  --color-border: #2a303c;
+  --color-border-strong: #3a4250;
+  --color-text: #e6e9ef;
+  --color-muted: #8d95a5;
+  --color-faint: #5d6575;
+  --color-accent: #f0b429;
+  --color-accent-strong: #ffc94d;
+  --color-accent-dim: #8a6a1a;
+  --color-good: #4ade80;
+  --color-bad: #f87171;
+  --color-info: #60a5fa;
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "Cascadia Code", Consolas, monospace;
+}
+
+:root {
+  color-scheme: dark;
+}
+
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  font-size: 14px;
+  line-height: 1.45;
+  -webkit-font-smoothing: antialiased;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-border-strong) transparent;
+}
+*::-webkit-scrollbar { width: 10px; height: 10px; }
+*::-webkit-scrollbar-thumb { background: var(--color-border-strong); border-radius: 6px; border: 2px solid var(--color-bg); }
+*::-webkit-scrollbar-track { background: transparent; }
+
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 1px;
+  border-radius: 4px;
+}
+
+input[type="range"] {
+  accent-color: var(--color-accent);
+}
+input[type="checkbox"], input[type="radio"] {
+  accent-color: var(--color-accent);
+}
+
+@layer components {
+  .card { @apply rounded-lg border border-border bg-surface; }
+  .card-pad { @apply rounded-lg border border-border bg-surface p-4; }
+  .label { @apply text-xs font-medium uppercase tracking-wide text-muted; }
+  .input {
+    @apply w-full rounded-md border border-border bg-bg-soft px-2.5 py-1.5 text-sm text-text placeholder:text-faint
+      focus:border-accent focus:outline-none disabled:opacity-50;
+  }
+  .btn {
+    @apply inline-flex items-center justify-center gap-1.5 rounded-md border border-border bg-surface-2 px-3 py-1.5 text-sm font-medium text-text
+      transition-colors hover:bg-surface-3 disabled:cursor-not-allowed disabled:opacity-50 whitespace-nowrap;
+  }
+  .btn-primary { @apply border-accent-dim bg-accent text-black hover:bg-accent-strong; }
+  .btn-danger { @apply border-red-900/60 bg-red-950/50 text-red-200 hover:bg-red-900/60; }
+  .btn-ghost { @apply border-transparent bg-transparent hover:bg-surface-2; }
+  .btn-sm { @apply px-2 py-1 text-xs; }
+  .chip { @apply inline-flex items-center gap-1 rounded border border-border bg-surface-2 px-1.5 py-0.5 text-[11px] leading-4 text-muted; }
+  .tab { @apply rounded-md px-3 py-1.5 text-sm text-muted hover:text-text; }
+  .tab-active { @apply bg-surface-2 text-text; }
+  .mono { font-family: var(--font-mono); }
+  .md-body { @apply text-sm leading-relaxed text-text; }
+  .md-body h1, .md-body h2, .md-body h3 { @apply mt-3 mb-1.5 font-semibold text-text first:mt-0; }
+  .md-body h1 { @apply text-lg; }
+  .md-body h2 { @apply text-base; }
+  .md-body h3 { @apply text-sm; }
+  .md-body p { @apply my-1.5; }
+  .md-body strong { @apply font-semibold text-text; }
+  .md-body ul { @apply my-1.5 list-disc space-y-0.5 pl-5; }
+  .md-body ol { @apply my-1.5 list-decimal space-y-0.5 pl-5; }
+  .md-body a { @apply text-accent underline decoration-accent-dim underline-offset-2 hover:text-accent-strong; }
+  .md-body code { @apply rounded bg-surface-2 px-1 py-0.5 text-[12px]; font-family: var(--font-mono); }
+  .md-body blockquote { @apply border-l-2 border-border-strong pl-3 text-muted; }
+  .md-body table { @apply my-2 w-full border-collapse text-xs; }
+  .md-body th, .md-body td { @apply border border-border px-2 py-1 text-left; }
+  .md-body th { @apply bg-surface-2 font-medium text-muted; }
+}
+
+.bar-fill {
+  background: linear-gradient(90deg, var(--color-accent-dim), var(--color-accent));
+}
+.bar-fill-neg {
+  background: linear-gradient(90deg, #5c2626, #a33a3a);
+}
+.bar-fill-base {
+  background: linear-gradient(90deg, #2f4d7a, #4f8ff7);
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+.shimmer {
+  background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,.12) 50%, transparent 100%);
+  background-size: 200% 100%;
+  animation: shimmer 1.6s linear infinite;
+}

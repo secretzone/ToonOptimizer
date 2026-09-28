@@ -1,0 +1,38 @@
+# Icicle - Frost - 2026-09-21 12:45 - US/Illidan
+# SimC Addon 12.1.0-01
+# WoW 12.1.0.69875, TOC 120100
+# Requires SimulationCraft 1000-01 or newer
+
+mage="Icicle"
+level=90
+race=void_elf
+region=us
+server=illidan
+role=attack
+professions=tailoring=100/enchanting=100
+spec=frost
+# loot_spec=frost
+
+talents=CAEAAAAAAAAAAAAAAAAAAAAAAYGGLzMzsMmZmYmZGjZMziZmZmZMDEAAYmZmllZm2AAAAAAgNA2WGzMzAbzYmZYBAAgZ2AmBGwADD
+
+# Saved Loadout: Cleave
+# talents=C4EAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAYMzMzMzMzMzYmZmZmZGjZGzMYGAAAAAAAAAAgZmxwMDAAAAAAAAAAAAAB
+
+# Martyr's Crown (334)
+head=,id=239652,bonus_id=4786/12854/13692/13698,gem_id=240983
+# Martyr's Vestments (344)
+chest=,id=239655,enchant_id=7987,bonus_id=13335/13848
+# Cookie's Stirring Rod (344)
+main_hand=,id=5198,enchant_id=3368,bonus_id=13335/13848
+# Aln'hara Lantern (344)
+off_hand=,id=245769,bonus_id=13335/13848
+
+### Gear from Bags
+#
+# Glowing Brightwood Staff (344)
+# main_hand=,id=812,bonus_id=13335/13848
+#
+# Swampchill Fetish (340)
+# off_hand=,id=1992,bonus_id=13335,ilevel=340
+
+# Checksum: cafebabe
