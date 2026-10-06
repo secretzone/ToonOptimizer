@@ -61,11 +61,23 @@ def test_saved_loadouts(dk_export, mage_export):
 def test_profile_saved_loadouts_loot_spec_and_high_watermarks(dk_profile):
     p = dk_profile
     assert [lo.kind for lo in p.saved_loadouts] == ["active", "saved", "saved"]
-    assert p.saved_loadouts[0].name == "Frostbyte" and p.saved_loadouts[0].string == p.talents
+    assert p.saved_loadouts[0].name == "Raid ST (active)" and p.saved_loadouts[0].string == p.talents
     assert [lo.name for lo in p.saved_loadouts[1:]] == ["Raid ST", "M+ Cleave"]
     assert p.saved_loadouts[2].string.endswith("AwB")
     assert p.loot_spec == "frost"
     assert p.high_watermarks == {"neck": 344}      # "# slot_high_watermarks=1:344:344" -> Neck
+
+
+def test_active_loadout_named_after_matching_saved_loadout():
+    text = (
+        'hunter="Testhunter"\nlevel=90\nspec=marksmanship\n'
+        "talents=ABC\n"
+        "# Saved Loadout: Solo\n# talents=XYZ\n"
+        "# Saved Loadout: AOE/Raid\n# talents=ABC\n"
+        "head=,id=1\n"
+    )
+    p = profile.parse(text)
+    assert p.saved_loadouts[0].name == "AOE/Raid (active)"      # never the character name
 
 
 def test_saved_loadouts_active_name_falls_back_when_no_name_parsed():

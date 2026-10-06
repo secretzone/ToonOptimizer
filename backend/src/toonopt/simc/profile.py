@@ -72,7 +72,8 @@ use ``shoulders``/``wrists`` and are normalised. The data layer
 (``toonopt.data.items.resolve_item``) enriches items when available.
 
 ``CharacterProfile.saved_loadouts`` is every loadout the export carries: the active one
-(the un-commented ``talents=`` line, name from the header/character name, ``kind="active"``)
+(the un-commented ``talents=`` line, ``kind="active"``, named "<saved name> (active)" when its
+purchased talents match a saved loadout, else "Active")
 plus every ``# Saved Loadout: <name>`` / ``# Offspec Loadout: <name>`` block (``kind="saved"``,
 via :func:`saved_loadouts`). ``loot_spec`` is the addon's ``# loot_spec=<spec>`` comment
 (``Tokenize(playerLootSpec)``, core.lua ~1138-1164), verbatim. ``high_watermarks`` decodes
@@ -373,6 +374,33 @@ def _parse_high_watermarks(value: str) -> dict[str, int]:
     return out
 
 
+def _active_loadout_name(klass: str, spec: str, talents: str, saved: list[dict[str, str]]) -> str:
+    """Name the active ``talents=`` line after the saved loadout it matches, else "Active".
+
+    The addon writes the active line and the saved loadouts with different granted-node bits
+    (auto-granted hero talents), so equal builds rarely match as text; compare the purchased
+    nodes instead. Suffixed " (active)" so it never collides with the saved entry's name.
+    """
+    for lo in saved:
+        if lo["kind"] == "talents" and lo["string"] == talents:
+            return f"{lo['name']} (active)"
+    try:
+        from toonopt.data.talents import decode
+
+        def purchased(s: str) -> set[tuple]:
+            d = decode(klass, spec, s)
+            return {(x["node_id"], x["rank"], x["entry_id"]) for x in d["selected"] if x["purchased"]}
+
+        want = purchased(talents)
+        if want:
+            for lo in saved:
+                if lo["kind"] == "talents" and purchased(lo["string"]) == want:
+                    return f"{lo['name']} (active)"
+    except Exception as exc:  # no talent data cached yet, or an unreadable string
+        log.debug("active loadout match skipped: %s", exc)
+    return "Active"
+
+
 def saved_loadouts(raw: str) -> list[dict[str, str]]:
     """``[{name, string, kind}]`` for ``# Saved Loadout:`` / ``# Offspec Loadout:`` blocks."""
     out: list[dict[str, str]] = []
@@ -524,10 +552,11 @@ def parse(text: str) -> CharacterProfile:
     if not spec:
         raise ProfileError("no spec= line found")
     currencies, catalyst_charges, catalyst_charges_max = _parse_currencies(currency_raw)
+    saved = saved_loadouts(raw)
     loadouts: list[SavedLoadout] = []
     if talents:
-        loadouts.append(SavedLoadout(name=name or "Active", string=talents, kind="active"))
-    loadouts.extend(SavedLoadout(name=lo["name"], string=lo["string"], kind="saved") for lo in saved_loadouts(raw))
+        loadouts.append(SavedLoadout(name=_active_loadout_name(klass, spec, talents, saved), string=talents, kind="active"))
+    loadouts.extend(SavedLoadout(name=lo["name"], string=lo["string"], kind="saved") for lo in saved)
     return CharacterProfile(
         name=name or "Unknown", realm=realm, region=region or "us", level=level, race=race,
         klass=klass, spec=spec, role=role, talents=talents, professions=professions,
