@@ -118,6 +118,23 @@ function Invoke-Stop {
   }
 }
 
+# Opens the browser from a background job once $HealthUrl answers, so the first page load
+# doesn't hit a server that is still starting. Gives up waiting after 120s and opens anyway.
+function Start-BrowserWhenReady([string]$HealthUrl, [string]$PageUrl) {
+  Start-Job -ArgumentList $HealthUrl, $PageUrl -ScriptBlock {
+    param($HealthUrl, $PageUrl)
+    $deadline = (Get-Date).AddSeconds(120)
+    while ((Get-Date) -lt $deadline) {
+      try {
+        $r = Invoke-WebRequest -Uri $HealthUrl -UseBasicParsing -TimeoutSec 2
+        if ($r.StatusCode -eq 200) { break }
+      } catch {}
+      Start-Sleep -Milliseconds 500
+    }
+    Start-Process $PageUrl
+  } | Out-Null
+}
+
 if ($Stop) {
   Invoke-Stop
   return
@@ -149,14 +166,19 @@ if ($BackendPort -ne 8790) {
 
 if ($Build) {
   Push-Location $frontend; npm run build; Pop-Location
-  if (-not $NoBrowser) { Start-Process "http://127.0.0.1:$BackendPort" }
+  if (-not $NoBrowser) {
+    Start-BrowserWhenReady "http://127.0.0.1:$BackendPort/api/health" "http://127.0.0.1:$BackendPort"
+  }
   Push-Location $backend
   try { uv run uvicorn toonopt.main:app --host 127.0.0.1 --port $BackendPort } finally { Pop-Location }
 } else {
   $api = Start-Process -PassThru -NoNewWindow -WorkingDirectory $backend -FilePath "uv" `
     -ArgumentList "run", "uvicorn", "toonopt.main:app", "--host", "127.0.0.1", "--port", "$BackendPort", "--reload", "--reload-dir", "src"
   try {
-    if (-not $NoBrowser) { Start-Process "http://localhost:$FrontendPort" }
+    # Polling /api/health through Vite's proxy waits for both Vite and the backend.
+    if (-not $NoBrowser) {
+      Start-BrowserWhenReady "http://localhost:$FrontendPort/api/health" "http://localhost:$FrontendPort"
+    }
     Push-Location $frontend
     try { npm run dev -- --port $FrontendPort } finally { Pop-Location }
   } finally {
