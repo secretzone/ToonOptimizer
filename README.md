@@ -28,7 +28,8 @@ By hand:
    ```
    The first start installs Python and Node packages, which takes a few minutes.
 3. In the browser tab that opens (http://localhost:5173), go to **Settings**:
-   - Check the WoW folder. It's auto-detected; fix it if it's wrong.
+   - Check the WoW folder (the one that contains `_retail_`). It's found automatically from the
+     Battle.net install or a scan of your drives; if not, click **Auto-detect** or type it in.
    - Click **Install SimC**, then **Refresh data**. Both are one-time downloads: about 160 MB,
      or 260 MB once unpacked.
 4. Install the addons (PowerShell, from the repo folder), then restart the game fully:

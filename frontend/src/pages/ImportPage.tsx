@@ -193,7 +193,15 @@ export function ImportPage() {
         </div>
         {addonError && <div className="mt-3 rounded-md border border-red-600/50 bg-red-500/10 p-2 text-sm text-red-300">{addonError}</div>}
         {addonLoading && !addon && <div className="mt-3 flex items-center gap-2 text-sm text-muted"><Spinner /> Looking for addon data...</div>}
-        {!addonLoading && !addonError && captures.length === 0 && (
+        {!addonLoading && !addonError && addon?.wow_dir_valid === false && (
+          <div className="mt-3 flex items-center justify-between gap-3 rounded-md border border-amber-600/50 bg-amber-500/10 p-2.5 text-sm text-amber-200">
+            <div>ToonOptimizer can't find your WoW folder. Set it in Settings → WoW directory.</div>
+            <button type="button" className="btn btn-sm shrink-0 border-amber-600/50 text-amber-200 hover:bg-amber-500/20" onClick={() => navigate('/settings')}>
+              Go to Settings
+            </button>
+          </div>
+        )}
+        {!addonLoading && !addonError && addon?.wow_dir_valid !== false && captures.length === 0 && (
           <div className="mt-3 text-sm text-muted">
             Install the ToonOptimizer addon (<span className="mono text-text">scripts/Install-Addons.ps1</span>), log in, then /reload or log out — WoW only writes addon data then.
           </div>

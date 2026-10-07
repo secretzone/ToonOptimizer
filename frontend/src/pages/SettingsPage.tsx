@@ -6,7 +6,7 @@ import { fmtDate } from '../lib/format'
 import { titleCase } from '../lib/wow'
 import { JobProgress } from '../components/JobProgress'
 import { Card, Field, Input, PageTitle, Select, Spinner, Toggle } from '../components/ui'
-import type { Settings, Status, SurrogateStatus } from '../lib/types'
+import type { Settings, Status, SurrogateStatus, WowDirInfo } from '../lib/types'
 
 function YesNo({ ok, yes = 'yes', no = 'no' }: { ok: boolean; yes?: string; no?: string }) {
   return <span className={`inline-flex items-center gap-1 ${ok ? 'text-good' : 'text-bad'}`}>{ok ? <Check size={13} /> : <X size={13} />}{ok ? yes : no}</span>
@@ -26,6 +26,9 @@ export function SettingsPage() {
   const [draft, setDraft] = useState<Partial<Settings>>({})
   const [saving, setSaving] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  const [wowDirInfo, setWowDirInfo] = useState<WowDirInfo | null>(null)
+  const [wowDirError, setWowDirError] = useState<string | null>(null)
+  const [detecting, setDetecting] = useState(false)
 
   const load = () =>
     Promise.all([api.status(), api.settings()])
@@ -34,6 +37,7 @@ export function SettingsPage() {
   const loadSurrogate = () => api.surrogateStatus().then(setSurrogate).catch(() => undefined)
   useEffect(() => { void load() }, [])
   useEffect(() => { void loadSurrogate() }, [])
+  useEffect(() => { void api.wowDir().then(setWowDirInfo).catch(() => undefined) }, [])
   // Reload status when an install/refresh/train job finishes.
   const installDone = !!installJob && isTerminal(installJob)
   const refreshDone = !!refreshJob && isTerminal(refreshJob)
@@ -46,15 +50,32 @@ export function SettingsPage() {
   const dirty = Object.keys(draft).length > 0
   const save = async () => {
     setSaving(true)
+    setWowDirError(null)
     try {
       const s = await api.putSettings(draft)
       setSettings(s)
       setDraft({})
       toast('Settings saved', 'success')
+      if (draft.wow_dir !== undefined) void api.wowDir().then(setWowDirInfo).catch(() => undefined)
+    } catch (e) {
+      if (draft.wow_dir !== undefined) setWowDirError((e as Error).message)
+      else toast((e as Error).message, 'error')
+    } finally {
+      setSaving(false)
+    }
+  }
+  const detect = async () => {
+    setDetecting(true)
+    try {
+      const info = await api.wowDir()
+      setWowDirInfo(info)
+      setWowDirError(null)
+      if (info.candidates.length) setDraft((d) => ({ ...d, wow_dir: info.candidates[0].path }))
+      else toast('No WoW installation found. Enter the folder manually.', 'error')
     } catch (e) {
       toast((e as Error).message, 'error')
     } finally {
-      setSaving(false)
+      setDetecting(false)
     }
   }
   const installing = !!installJob && !isTerminal(installJob)
@@ -183,8 +204,27 @@ export function SettingsPage() {
               </Field>
               <div className="pt-5"><Toggle checked={cur.ptr} onChange={(v) => setDraft({ ...draft, ptr: v })} label="PTR" description="Use PTR SimC data by default" /></div>
             </div>
-            <Field label="WoW directory" hint="Used to read .build.info">
-              <Input value={cur.wow_dir} onChange={(e) => setDraft({ ...draft, wow_dir: e.target.value })} className="mono text-xs" />
+            <Field label="WoW directory" hint="The folder that contains _retail_ (auto-detected)">
+              <div className="flex items-center gap-2">
+                <Input value={cur.wow_dir} onChange={(e) => { setWowDirError(null); setDraft({ ...draft, wow_dir: e.target.value }) }} className="mono text-xs" />
+                <button type="button" className="btn btn-sm shrink-0" disabled={detecting} onClick={() => void detect()}>
+                  {detecting ? <Spinner /> : <RefreshCw size={13} />} Auto-detect
+                </button>
+              </div>
+              {wowDirInfo && draft.wow_dir === undefined && (
+                <div className="mt-1.5 text-xs"><YesNo ok={wowDirInfo.valid} yes="WoW folder found" no="Not a WoW folder" /></div>
+              )}
+              {wowDirInfo && wowDirInfo.candidates.length > 1 && (
+                <div className="mt-1.5 flex flex-wrap items-center gap-1.5 text-xs">
+                  <span className="text-faint">Detected:</span>
+                  {wowDirInfo.candidates.map((c) => (
+                    <button key={c.path} type="button" className="chip hover:border-accent" onClick={() => { setWowDirError(null); setDraft({ ...draft, wow_dir: c.path }) }}>
+                      <span className="mono">{c.path}</span> <span className="text-faint">({c.source})</span>
+                    </button>
+                  ))}
+                </div>
+              )}
+              {wowDirError && <div className="mt-1.5 text-xs text-bad">{wowDirError}</div>}
             </Field>
           </div>
         </Card>

@@ -91,7 +91,18 @@ export type AddonImportResult = {
   profile: CharacterProfile | null
 }
 
-export type AddonStatus = { installed: boolean; wow_dir: string | null; files: string[]; captures: AddonCapture[] }
+export type AddonStatus = {
+  installed: boolean
+  wow_dir: string | null
+  /** False when wow_dir has no _retail_ folder (ToonOptimizer can't find WoW). Treat absent as true. */
+  wow_dir_valid?: boolean
+  files: string[]
+  captures: AddonCapture[]
+}
+
+/** GET /api/settings/wow-dir — valid candidates only, priority order. */
+export type WowDirCandidate = { path: string; source: 'env' | 'registry' | 'scan' }
+export type WowDirInfo = { current: string; valid: boolean; candidates: WowDirCandidate[] }
 
 export type CharacterProfile = {
   /** Where this profile came from. Additive/optional. */
@@ -393,6 +404,9 @@ export type Status = {
   gpu: { available: boolean; name: string }
   threads: number
   wow_build: string
+  /** Optional: configured WoW folder and whether it contains _retail_. */
+  wow_dir?: string
+  wow_dir_valid?: boolean
   mismatch: {
     simc: boolean          // installed SimC's WoW version (major.minor.patch) differs from game_build
     data: boolean          // cached data build differs from game_build

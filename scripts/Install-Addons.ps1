@@ -15,25 +15,69 @@ $ErrorActionPreference = "Stop"
 $root = Split-Path -Parent (Split-Path -Parent $MyInvocation.MyCommand.Path)
 $srcRoot = Join-Path $root "addons"
 
-function Test-WowDir([string]$Dir) {
-  return [bool]($Dir -and (Test-Path -LiteralPath (Join-Path $Dir "_retail_")))
+function ConvertTo-WowRoot([string]$Dir) {
+  if (-not $Dir) { return $null }
+  $d = $Dir.Trim().Trim('"', "'").Trim().TrimEnd('\', '/')
+  if (-not $d) { return $null }
+  # Anything at or below a _retail_ folder (e.g. ...\_retail_\Wow.exe) -> its parent is the root.
+  if ($d -match '^(.*?)[\\/]_retail_(?:[\\/].*)?$') { return $Matches[1].TrimEnd('\', '/') }
+  if ($d -ieq '_retail_') { return $null }
+  try { if (Test-Path -LiteralPath $d -PathType Leaf) { $d = Split-Path -Parent $d } } catch {}
+  return $d
 }
 
+function Test-WowDir([string]$Dir) {
+  if (-not $Dir) { return $false }
+  try { return [bool](Test-Path -LiteralPath (Join-Path $Dir "_retail_") -PathType Container) } catch { return $false }
+}
+
+# Returns @{ Path; Source }. Priority matches backend/src/toonopt/config.py.
 function Resolve-WowDir {
-  if ($WowDir) { return $WowDir }
-  $cands = @()
-  $settings = Join-Path $root "data\settings.json"
-  if (Test-Path $settings) {
-    try { $cands += (Get-Content $settings -Raw | ConvertFrom-Json).wow_dir } catch {}
+  if ($WowDir) {
+    $n = ConvertTo-WowRoot $WowDir
+    if (-not (Test-WowDir $n)) {
+      throw "-WowDir '$WowDir' does not contain a _retail_ folder. Pass the folder that contains _retail_."
+    }
+    return @{ Path = $n; Source = "-WowDir" }
   }
-  $cands += $env:WOW_DIR
-  try {
-    $p = (Get-ItemProperty "HKLM:\SOFTWARE\WOW6432Node\Blizzard Entertainment\World of Warcraft" -ErrorAction Stop).InstallPath
-    if ($p) { $cands += ($p.TrimEnd('\', '/') -replace '[\\/]_retail_$', '') }
-  } catch {}
-  $cands += "C:\Program Files (x86)\World of Warcraft", "C:\Games\World of Warcraft"
-  foreach ($c in $cands) { if (Test-WowDir $c) { return $c } }
-  throw "WoW folder not found. Pass -WowDir <folder containing _retail_>."
+
+  $settings = Join-Path $root "data\settings.json"
+  if (Test-Path -LiteralPath $settings) {
+    try {
+      $n = ConvertTo-WowRoot ((Get-Content -LiteralPath $settings -Raw | ConvertFrom-Json).wow_dir)
+      if (Test-WowDir $n) { return @{ Path = $n; Source = "data/settings.json" } }
+    } catch {}
+  }
+
+  $n = ConvertTo-WowRoot $env:WOW_DIR
+  if (Test-WowDir $n) { return @{ Path = $n; Source = "WOW_DIR environment variable" } }
+
+  $regKeys = @(
+    @("HKLM:\SOFTWARE\WOW6432Node\Blizzard Entertainment\World of Warcraft", "InstallPath"),
+    @("HKLM:\SOFTWARE\Blizzard Entertainment\World of Warcraft", "InstallPath"),
+    @("HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\World of Warcraft", "InstallLocation")
+  )
+  foreach ($k in $regKeys) {
+    try {
+      $v = (Get-ItemProperty -LiteralPath $k[0] -Name $k[1] -ErrorAction Stop).($k[1])
+      $n = ConvertTo-WowRoot $v
+      if (Test-WowDir $n) { return @{ Path = $n; Source = "registry" } }
+    } catch {}
+  }
+
+  $subs = "World of Warcraft", "Games\World of Warcraft", "Program Files (x86)\World of Warcraft",
+          "Program Files\World of Warcraft", "Blizzard\World of Warcraft", "Battle.net\World of Warcraft"
+  $drives = @()
+  try { $drives = [IO.DriveInfo]::GetDrives() | Where-Object { $_.DriveType -eq 'Fixed' -and $_.IsReady } } catch {}
+  foreach ($dr in $drives) {
+    foreach ($s in $subs) {
+      $c = Join-Path $dr.RootDirectory.FullName $s
+      if (Test-WowDir $c) { return @{ Path = $c; Source = "drive scan" } }
+    }
+  }
+
+  throw ("WoW folder not found. Pass -WowDir ""<folder that contains _retail_>"" " +
+         "or set it in the app's Settings -> WoW directory.")
 }
 
 function Get-TocVersion([string]$Dir, [string]$Name) {
@@ -61,10 +105,17 @@ function Test-Junction([string]$Path) {
   return [bool]($i -and ($i.Attributes -band [IO.FileAttributes]::ReparsePoint))
 }
 
-$wow = Resolve-WowDir
+$found = Resolve-WowDir
+$wow = $found.Path
 $addons = Join-Path $wow "_retail_\Interface\AddOns"
 if (-not (Test-Path -LiteralPath $addons)) { New-Item -ItemType Directory -Path $addons -Force | Out-Null }
-Write-Host "WoW: $wow"
+Write-Host "WoW: $wow (from $($found.Source))"
+if ($WowDir) {
+  $saved = $null
+  $sf = Join-Path $root "data\settings.json"
+  if (Test-Path -LiteralPath $sf) { try { $saved = ConvertTo-WowRoot (Get-Content -LiteralPath $sf -Raw | ConvertFrom-Json).wow_dir } catch {} }
+  if ($saved -ne $wow) { Write-Host "Tip: also set this in the app under Settings -> WoW directory so the backend uses the same folder." }
+}
 
 if (Get-Process -Name "Wow", "WowB", "WowT" -ErrorAction SilentlyContinue) {
   Write-Warning "WoW is running. A newly added addon needs a full client restart (/reload is not enough)."

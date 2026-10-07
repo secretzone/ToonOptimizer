@@ -3,7 +3,7 @@ import type {
   AddonImportResult, AddonStatus, AdvancedBody, AdvisorBody, AdvisorResult, CharacterProfile, CharacterReport, CharacterSummary, ConsumableOption,
   Consumables, ConsumableOptions, ConsumablesBody, DecodedTalents, DropSource, DroptimizerBody, GearCompareBody,
   GemsBody, HistoryEntry, Item, ItemSearchResult, Job, LootSources, OmniumBody, QuickBody, RawUpgradeTrack,
-  Recommendations, ReportListEntry, SeasonData, Settings, SimResult, StatWeightsBody, Status, SurrogateStatus,
+  Recommendations, ReportListEntry, SeasonData, Settings, SimResult, StatWeightsBody, Status, SurrogateStatus, WowDirInfo,
   TalentCompareBody, TalentTrees, TopGearBody, UpgradeTrackDef, UpgradesBody,
 } from './types'
 import { prettifySimcName } from './wow'
@@ -128,6 +128,8 @@ export interface ApiClient {
   deleteCharacterReport(slug: string): Promise<{ ok: boolean }>
   settings(): Promise<Settings>
   putSettings(patch: Partial<Settings>): Promise<Settings>
+  /** GET /api/settings/wow-dir — current dir validity plus auto-detected candidates. */
+  wowDir(): Promise<WowDirInfo>
   /** Experimental GPU surrogate (see toonopt.surrogate). */
   surrogateStatus(): Promise<SurrogateStatus>
   surrogateTrain(klass: string, spec: string, opts?: { min_samples?: number; epochs?: number }): Promise<Job>
@@ -285,6 +287,7 @@ const http: ApiClient = {
   deleteCharacterReport: (slug) => del(`/api/reports/${slug}`),
   settings: () => get('/api/settings'),
   putSettings: (patch) => put('/api/settings', patch),
+  wowDir: () => get('/api/settings/wow-dir'),
   surrogateStatus: () => get('/api/surrogate/status'),
   surrogateTrain: (klass, spec, opts) => post('/api/surrogate/train', { klass, spec, ...opts }),
   subscribeJob: subscribeJobHttp,

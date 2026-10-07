@@ -15,7 +15,7 @@
 .\scripts\Install-Addons.ps1 -Only ToonOptimizer -Force
 ```
 The WoW folder comes from `-WowDir`, `data/settings.json` (`wow_dir`), `$env:WOW_DIR`, the
-registry, or the default install paths. An existing Simulationcraft install that is as new as
+Battle.net registry entries, or a scan of your fixed drives (the folder must contain `_retail_`). An existing Simulationcraft install that is as new as
 the vendored one is left alone unless `-Force`. Replaced folders are backed up to
 `runtime\addon-backups\`. A newly installed addon needs a full game restart.
 

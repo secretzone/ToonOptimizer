@@ -128,7 +128,7 @@ type SimResult = {
 | Method | Path | Body / query | Returns |
 |---|---|---|---|
 | GET | `/api/health` | | `{ok, version}` |
-| GET | `/api/status` | | `{ simc: {installed, tag, path, version_string, wow_version, latest_tag, update_available}, data: {build, cached_tables: string[], ready, refreshed_at, effective_build, ready_builds: string[]}, gpu: {available, name}, threads, wow_build, mismatch: {simc, data, simc_wow_version, data_build, game_build} }` |
+| GET | `/api/status` | | `{ simc: {installed, tag, path, version_string, wow_version, latest_tag, update_available}, data: {build, cached_tables: string[], ready, refreshed_at, effective_build, ready_builds: string[]}, gpu: {available, name}, threads, wow_build, wow_dir: string, wow_dir_valid: boolean, mismatch: {simc, data, simc_wow_version, data_build, game_build} }` |
 | POST | `/api/simc/install` | `{tag?: string}` (default latest weekly) | `Job` |
 | POST | `/api/data/refresh` | `{build?: string}` | `Job` |
 | GET | `/api/data/season` | | contents of `data/season.json` |
@@ -141,7 +141,7 @@ type SimResult = {
 | POST | `/api/data/talents/names` | `{klass, spec, loadout}` | `{ class: string[], spec: string[], hero: string[], hero_tree }` -- selected talent names grouped by section, `" (N)"` suffix above rank 1 |
 | POST | `/api/import/simc` | `{text}` | `CharacterProfile` |
 | GET | `/api/import/armory` | `?region=&realm=&name=` | `CharacterProfile` (best effort, raider.io public) |
-| GET | `/api/import/addon` | | `{installed: boolean, wow_dir: string\|null, files: string[], captures: AddonCapture[]}` -- see "Import from addon" |
+| GET | `/api/import/addon` | | `{installed: boolean, wow_dir: string\|null, wow_dir_valid: boolean, files: string[], captures: AddonCapture[]}` -- see "Import from addon" |
 | POST | `/api/import/addon` | `{key?: string\|null, all?: boolean}` (default `{}`) | `CharacterProfile`, or `AddonImportResult[]` when `all: true` -- see "Import from addon" |
 | POST | `/api/sims/quick` | `{profile, options}` | `Job` |
 | POST | `/api/sims/topgear` | `{profile, options, candidate_keys: string[], max_combos: number, smart: boolean, min_ilevel?: number}` | `Job` |
@@ -160,7 +160,8 @@ type SimResult = {
 | GET | `/api/history` | | `{id, type, character, spec, created, summary: string}[]` |
 | DELETE | `/api/history/{id}` | | `{ok}` |
 | GET | `/api/settings` | | `Settings` (see backend/src/toonopt/config.py) |
-| PUT | `/api/settings` | partial `Settings` | `Settings` |
+| PUT | `/api/settings` | partial `Settings` | `Settings`. A `wow_dir` is normalized (quotes, trailing slashes, a `_retail_` suffix or file inside it are cut back to the root) and stored as the root; a non-empty value with no `_retail_` folder inside gives 400 `{detail: "That folder doesn't look like a World of Warcraft install (no _retail_ folder inside). Pick the folder that contains _retail_."}`. `""` is accepted (clears it). |
+| GET | `/api/settings/wow-dir` | | `{ current: string, valid: boolean, candidates: {path: string, source: "env"\|"registry"\|"scan"}[] }`. `valid` = `<current>/_retail_` exists. Candidates are valid installs only, in priority order (WOW_DIR env, registry, scan of fixed drives), deduped. |
 | GET | `/api/surrogate/status` | | `{ available: boolean, device: "cuda"\|"cpu"\|"unavailable", models: [{klass, spec, samples, val_mae_pct, trained_at}] }` |
 | POST | `/api/surrogate/train` | `{klass, spec, min_samples?: number, epochs?: number}` | `Job` (job type `surrogate_train`; result is `{samples, val_mae_pct, epochs, device, path}`) |
 
@@ -179,7 +180,7 @@ Errors: FastAPI default `{detail: string}` with 4xx/5xx.
 
 The in-game ToonOptimizer addon keeps the `/simc` export in SavedVariables, which WoW only writes on
 `/reload`, logout or exit: `<wow_dir>/_retail_/WTF/Account/<ACCOUNT>/SavedVariables/ToonOptimizer.lua`
-(`wow_dir` from Settings; may also point at `_retail_` itself). The addon counts as installed when
+(`wow_dir` from Settings, the folder containing `_retail_`; auto-detected at startup and re-detected if the saved folder no longer exists). The addon counts as installed when
 `_retail_/Interface/AddOns/ToonOptimizer/ToonOptimizer.toc` exists.
 
 ```ts
@@ -196,7 +197,7 @@ type AddonCapture = {
 }
 ```
 
-- `GET /api/import/addon` -> `{installed, wow_dir (null when unset), files: string[], captures: AddonCapture[]}`.
+- `GET /api/import/addon` -> `{installed, wow_dir (null when unset), wow_dir_valid, files: string[], captures: AddonCapture[]}`.
   Captures are newest first; a key present in several accounts keeps its newest; entries without a
   `simc` string are skipped, and a malformed file is skipped with a logged warning. Never errors.
 - `POST /api/import/addon` body `{key?: string|null, all?: boolean}` (body optional). No `key` imports the

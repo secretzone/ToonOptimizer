@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import json
 import os
+import re
 from pathlib import Path
 
 from pydantic import BaseModel, Field
@@ -18,58 +19,120 @@ try:
 except ImportError:  # pragma: no cover - non-Windows dev/test environments
     winreg = None  # type: ignore[assignment]
 
-_CANDIDATE_WOW_DIRS = (
-    r"C:\Program Files (x86)\World of Warcraft",
-    r"C:\Program Files\World of Warcraft",
-    r"C:\Games\World of Warcraft",
-    r"D:\World of Warcraft",
-    r"D:\Games\World of Warcraft",
+_REGISTRY_KEYS = (
+    (r"SOFTWARE\WOW6432Node\Blizzard Entertainment\World of Warcraft", "InstallPath"),
+    (r"SOFTWARE\Blizzard Entertainment\World of Warcraft", "InstallPath"),
+    (r"SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\World of Warcraft",
+     "InstallLocation"),
 )
+_SCAN_SUBPATHS = (
+    "World of Warcraft",
+    r"Games\World of Warcraft",
+    r"Program Files (x86)\World of Warcraft",
+    r"Program Files\World of Warcraft",
+    r"Blizzard\World of Warcraft",
+    r"Battle.net\World of Warcraft",
+)
+_RETAIL_RE = re.compile(r"(^|[\\/])_retail_([\\/]|$)", re.IGNORECASE)
 
 
-def _battlenet_wow_dir() -> str:
-    """Read the Battle.net install path for World of Warcraft from the registry.
+def normalize_wow_dir(raw: str | None) -> str:
+    """Normalize user/registry input to the WoW root (the folder that contains ``_retail_``).
 
-    Returns "" if the key doesn't exist, isn't readable, or we're not on Windows --
-    never raises. A trailing ``_retail_`` component (Battle.net stores the retail
-    subdirectory itself) is stripped so callers get the same shape as the other
-    candidates (a directory that itself contains ``.build.info``... actually
-    ``_retail_/.build.info``, but detect_wow_build already expects the game dir).
+    Strips whitespace/quotes/trailing slashes, expands ``~`` and env vars, and cuts any
+    path at its ``_retail_`` component (so ``X\\_retail_`` and ``X\\_retail_\\Wow.exe``
+    both give ``X``). A path to a file such as ``.build.info`` gives its folder.
     """
-    if winreg is None:
+    if not raw:
         return ""
+    value = raw.strip().strip("\"'").strip()
+    if not value:
+        return ""
+    value = os.path.expandvars(os.path.expanduser(value))
+    m = _RETAIL_RE.search(value)
+    if m:
+        value = value[: m.start()] if m.group(1) else ""
+    elif os.path.isfile(value):
+        value = os.path.dirname(value)
+    stripped = value.rstrip("\\/")
+    if len(stripped) == 2 and stripped[1] == ":":  # "C:" -> keep the root slash
+        return stripped + "\\"
+    return stripped
+
+
+def is_wow_dir(path: str | os.PathLike[str] | None) -> bool:
+    """True if ``path`` looks like a WoW install root, i.e. ``<path>/_retail_`` is a directory."""
+    if not path:
+        return False
     try:
-        with winreg.OpenKey(
-            winreg.HKEY_LOCAL_MACHINE,
-            r"SOFTWARE\WOW6432Node\Blizzard Entertainment\World of Warcraft",
-        ) as key:
-            value, _ = winreg.QueryValueEx(key, "InstallPath")
+        return (Path(path) / "_retail_").is_dir()
     except OSError:
-        return ""
-    value = value.rstrip("\\/")
-    if value.lower().endswith("_retail_"):
-        value = value[: -len("_retail_")].rstrip("\\/")
-    return value
+        return False
+
+
+def _registry_paths() -> list[str]:
+    """Raw WoW install paths from the registry (empty off Windows). Never raises."""
+    if winreg is None:
+        return []
+    out: list[str] = []
+    for subkey, name in _REGISTRY_KEYS:
+        try:
+            with winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, subkey) as key:
+                value, _ = winreg.QueryValueEx(key, name)
+        except OSError:
+            continue
+        if isinstance(value, str) and value.strip():
+            out.append(value)
+    return out
+
+
+def _list_drives() -> list[str]:
+    """Roots of fixed local drives (``C:\\`` ...). Empty off Windows.
+
+    Uses GetDriveTypeW == DRIVE_FIXED so disconnected network drives are never touched.
+    """
+    if os.name != "nt":
+        return []
+    try:
+        import ctypes
+
+        get_type = ctypes.windll.kernel32.GetDriveTypeW  # type: ignore[attr-defined]
+        return [
+            f"{letter}:\\"
+            for letter in "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+            if get_type(f"{letter}:\\") == 3
+        ]
+    except Exception:  # noqa: BLE001 - detection must never crash
+        return []
+
+
+def wow_dir_candidates() -> list[dict[str, str]]:
+    """Valid WoW install roots, priority order: env, registry, drive scan (deduped)."""
+    found: list[dict[str, str]] = []
+    seen: set[str] = set()
+
+    def add(raw: str | None, source: str) -> None:
+        path = normalize_wow_dir(raw)
+        key = os.path.normcase(os.path.normpath(path)).lower() if path else ""
+        if not path or key in seen or not is_wow_dir(path):
+            return
+        seen.add(key)
+        found.append({"path": path, "source": source})
+
+    add(os.environ.get("WOW_DIR"), "env")
+    for raw in _registry_paths():
+        add(raw, "registry")
+    for drive in _list_drives():
+        for sub in _SCAN_SUBPATHS:
+            add(os.path.join(drive, sub), "scan")
+    return found
 
 
 def detect_wow_dir() -> str:
-    """Best-effort auto-detect of the WoW install directory on this machine.
+    """First valid candidate path, or "" when WoW can't be found."""
+    cands = wow_dir_candidates()
+    return cands[0]["path"] if cands else ""
 
-    Precedence: ``WOW_DIR`` env var, else the first existing well-known path, else the
-    Battle.net registry install path (if readable), else "" (caller falls back to a
-    default that simply won't resolve a build -- status should report that clearly
-    rather than crash).
-    """
-    env = os.environ.get("WOW_DIR")
-    if env:
-        return env
-    for candidate in _CANDIDATE_WOW_DIRS:
-        if Path(candidate).is_dir():
-            return candidate
-    registry_path = _battlenet_wow_dir()
-    if registry_path and Path(registry_path).is_dir():
-        return registry_path
-    return ""
 
 ROOT = Path(__file__).resolve().parents[3]          # repo root
 RUNTIME_DIR = ROOT / "runtime"
@@ -103,12 +166,28 @@ class Settings(BaseModel):
 
     @classmethod
     def load(cls) -> Settings:
+        loaded: Settings | None = None
         if SETTINGS_FILE.exists():
             try:
-                return cls.model_validate(json.loads(SETTINGS_FILE.read_text("utf-8")))
+                loaded = cls.model_validate(json.loads(SETTINGS_FILE.read_text("utf-8")))
             except Exception:  # noqa: BLE001, S110 - corrupt settings fall back to defaults
                 pass
-        return cls()
+        if loaded is None:
+            return cls()
+        env = normalize_wow_dir(os.environ.get("WOW_DIR"))
+        if env and is_wow_dir(env):
+            wanted = env
+        elif is_wow_dir(loaded.wow_dir):
+            wanted = normalize_wow_dir(loaded.wow_dir)
+        else:
+            wanted = detect_wow_dir() or loaded.wow_dir
+        if wanted != loaded.wow_dir:
+            loaded.wow_dir = wanted
+            try:
+                loaded.save()
+            except OSError:
+                pass
+        return loaded
 
     def save(self) -> None:
         SETTINGS_FILE.write_text(json.dumps(self.model_dump(), indent=2), "utf-8")

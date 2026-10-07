@@ -1275,7 +1275,7 @@ export const mock: ApiClient = {
   async addonCaptures() {
     await sleep(300)
     const mode = new URLSearchParams(window.location.search).get('addon')
-    if (mode === 'missing') return { installed: false, wow_dir: null, files: [], captures: [] }
+    if (mode === 'missing') return { installed: false, wow_dir: null, wow_dir_valid: false, files: [], captures: [] }
     if (mode === 'empty') return { installed: true, wow_dir: 'C:\\Games\\World of Warcraft', files: [], captures: [] }
     const now = Date.now()
     return {
@@ -1491,8 +1491,24 @@ export const mock: ApiClient = {
     if (i >= 0) REPORT_LIST.splice(i, 1)
     return { ok: true }
   },
+  async wowDir() {
+    await sleep(200)
+    return {
+      current: SETTINGS.wow_dir,
+      valid: !/invalid/i.test(SETTINGS.wow_dir),
+      candidates: [
+        { path: 'C:\\Games\\World of Warcraft', source: 'registry' as const },
+        { path: 'D:\\Games\\World of Warcraft', source: 'scan' as const },
+      ],
+    }
+  },
   async settings() { return { ...SETTINGS } },
-  async putSettings(patch) { SETTINGS = { ...SETTINGS, ...patch }; STATUS.threads = SETTINGS.threads; return { ...SETTINGS } },
+  async putSettings(patch) {
+    if (patch.wow_dir !== undefined && /invalid/i.test(patch.wow_dir)) throw new Error('No _retail_ folder found in that directory')
+    SETTINGS = { ...SETTINGS, ...patch }
+    STATUS.threads = SETTINGS.threads
+    return { ...SETTINGS }
+  },
   async surrogateStatus() { await sleep(150); return { ...SURROGATE_STATUS, models: [...SURROGATE_STATUS.models] } },
   async surrogateTrain(klass, spec) { return startSurrogateTrainJob(klass, spec) },
   subscribeJob(id, listener): Unsubscribe {

@@ -122,6 +122,7 @@ def addon_status() -> dict:
     return {
         "installed": addon_import.addon_installed(wow_dir),
         "wow_dir": wow_dir or None,
+        "wow_dir_valid": config.is_wow_dir(wow_dir),
         "files": [str(p) for p in addon_import.savedvariables_files(wow_dir)],
         "captures": addon_import.list_captures(wow_dir),
     }

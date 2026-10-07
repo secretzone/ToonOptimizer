@@ -163,7 +163,7 @@ def test_api_get(client, wow):
 def test_api_get_no_wow(client, tmp_path, monkeypatch):
     monkeypatch.setattr(config.settings, "wow_dir", "")
     body = client.get("/api/import/addon").json()
-    assert body == {"installed": False, "wow_dir": None, "files": [], "captures": []}
+    assert body == {"installed": False, "wow_dir": None, "wow_dir_valid": False, "files": [], "captures": []}
 
 
 def test_api_post(client, wow):

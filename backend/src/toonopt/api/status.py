@@ -4,7 +4,7 @@ from __future__ import annotations
 from fastapi import APIRouter
 from pydantic import BaseModel
 
-from toonopt.config import settings
+from toonopt.config import is_wow_dir, settings
 from toonopt.jobs import JobContext, manager
 from toonopt.models import Job
 from toonopt.simc import runtime
@@ -101,6 +101,8 @@ def status() -> dict:
         "gpu": gpu_status(),
         "threads": settings.threads,
         "wow_build": game_build,
+        "wow_dir": settings.wow_dir,
+        "wow_dir_valid": is_wow_dir(settings.wow_dir),
         "mismatch": mismatch_status(simc, game_build, _effective_data_build()),
     }
 

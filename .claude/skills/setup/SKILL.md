@@ -65,9 +65,11 @@ Use `WScript.Shell` `CreateShortcut` to make them.
 
 Once `GET http://127.0.0.1:8790/api/health` answers:
 
-1. `GET /api/settings`: check `wow_dir` points at the folder that holds `_retail_`. If it's
-   empty or wrong, find the install. Look for `World of Warcraft\_retail_\Wow.exe` on the
-   fixed drives, or read the Battle.net registry key. Then `PUT /api/settings {"wow_dir": ...}`.
+1. `GET /api/settings/wow-dir`: if `valid` is true, the WoW folder is set. Otherwise use the
+   first of `candidates` (found from `WOW_DIR`, the Battle.net registry, or a scan of the fixed
+   drives) with `PUT /api/settings {"wow_dir": ...}`. If there are no candidates, ask where WoW
+   is installed (the folder that contains `_retail_`) and PUT that; a 400 means it isn't a WoW
+   folder. They can also set it on the Settings page (WoW directory → Auto-detect).
 2. `GET /api/status`: if `simc.installed` is false, `POST /api/simc/install`. If `data.ready` is
    false, `POST /api/data/refresh`. Poll `GET /api/jobs/{id}` until done. SimC is a
    16 MB download (about 120 MB unpacked) and the game data about 140 MB. Both take a minute or
