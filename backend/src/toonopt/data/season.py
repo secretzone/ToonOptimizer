@@ -166,7 +166,7 @@ CONSUMABLE_OPTIONS = {
 # curated: enchants (SpellItemEnchantment ids; usage counted over the MID2 SimC profiles)
 
 ENCHANTS_BEST: dict[str, int] = {
-    "head": 8017, "chest": 7987, "legs": 8159, "feet": 7963,
+    "head": 8017, "shoulder": 8001, "chest": 7987, "legs": 8159, "feet": 7963,
     "finger1": 7967, "finger2": 7967, "main_hand": 8689, "off_hand": 8689,
 }
 ENCHANTS_BY_STAT: dict[str, dict[str, int]] = {
@@ -195,6 +195,18 @@ ENCHANT_OPTIONS: dict[str, list[dict]] = {
         {"id": 7961, "label": "Empowered Hex of Leeching", "dps": False},
         {"id": 7991, "label": "Empowered Blessing of Speed", "dps": False},
         {"id": 8017, "label": "Empowered Rune of Avoidance", "dps": False},
+    ],
+    # Midnight brought shoulder enchants back; all are utility (speed / avoidance / leech).
+    # Top-rank ids from SpellItemEnchantment 12.1.0.69933, cross-checked against the
+    # `shoulders=...,enchant_id=` lines of simulationcraft/simc profiles/MID2 (8001 x16,
+    # 8031 x13, 7973 x7, 7971 x1) and warcraft.wiki.gg/wiki/Midnight_Enchanting.
+    "shoulder": [
+        {"id": 8001, "label": "Amirdrassil's Grace", "dps": False},
+        {"id": 8031, "label": "Silvermoon's Mending", "dps": False},
+        {"id": 7973, "label": "Akil'zon's Swiftness", "dps": False},
+        {"id": 7971, "label": "Flight of the Eagle", "dps": False},
+        {"id": 7999, "label": "Nature's Grace", "dps": False},
+        {"id": 8029, "label": "Thalassian Recovery", "dps": False},
     ],
     "feet": [
         {"id": 7963, "label": "Lynx's Dexterity", "dps": False},
@@ -675,6 +687,7 @@ def generate(build: str | None = None) -> dict:
             "delves": "Tier 8+ from localbots' season-2 notes; tiers 1-7 extrapolated along the track ladders, not verified in game.",
             "world_bosses": "302 (Champion 4/6) from localbots; not verified in game.",
             "consumables": "Defaults per spec from simulationcraft/simc profiles/MID2; specs without a profile fall back by primary stat / role.",
+            "enchants": "Ids per slot from SpellItemEnchantment; picks are the enchant_id most used by simulationcraft/simc profiles/MID2 (head/shoulder/feet are utility only and are not simmed).",
             "tier_sets": "Tier pieces are not in the raid loot journal for these raids (obtained through the Catalyst); see data/README.md limitations.",
         },
         "mplus_season_id": j["mplus_season_id"],
@@ -754,9 +767,19 @@ _WEAPON_INV_TYPES = {13, 15, 17, 21, 22, 26}
 STAT_KEYS: tuple[str, ...] = ("crit", "haste", "mastery", "versatility")
 # SimC slot -> ENCHANT_OPTIONS/ENCHANTS_BY_STAT generic key
 SLOT_ENCHANT_KEY: dict[str, str] = {
-    "head": "head", "chest": "chest", "legs": "legs", "feet": "feet",
+    "head": "head", "shoulder": "shoulder", "chest": "chest", "legs": "legs", "feet": "feet",
     "finger1": "ring", "finger2": "ring", "main_hand": "weapon", "off_hand": "weapon",
 }
+
+
+def utility_enchant_slots() -> list[str]:
+    """Enchantable slots whose every option is utility only (``dps: false``), e.g. Midnight's
+    head/shoulder/feet speed/leech/avoidance enchants: they exist, but simming them is moot."""
+    options: dict[str, list[dict]] = load().get("enchant_options", ENCHANT_OPTIONS)
+    return [
+        slot for slot, generic in SLOT_ENCHANT_KEY.items()
+        if options.get(generic) and all(o.get("dps", True) is False for o in options[generic])
+    ]
 
 
 def _pick_enchant(slot: str, prim: str | None, s: dict | None = None) -> int | None:
@@ -772,8 +795,9 @@ def _pick_enchant(slot: str, prim: str | None, s: dict | None = None) -> int | N
 def best_enchant(slot: str, profile: CharacterProfile) -> int | None:
     """The season's best enchant_id for a SimC slot, given the character's primary stat.
 
-    None for slots without an enchant this season (back, wrist, hands, waist, neck,
-    shoulder, trinkets) and for an off-hand that is not a weapon (shield, held item).
+    None for slots without an enchant this season (neck, back, wrist, hands, waist,
+    trinkets) and for an off-hand that is not a weapon (shield, held item). Head, shoulder
+    and feet only have utility enchants; their entry is the one SimC's MID2 profiles use most.
     """
     from toonopt.data.loot import primary_stat
     if slot == "off_hand":
@@ -852,7 +876,44 @@ def _icon_file_names(file_ids: list[int], build: str | None = None) -> dict[int,
     return out
 
 
-def _gem_ref(gem_id: int, stat: str, limit: int | None = None, build: str | None = None) -> dict:
+@lru_cache(maxsize=4)
+def _limit_quantities(build: str | None = None) -> dict[int, tuple[str, int]]:
+    df = wago.table("ItemLimitCategory", build, ["ID", "Name_lang", "Quantity"])
+    return {
+        int(i): (str(n), int(q or 0))
+        for i, n, q in zip(df["ID"].to_list(), df["Name_lang"].to_list(), df["Quantity"].to_list(), strict=True)
+    }
+
+
+def gem_limit(gem_id: int, build: str | None = None) -> tuple[str, int] | None:
+    """``(limit category name, max equipped)`` for a unique-equipped gem, else None.
+
+    Limits are per *category*, not per gem id: every Eversong Diamond (all ranks, all
+    variants) shares ItemLimitCategory 698 "Thalassian Diamond", Quantity 1 -- one diamond
+    per character. Read from ItemSparse.LimitCategory; falls back to the curated diamond ids
+    when the DB2 cache is unavailable.
+    """
+    try:
+        r = items.row(gem_id, build)
+    except Exception:  # noqa: BLE001 - DB2 cache optional
+        r = None
+    if r:
+        lc = int(r.get("LimitCategory") or 0)
+        if not lc:
+            return None
+        name, qty = _limit_quantities(build).get(lc, (f"limit category {lc}", 1))
+        return name, max(1, qty)
+    if int(gem_id) in set(load().get("diamonds", DIAMONDS).get("known_ids", [])):
+        return "Thalassian Diamond", 1
+    return None
+
+
+def gem_name(gem_id: int, build: str | None = None) -> str:
+    r = items.row(gem_id, build)
+    return str(r.get("Display_lang") or "") if r else ""
+
+
+def _gem_ref(gem_id: int, stat: str, limited: bool = False, build: str | None = None) -> dict:
     r = items.row(gem_id, build)
     out = {
         "id": int(gem_id),
@@ -860,8 +921,10 @@ def _gem_ref(gem_id: int, stat: str, limit: int | None = None, build: str | None
         "icon": items.icon(gem_id, build) if r else "",
         "stat": stat,
     }
-    if limit is not None:
-        out["limit"] = limit
+    if limited:
+        category, qty = gem_limit(gem_id, build) or ("Thalassian Diamond", 1)
+        out["limit"] = qty
+        out["limit_category"] = category
     return out
 
 
@@ -910,7 +973,7 @@ def recommendations(klass: str, spec: str, build: str | None = None) -> dict:
     diamonds = s.get("diamonds", DIAMONDS)
     unique = [
         _gem_ref(int(d["id"]), "primary" if d["id"] == diamonds.get("options", [{}])[0].get("id") else "special",
-                 limit=1, build=build)
+                 limited=True, build=build)
         for d in diamonds.get("options", [])
     ]
 

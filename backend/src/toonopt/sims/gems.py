@@ -92,6 +92,8 @@ def _slot_label(slot: str) -> str:
 
 def _short_gem_label(gem_id: int, recs: dict) -> str:
     ref = _gem_ref(gem_id, recs)
+    if ref.get("limit"):                # unique gems: "Primary gem" would not say which one
+        return ref["name"]
     return f"{ref['stat'].capitalize()} gem" if ref.get("stat") else ref["name"]
 
 
@@ -100,47 +102,209 @@ def _pad_gems(item: Item, n: int) -> list[int]:
     return cur + [0] * (n - len(cur))
 
 
+# ---------------------------------------------------------------------------
+# unique-equipped gem limits
+#
+# Some gems are limited per character by an ItemLimitCategory shared across gem ids: every
+# Eversong Diamond (any variant, any rank) counts against "Thalassian Diamond", max 1. A row
+# that puts a limited gem in more sockets than its category allows is a setup the game
+# refuses to equip, so every generated row is fitted to the limits before it is simmed.
+
+Sockets = dict[str, list[int]]          # slot -> gem id per socket (0 = empty)
+Pos = tuple[str, int]                   # (slot, socket index)
+
+
+class _Limits:
+    """gem id -> (category, max equipped), from ``recommendations.gems.unique`` (``limit`` /
+    ``limit_category``) and, for gems outside the pool such as a lower-rank diamond the
+    character already wears, ``season.gem_limit``."""
+
+    def __init__(self, recs: dict, season_mod):
+        self._lookup = getattr(season_mod, "gem_limit", None)
+        self._name_lookup = getattr(season_mod, "gem_name", None)
+        self._recs = recs
+        self._known: dict[int, tuple[str, int] | None] = {}
+        for g in recs["gems"]["unique"]:
+            if g.get("limit"):
+                self._known[int(g["id"])] = (g.get("limit_category") or f"gem {g['id']}", int(g["limit"]))
+
+    def of(self, gem_id: int) -> tuple[str, int] | None:
+        if not gem_id:
+            return None
+        if gem_id not in self._known:
+            try:
+                self._known[gem_id] = self._lookup(gem_id) if self._lookup else None
+            except Exception:  # noqa: BLE001 - data layer optional
+                self._known[gem_id] = None
+        return self._known[gem_id]
+
+    def name(self, gem_id: int) -> str:
+        ref = _gem_ref(gem_id, self._recs)
+        if ref["name"] != str(gem_id) or not self._name_lookup:
+            return ref["name"]
+        try:
+            return self._name_lookup(gem_id) or str(gem_id)
+        except Exception:  # noqa: BLE001 - data layer optional
+            return str(gem_id)
+
+
+def _positions(assign: Sockets) -> list[Pos]:
+    return [(slot, i) for slot, gem_ids in assign.items() for i in range(len(gem_ids))]
+
+
+def _fit_limits(assign: Sockets, limits: _Limits, filler: int, pinned: list[Pos] | None = None) -> list[tuple[Pos, int]]:
+    """Replace limited gems over their category's cap with ``filler`` (in place).
+
+    ``pinned`` sockets claim their category's allowance first (the gem a row is testing);
+    the rest keep the first ones in slot order. Returns ``[(pos, removed gem id)]``.
+    """
+    pinned = pinned or []
+    used: dict[str, int] = {}
+    removed: list[tuple[Pos, int]] = []
+    for slot, i in [*pinned, *(p for p in _positions(assign) if p not in pinned)]:
+        gem_id = assign[slot][i]
+        lim = limits.of(gem_id)
+        if lim is None:
+            continue
+        category, cap = lim
+        if used.get(category, 0) < cap:
+            used[category] = used.get(category, 0) + 1
+            continue
+        assign[slot][i] = filler
+        removed.append(((slot, i), gem_id))
+    return removed
+
+
+def _current_sockets(profile: CharacterProfile, bonuses_mod) -> Sockets:
+    out: Sockets = {}
+    for slot, item in profile.equipped.items():
+        n = socket_count(item, bonuses_mod)
+        if n > 0:
+            out[slot] = _pad_gems(item, n)
+    return out
+
+
+def _changed(profile: CharacterProfile, current: Sockets, assign: Sockets, always: tuple[str, ...] = ()) -> dict:
+    return {
+        slot: profile.equipped[slot].model_copy(update={"gem_ids": gem_ids})
+        for slot, gem_ids in assign.items()
+        if gem_ids != current[slot] or slot in always
+    }
+
+
+def _socket_label(slot: str, i: int, assign: Sockets) -> str:
+    return _slot_label(slot) if len(assign[slot]) == 1 else f"{_slot_label(slot)} socket {i + 1}"
+
+
+def _removed_suffix(removed: list[tuple[Pos, int]], assign: Sockets, recs: dict, limits: _Limits, filler: int) -> str:
+    if not removed:
+        return ""
+    parts = [
+        f"{_socket_label(slot, i, assign)} {limits.name(old)} -> {_short_gem_label(filler, recs)}"
+        for (slot, i), old in removed
+    ]
+    return f" ({'; '.join(parts)}: unique-equipped)"
+
+
+def _limited_targets(current: Sockets, gem_id: int, limits: _Limits) -> list[Pos]:
+    """Where a limited gem goes: sockets already holding its category (swap in place), then
+    the neck, then the first sockets in equipped-slot order -- at most ``limit`` of them."""
+    category, cap = limits.of(gem_id)
+    positions = _positions(current)
+    same = [p for p in positions if (lim := limits.of(current[p[0]][p[1]])) and lim[0] == category]
+    neck = [p for p in positions if p[0] == "neck"]
+    return list(dict.fromkeys([*same, *neck, *positions]))[:cap]
+
+
 def _uniform_rows(profile: CharacterProfile, pool: list[int], recs: dict, bonuses_mod, season_mod) -> list[dict]:
     rows = []
-    sockets = {slot: socket_count(it, bonuses_mod) for slot, it in profile.equipped.items()}
-    slots_with_sockets = [s for s, n in sockets.items() if n > 0]
-    if not slots_with_sockets:
+    current = _current_sockets(profile, bonuses_mod)
+    if not current:
         return rows
+    limits = _Limits(recs, season_mod)
+    filler = int(recs["gems"]["default"]["id"])
     for gem_id in pool:
-        changes = {}
-        for slot in slots_with_sockets:
-            item = profile.equipped[slot]
-            changes[slot] = item.model_copy(update={"gem_ids": [gem_id] * sockets[slot]})
-        rows.append({"label": f"All sockets: {_short_gem_label(gem_id, recs)}", "changes": changes})
-    rec_changes = {}
-    for slot in slots_with_sockets:
-        item = profile.equipped[slot]
-        gem_ids = season_mod.best_gems(item, profile)
+        if limits.of(gem_id) is None:
+            # every socket gets the gem, except a unique-equipped gem the character already
+            # wears stays where it is (that is the limited-gem rows' question, not this one's)
+            assign = {slot: [g if limits.of(g) else gem_id for g in gem_ids] for slot, gem_ids in current.items()}
+            _fit_limits(assign, limits, filler)
+            kept = [(s, i) for s, i in _positions(assign) if assign[s][i] != gem_id]
+            label = f"All sockets: {_short_gem_label(gem_id, recs)}"
+            if kept:
+                label += " (kept " + ", ".join(
+                    f"{limits.name(assign[s][i])} in {_socket_label(s, i, assign)}" for s, i in kept
+                ) + ")"
+        else:
+            # a limited gem goes in at most `limit` sockets; every other socket keeps its gem
+            targets = _limited_targets(current, gem_id, limits)
+            assign = {slot: list(gem_ids) for slot, gem_ids in current.items()}
+            for slot, i in targets:
+                assign[slot][i] = gem_id
+            removed = _fit_limits(assign, limits, filler, pinned=targets)
+            where = ", ".join(_socket_label(s, i, assign) for s, i in targets)
+            label = f"{where}: {limits.name(gem_id)}, other sockets unchanged"
+            label += _removed_suffix(removed, assign, recs, limits, filler)
+        changes = _changed(profile, current, assign)
+        if changes:                     # e.g. the limited gem is already in its socket
+            rows.append({"label": label, "changes": changes})
+
+    rec_assign: Sockets = {}
+    for slot in current:
+        gem_ids = season_mod.best_gems(profile.equipped[slot], profile)
         if gem_ids:
-            rec_changes[slot] = item.model_copy(update={"gem_ids": gem_ids})
-    if rec_changes:
-        rows.append({"label": "Recommended", "changes": rec_changes})
+            rec_assign[slot] = list(gem_ids)
+    _fit_limits(rec_assign, limits, filler)
+    if rec_assign:
+        rows.append({
+            "label": "Recommended",
+            "changes": {s: profile.equipped[s].model_copy(update={"gem_ids": g}) for s, g in rec_assign.items()},
+        })
     return rows
 
 
-def _per_socket_rows(profile: CharacterProfile, pool: list[int], recs: dict, bonuses_mod) -> list[dict]:
+def _per_socket_rows(profile: CharacterProfile, pool: list[int], recs: dict, bonuses_mod, season_mod) -> list[dict]:
     rows = []
-    for slot, item in profile.equipped.items():
-        n = socket_count(item, bonuses_mod)
-        for socket_index in range(n):
+    current = _current_sockets(profile, bonuses_mod)
+    limits = _Limits(recs, season_mod)
+    filler = int(recs["gems"]["default"]["id"])
+    for slot, gem_ids_now in current.items():
+        for socket_index in range(len(gem_ids_now)):
             for gem_id in pool:
-                gem_ids = _pad_gems(item, n)
-                gem_ids[socket_index] = gem_id
-                new_item = item.model_copy(update={"gem_ids": gem_ids})
+                assign = {s: list(g) for s, g in current.items()}
+                assign[slot][socket_index] = gem_id
+                # a second copy of a unique-equipped gem elsewhere would be unequippable:
+                # that one becomes the stat gem, and the label says so
+                removed = _fit_limits(assign, limits, filler, pinned=[(slot, socket_index)])
                 ref = _gem_ref(gem_id, recs)
                 label = f"{_slot_label(slot)} socket {socket_index + 1}: {_short_gem_label(gem_id, recs)}"
+                label += _removed_suffix(removed, assign, recs, limits, filler)
                 rows.append({
                     "label": label,
-                    "changes": {slot: new_item},
+                    "changes": _changed(profile, current, assign, always=(slot,)),
                     "gem": GemChange(slot=slot, socket_index=socket_index, gem_id=gem_id,
                                      gem_name=ref["name"], stat=ref.get("stat", "")),
                 })
     return rows
+
+
+def _limit_violations(profile: CharacterProfile, sets: list[GemSet], recs: dict, season_mod) -> list[str]:
+    """Custom sets are simmed as given; warn when one could not be equipped in game."""
+    limits = _Limits(recs, season_mod)
+    notes = []
+    for gs in sets:
+        counts: dict[str, list[int]] = {}
+        for slot, item in profile.equipped.items():
+            for g in gs.gems.get(slot, item.gem_ids):
+                if (lim := limits.of(g)) is not None:
+                    counts.setdefault(lim[0], [0, lim[1]])[0] += 1
+        for category, (n, cap) in counts.items():
+            if n > cap:
+                notes.append(
+                    f'Set "{gs.name}" equips {n} {category} gems but the game allows {cap}; '
+                    "it was simmed as given and cannot be equipped in game."
+                )
+    return notes
 
 
 def _custom_rows(profile: CharacterProfile, sets: list[GemSet]) -> list[dict]:
@@ -203,13 +367,15 @@ def build(
     if mode == "uniform":
         rows = _uniform_rows(profile, pool, recs, bonuses_mod, season_mod)
     elif mode == "per_socket":
-        rows = _per_socket_rows(profile, pool, recs, bonuses_mod)
+        rows = _per_socket_rows(profile, pool, recs, bonuses_mod, season_mod)
     elif mode == "custom":
         rows = _custom_rows(profile, sets or [])
     else:
         raise ValueError(f"invalid gems mode: {mode!r}")
 
     notes: list[str] = []
+    if mode == "custom":
+        notes.extend(_limit_violations(profile, sets or [], recs, season_mod))
     if mode in ("uniform", "per_socket"):
         no_socket_slots = [
             slot for slot, item in profile.equipped.items() if socket_count(item, bonuses_mod) == 0
@@ -221,8 +387,16 @@ def build(
             )
 
     if include_enchants:
-        enchant_rows, no_enchant_slots = _enchant_rows(profile, recs, season_mod, enchant_slots)
+        enchant_rows, skipped = _enchant_rows(profile, recs, season_mod, enchant_slots)
         rows.extend(enchant_rows)
+        utility_only = set(getattr(season_mod, "utility_enchant_slots", list)())
+        utility = [s for s in skipped if s in utility_only]
+        no_enchant_slots = [s for s in skipped if s not in utility_only]
+        if utility:
+            notes.append(
+                f"Skipped {len(utility)} slot(s) with only utility enchants: {', '.join(utility)} "
+                "(speed / leech / avoidance; no DPS effect to sim)."
+            )
         if no_enchant_slots:
             notes.append(
                 f"Skipped {len(no_enchant_slots)} slot(s) with no enchant options: "

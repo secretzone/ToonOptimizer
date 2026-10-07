@@ -278,11 +278,12 @@ GET `/api/data/recommendations?klass=&spec=` →
     default: GemRef,                             // the season gem for this spec's best secondary
     by_stat: Record<"crit"|"haste"|"mastery"|"versatility", GemRef>,
     unique: GemRef[]                             // unique-equipped / limited gems worth one socket, if any this season
+                                                 // (`limit` + `limit_category`: max equipped per character, per category)
   },
   enchants: Record<slot, EnchantRef[]>,          // options per enchantable slot, recommended first
   consumables: { flask, food, potion, augmentation, temporary_enchant }   // SimC names
 }
-type GemRef = { id: number; name: string; icon: string; stat: string; limit?: number }
+type GemRef = { id: number; name: string; icon: string; stat: string; limit?: number; limit_category?: string }
 type EnchantRef = { id: number; name: string; icon?: string; stat?: string; recommended: boolean }
 ```
 Backed by `toonopt.data.season.recommendations(klass, spec)`. Names/icons via the Item and
@@ -337,6 +338,25 @@ POST `/api/sims/gems` body:
 - custom: rows = the given sets; `meta.changes` = items with the new gem_ids/enchant_id.
 - enchants (any mode when include_enchants): rows per (slot, option) that differs from current;
   `meta.enchant = { slot, enchant_id, name, stat }`.
+
+Unique-equipped gems: limits are per ItemLimitCategory, shared across gem ids (every Eversong Diamond,
+any variant or rank, counts against "Thalassian Diamond", max 1). `season.gem_limit(gem_id)` reads it
+from ItemSparse.LimitCategory / ItemLimitCategory.Quantity. No generated row exceeds a limit:
+- uniform, limited gem: placed in at most `limit` sockets -- a socket already holding that category
+  (swap in place), else the neck, else the first socket in slot order. Every other socket keeps its
+  current gem. Label `"Neck: Indecipherable Eversong Diamond, other sockets unchanged"`.
+- uniform, stat gem: fills every socket except a limited gem the character already wears, which stays;
+  label `"All sockets: Haste gem (kept Indecipherable Eversong Diamond in Finger1)"`.
+- per_socket: the tested socket wins; another socket over the limit gets the spec's default stat gem and
+  the label says so: `"Neck socket 1: Powerful Eversong Diamond (Finger1 Indecipherable Eversong Diamond
+  -> Mastery gem: unique-equipped)"`; that item is in `meta.changes` too.
+- Recommended: `best_gems` per item, then fitted to the limits (one diamond kept, never invented).
+- custom: sets are simmed as given; a set over a limit adds a note to `SimResult.notes`.
+- Rows identical to the current gems (e.g. the diamond is already in its socket) are dropped.
+
+Enchant notes: slots whose only enchants are utility (Midnight head/shoulder/feet: speed, leech,
+avoidance; `dps: false` in season.json `enchant_options`, `season.utility_enchant_slots()`) are named
+in their own note; slots with no enchant at all (neck, back, wrist, hands, waist, trinkets) in another.
 Socket count per item from `best_gems` logic (bonus ids). Cap rows at 400 with a clear error.
 
 Add to `ResultMeta`: `upgrade?: UpgradeInfo`, `gem?: GemChange`, `enchant?: EnchantChange`.

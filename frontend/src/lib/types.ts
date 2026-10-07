@@ -202,8 +202,8 @@ export type Job = {
   error?: string | null
 }
 
-/** GET /api/data/recommendations gem reference: id/name/icon/stat, `limit` for unique-equipped gems. */
-export type GemRef = { id: number; name: string; icon: string; stat: string; limit?: number }
+/** GET /api/data/recommendations gem reference: id/name/icon/stat; `limit` (max equipped, shared by every gem in `limit_category`) for unique-equipped gems. */
+export type GemRef = { id: number; name: string; icon: string; stat: string; limit?: number; limit_category?: string }
 /** GET /api/data/recommendations enchant option for a slot; `recommended` marks the season's pick. */
 export type EnchantRef = { id: number; name: string; icon?: string; stat?: string; recommended: boolean }
 
