@@ -6,10 +6,10 @@ ns.version = "1.0.0"
 local DB_VERSION = 1
 local DEBOUNCE = 2
 local FIRST_DELAY = 5
--- WoW writes SavedVariables only on /reload, logout or exit, and PLAYER_LOGOUT fires for all
--- three, so the logout capture is the one that lands on disk. Event captures are a fallback
--- and are spaced out so looting doesn't rebuild the export every few seconds.
-local MIN_INTERVAL = 60
+-- WoW writes SavedVariables only on /reload, logout or exit. The logout capture is best-effort
+-- (the game may already be tearing down), so changes are also captured shortly after they
+-- happen; the interval only keeps looting from rebuilding the export every few seconds.
+local MIN_INTERVAL = 10
 
 local frame = CreateFrame("Frame")
 local pending = false      -- a debounced capture is scheduled
@@ -65,6 +65,7 @@ function ns.Capture()
   end
 
   local db = ToonOptimizerDB or initDB()
+  db.last_error = nil
   local name = UnitName("player")
   local realm = GetRealmName()
   local key = name .. "-" .. realmFromSimc(simc)
@@ -82,6 +83,15 @@ function ns.Capture()
   return true, key
 end
 
+-- Keeps the latest failure so /topt status (and the app) can say why nothing was saved.
+local function capture(event)
+  local ok, res, info = pcall(ns.Capture)
+  if not ok or not res then
+    local db = ToonOptimizerDB or initDB()
+    db.last_error = { at = time(), event = event, reason = tostring(ok and info or res) }
+  end
+end
+
 local function autoCapture()
   pending = false
   if not (ToonOptimizerDB and ToonOptimizerDB.settings.auto) then return end
@@ -91,7 +101,7 @@ local function autoCapture()
     return
   end
   lastAuto = GetTime()
-  pcall(ns.Capture)
+  capture("auto")
 end
 
 local function schedule(delay)
@@ -121,7 +131,7 @@ frame:SetScript("OnEvent", function(_, event, arg1)
       schedule()
     end
   elseif event == "PLAYER_LOGOUT" then
-    if ToonOptimizerDB and ToonOptimizerDB.settings.auto then pcall(ns.Capture) end
+    if ToonOptimizerDB and ToonOptimizerDB.settings.auto then capture("logout") end
   else
     schedule()
   end
@@ -152,6 +162,10 @@ local function slash(msg)
       end
     end
     if not found then say("no capture yet for " .. tostring(name)) end
+    if db.last_error then
+      say(("last failed save (%s, %s): %s"):format(db.last_error.event,
+        date("%H:%M:%S", db.last_error.at), db.last_error.reason))
+    end
     say("auto capture is " .. (db.settings.auto and "on" or "off"))
   else
     local ok, info = ns.Capture()
