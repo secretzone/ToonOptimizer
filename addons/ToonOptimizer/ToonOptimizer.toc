@@ -1,0 +1,10 @@
+## Interface: 120100
+## Title: ToonOptimizer
+## Notes: Saves your SimulationCraft export so ToonOptimizer can import it without copy/paste
+## Author: ToonOptimizer
+## Version: 1.0.0
+## Dependencies: Simulationcraft
+## SavedVariables: ToonOptimizerDB
+## IconTexture: Interface\Icons\INV_Misc_Note_01
+
+ToonOptimizer.lua

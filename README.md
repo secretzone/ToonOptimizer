@@ -1,6 +1,7 @@
 # ToonOptimizer
 
-A Raidbots that runs on your own PC. Paste your in-game `/simc` export and run Quick Sim, Top Gear,
+A Raidbots that runs on your own PC. Import your character with one click from the companion
+addon (or paste your in-game `/simc` export) and run Quick Sim, Top Gear,
 Droptimizer, crest Upgrades, Gems & Enchants, Stat Weights and talent comparisons. The simulations
 use [SimulationCraft](https://github.com/simulationcraft/simc) on every CPU core you have: no queue,
 no account, no premium tier.
@@ -30,12 +31,24 @@ By hand:
    - Check the WoW folder. It's auto-detected; fix it if it's wrong.
    - Click **Install SimC**, then **Refresh data**. Both are one-time downloads: about 160 MB,
      or 260 MB once unpacked.
-4. In game, install the [SimulationCraft addon](https://www.curseforge.com/wow/addons/simulationcraft).
+4. Install the addons (PowerShell, from the repo folder), then restart the game fully:
+   ```powershell
+   .\scripts\Install-Addons.ps1
+   ```
+   This installs the **ToonOptimizer** addon and the
+   [SimulationCraft addon](https://www.curseforge.com/wow/addons/simulationcraft) it builds on.
+   If you already keep SimulationCraft up to date with CurseForge, the script leaves it alone.
+   `.\run.ps1 -InstallAddons` does the same before starting the app.
 
 ## Use
 
-1. In game type `/simc`, then Ctrl+A, Ctrl+C.
-2. **Import** page: paste, Import. Your bags, Great Vault choices and crests come along.
+1. Log into your character, then `/reload` or log out. The addon saves your character as you
+   play, but WoW only writes addon data to disk on a reload, logout or exit.
+2. **Import** page: click **Import from addon**, or pick a character from the list under it. Your
+   bags, Great Vault choices and crests come along.
+
+   No addon? Type `/simc` in game, Ctrl+A, Ctrl+C, and paste it on the **Import** page instead.
+   In game, `/topt` saves right away and `/topt status` shows the last save.
 3. Pick a sim from the sidebar. Every run is kept under **History**.
 
 Stop the app with Ctrl+C in its window, or `.\run.ps1 -Stop`. Other switches: `-NoBrowser`, and
@@ -52,6 +65,7 @@ ask. Skills in `.claude/skills/` pick the right sims, run them on your app, and 
 | Skill | Ask something like | What you get |
 |---|---|---|
 | `setup` | "set up ToonOptimizer", "it won't start" | Tools installed, SimC and game data downloaded, your first character imported. |
+| `import-addon` | "import my character", "I just logged out, update Thrall", "import everyone" | Your character pulled from the addon, with what changed since the last import (gear, item level, talents, crests). |
 | `run-sim` | "is this trinket better?", "what should I get from heroic raid?", "where do my crests go?", "best flask for me" | The right sim with sensible options, top results, and in-game steps. |
 | `raid-talents` | "best raid build for cleave", "which loadout for Ula'tek?" | Your loadouts vs guide builds at 1, 2, 3 and 5 targets and with adds, plus a boss-by-boss pick. |
 | `dungeon-talents` | "talents per dungeon", "what should I swap for Murder Row?" | Named M+ loadouts, each covering the dungeons that share it, checked in sims. |
@@ -76,5 +90,6 @@ Conventions are in `CLAUDE.md`, and the HTTP contract is in `API.md`.
 
 ## License
 
-MIT. SimulationCraft is GPL-3.0 and is downloaded at runtime, not bundled. Other sources are listed
-in `THIRD_PARTY.md`.
+MIT. SimulationCraft is GPL-3.0 and is downloaded at runtime, not bundled. The SimulationCraft
+addon in `addons/Simulationcraft` is a separate work (Unlicense), shipped unmodified with its own
+license file. Other sources are listed in `THIRD_PARTY.md`.

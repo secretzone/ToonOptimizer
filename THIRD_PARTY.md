@@ -32,3 +32,11 @@ season, fetched/cached the same way as the wago.tools CSVs):
 
 ## Item icons
 Icons are loaded from Wowhead's CDN (wow.zamimg.com) by the browser.
+
+## SimulationCraft addon (vendored)
+`addons/Simulationcraft/` is an unmodified copy of the in-game SimulationCraft addon,
+release 12.1.0-04 (its TOC still reads 12.1.0-03), from https://github.com/simulationcraft/simc-addon (Theck, navv_, seriallos). It is a
+separate work distributed alongside ToonOptimizer, not part of it, and is installed next to the
+ToonOptimizer addon, which calls its public SimulationcraftAPI. Its own LICENSE (the Unlicense,
+public domain) ships in that folder, and bundled libraries (Ace3, LibStub, LibRealmInfo, LibDBIcon,
+LibDataBroker) keep their own licenses and notices. Refresh it with scripts/Update-SimcAddon.ps1.

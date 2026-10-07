@@ -21,7 +21,8 @@ Maintains `reports/<slug>.json` for one character, shown on the **Reports** page
 2. `GET /api/status` shows `mismatch.simc` and `mismatch.data` both false. Otherwise ask them to
    press Update SimC and Refresh data in Settings.
 3. `GET /api/characters/<slug>` returns the profile. If it's older than their last play session,
-   ask for a fresh `/simc` paste first. Never invent gear.
+   refresh it with the `import-addon` skill first; ask for a fresh `/simc` paste only when the
+   addon has nothing newer. Never invent gear.
 
 Every sim and advisor call takes the full `profile` object from step 3, not just the slug.
 

@@ -1,6 +1,6 @@
-import { useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import { useNavigate } from 'react-router'
-import { AlertTriangle, ClipboardPaste, Globe, RefreshCw, Trash2, Zap } from 'lucide-react'
+import { AlertTriangle, ClipboardPaste, Download, Globe, RefreshCw, Trash2, Zap } from 'lucide-react'
 import { api } from '../lib/api'
 import { deleteCharacterEverywhere, seedConsumablesForProfile, syncProfileToServer, useStore } from '../store'
 import { SLOT_LABELS, PAPERDOLL_LEFT, PAPERDOLL_RIGHT, PAPERDOLL_BOTTOM, characterSlug } from '../lib/wow'
@@ -9,7 +9,16 @@ import { CharacterHeader } from '../components/CharacterHeader'
 import { ItemCard, EmptySlot } from '../components/ItemCard'
 import { Card, ConfirmButton, CopyButton, Field, Input, Select, Spinner, Checkbox } from '../components/ui'
 import { EmptyState } from '../components/EmptyState'
-import type { Item } from '../lib/types'
+import type { AddonStatus, Item } from '../lib/types'
+
+function relTime(iso: string): string {
+  const s = Math.max(0, (Date.now() - new Date(iso).getTime()) / 1000)
+  if (!Number.isFinite(s)) return iso
+  if (s < 60) return 'just now'
+  if (s < 3600) return `${Math.floor(s / 60)} min ago`
+  if (s < 86400) return `${Math.floor(s / 3600)} h ago`
+  return `${Math.floor(s / 86400)} d ago`
+}
 
 const REGIONS = ['us', 'eu', 'kr', 'tw', 'cn']
 
@@ -49,7 +58,10 @@ export function ImportPage() {
   const setCandidateKeys = useStore((s) => s.setCandidateKeys)
   const toast = useStore((s) => s.toast)
   const [text, setText] = useState('')
-  const [busy, setBusy] = useState<'simc' | 'armory' | null>(null)
+  const [busy, setBusy] = useState<string | null>(null)
+  const [addon, setAddon] = useState<AddonStatus | null>(null)
+  const [addonLoading, setAddonLoading] = useState(true)
+  const [addonError, setAddonError] = useState<string | null>(null)
   const [resyncing, setResyncing] = useState(false)
   const [armory, setArmory] = useState({ region: 'us', realm: '', name: '' })
 
@@ -89,6 +101,61 @@ export function ImportPage() {
       setBusy(null)
     }
   }
+  const loadCaptures = useCallback(async () => {
+    setAddonLoading(true)
+    setAddonError(null)
+    try {
+      setAddon(await api.addonCaptures())
+    } catch (e) {
+      setAddonError((e as Error).message)
+    } finally {
+      setAddonLoading(false)
+    }
+  }, [])
+  useEffect(() => { void loadCaptures() }, [loadCaptures])
+
+  const captures = addon?.captures ?? []
+  const currentSlug = profile ? characterSlug(profile.name, profile.realm) : null
+  const currentMatch = currentSlug ? captures.find((c) => c.saved_slug === currentSlug) : undefined
+  const preferred = currentMatch ?? captures[0]
+
+  const importFromAddon = async (key: string) => {
+    setBusy(`addon:${key}`)
+    try {
+      const p = await api.importAddon(key)
+      setProfile(p)
+      void seedConsumablesForProfile(p)
+      toast(`Saved as ${characterSlug(p.name, p.realm)}; see Reports`, 'success')
+      void loadCaptures()
+    } catch (e) {
+      toast(`Addon import failed: ${(e as Error).message}`, 'error')
+    } finally {
+      setBusy(null)
+    }
+  }
+  const importAllNewer = async () => {
+    setBusy('addon:all')
+    try {
+      const results = await api.importAddonAll()
+      const imported = results.filter((r) => r.status === 'imported')
+      const skipped = results.filter((r) => r.status === 'skipped').length
+      const errors = results.filter((r) => r.status === 'error')
+      const cur = imported.find((r) => r.profile && characterSlug(r.profile.name, r.profile.realm) === currentSlug)?.profile
+      const p = cur ?? (profile ? null : imported[0]?.profile ?? null)
+      if (p) {
+        setProfile(p)
+        void seedConsumablesForProfile(p)
+      }
+      const parts = [`Imported ${imported.length}`, `skipped ${skipped}`]
+      if (errors.length) parts.push(`${errors.length} error${errors.length === 1 ? '' : 's'} (${errors.map((r) => `${r.key}: ${r.detail ?? 'failed'}`).join('; ')})`)
+      toast(parts.join(', '), errors.length ? 'error' : 'success')
+      void loadCaptures()
+    } catch (e) {
+      toast(`Addon import failed: ${(e as Error).message}`, 'error')
+    } finally {
+      setBusy(null)
+    }
+  }
   const resync = async () => {
     if (!profile) return
     setResyncing(true)
@@ -101,6 +168,54 @@ export function ImportPage() {
 
   return (
     <div className="flex flex-col gap-4">
+      <Card
+        title="Import from addon"
+        actions={
+          <button type="button" className="btn btn-ghost btn-sm" disabled={addonLoading} onClick={() => void loadCaptures()}>
+            {addonLoading ? <Spinner /> : <RefreshCw size={13} />} Refresh
+          </button>
+        }
+      >
+        <div className="flex flex-wrap items-center gap-3">
+          <button
+            type="button"
+            className="btn btn-primary"
+            disabled={!preferred || busy !== null}
+            onClick={() => preferred && void importFromAddon(preferred.key)}
+          >
+            {busy?.startsWith('addon:') ? <Spinner /> : <Download size={15} />} Import from addon
+          </button>
+          <button type="button" className="btn" disabled={!captures.some((c) => c.newer_than_saved) || busy !== null} onClick={() => void importAllNewer()}>
+            {busy === 'addon:all' ? <Spinner /> : <Download size={15} />} Import all newer
+          </button>
+          {preferred && <span className="text-xs text-muted">Imports <span className="text-text">{preferred.name}-{preferred.realm}</span>{currentMatch ? ' (current character)' : ' (newest capture)'}</span>}
+          <span className="ml-auto text-xs text-faint">or paste a /simc export below</span>
+        </div>
+        {addonError && <div className="mt-3 rounded-md border border-red-600/50 bg-red-500/10 p-2 text-sm text-red-300">{addonError}</div>}
+        {addonLoading && !addon && <div className="mt-3 flex items-center gap-2 text-sm text-muted"><Spinner /> Looking for addon data...</div>}
+        {!addonLoading && !addonError && captures.length === 0 && (
+          <div className="mt-3 text-sm text-muted">
+            Install the ToonOptimizer addon (<span className="mono text-text">scripts/Install-Addons.ps1</span>), log in, then /reload or log out — WoW only writes addon data then.
+          </div>
+        )}
+        {captures.length > 0 && (
+          <div className="mt-3 flex flex-col gap-1">
+            {captures.map((c) => (
+              <div key={c.key} className="flex flex-wrap items-center gap-2 rounded px-1 py-1 hover:bg-surface-2">
+                <span className="min-w-0 truncate text-sm font-medium">{c.name}-{c.realm}</span>
+                <span className="text-xs text-muted">{[c.spec, c.class && c.class.toLowerCase().replace(/_/g, ' ')].filter(Boolean).join(' ')}</span>
+                {c.ilvl != null && <span className="mono text-xs text-muted">{c.ilvl} ilvl</span>}
+                <span className="text-xs text-faint" title={c.captured_at}>{relTime(c.captured_at)}</span>
+                {c.newer_than_saved && <span className="chip text-info">newer than saved</span>}
+                <button type="button" className="btn btn-sm ml-auto" disabled={busy !== null} onClick={() => void importFromAddon(c.key)}>
+                  {busy === `addon:${c.key}` ? <Spinner /> : <Download size={13} />} Import
+                </button>
+              </div>
+            ))}
+          </div>
+        )}
+      </Card>
+
       <div className="grid grid-cols-1 gap-4 lg:grid-cols-[3fr_2fr]">
         <Card title="Paste your /simc export" actions={<span className="text-xs text-muted">Type <span className="mono text-text">/simc</span> in game with the SimulationCraft addon</span>}>
           <textarea

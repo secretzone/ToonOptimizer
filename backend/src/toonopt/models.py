@@ -121,6 +121,7 @@ class CharacterProfile(BaseModel):
     loot_spec: str | None = None                        # "# loot_spec=" if present
     high_watermarks: dict[str, int] = Field(default_factory=dict)  # "# slot_high_watermarks=" slot -> ilvl
     omnium: dict[int, int] = Field(default_factory=dict)  # "omnium_talents=<entry_id>:<rank>/..." entry_id -> rank
+    source: Literal["paste", "addon", "armory"] | None = None   # how the profile was imported
 
 
 class Consumables(BaseModel):

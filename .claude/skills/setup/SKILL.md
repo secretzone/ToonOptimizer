@@ -78,10 +78,15 @@ Once `GET http://127.0.0.1:8790/api/health` answers:
 
 The tool ships with no characters, so walk them through this:
 
-1. Install the SimulationCraft addon from CurseForge or Wago. New addons need a full game restart,
-   not just `/reload`.
-2. On the character they want to optimize, type `/simc`, then Ctrl+A, Ctrl+C.
-3. Paste it on the **Import** page at http://localhost:5173 and click Import.
+1. Install the addons with `.\scripts\Install-Addons.ps1` from the repo folder. It copies the
+   ToonOptimizer addon and the SimulationCraft addon it needs into the game's AddOns folder
+   (it leaves a CurseForge-managed SimulationCraft alone if that one is current). New addons
+   need a full game restart, not just `/reload`.
+2. In game, log into the character they want to optimize, then type `/reload` or log out. WoW
+   writes addon data only then.
+3. On the **Import** page at http://localhost:5173, click **Import from addon** (or use the
+   `import-addon` skill). Fallback if the addon can't be used: type `/simc`, Ctrl+A, Ctrl+C,
+   paste it on the Import page and click Import.
 4. Confirm with `GET /api/characters`. It should list that character with the right class, spec
    and item level. If the class is wrong or a MOCK banner is showing, they're on a mock-mode
    window. Have them close it and use the window `run.ps1` opened.

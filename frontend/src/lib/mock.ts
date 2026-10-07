@@ -2,7 +2,7 @@
 // is demonstrable without SimC. Never imported by the real bundle (lazy import in api.ts).
 import type { ApiClient, JobListener, Unsubscribe } from './api'
 import type {
-  BreakdownRow, CharacterProfile, CharacterReport, CharacterSummary, ConsumableCategory, ConsumableOptions, ConsumablesBody,
+  AddonImportResult, BreakdownRow, CharacterProfile, CharacterReport, CharacterSummary, ConsumableCategory, ConsumableOptions, ConsumablesBody,
   ConsumablesCustomSet, Currency, DecodedTalents, DropSource, EnchantRef, GemRef, GemsCustomSet, GemsMode, HistoryEntry,
   Item, ItemSearchResult, ItemSource, Job, JobType, LootSources, OmniumBody, OmniumChoice, OmniumCustomSet, OmniumMode,
   OmniumRow, Precision, RawUpgradeTrack, Recommendations, ReportListEntry, ResultGroup, ResultRow, SeasonData, Settings,
@@ -1270,6 +1270,52 @@ export const mock: ApiClient = {
     }
     upsertCharacter(profile) // every successful import is also saved to characters/<slug>.json (API.md)
     return profile
+  },
+  // Addon import. Dev hook: open the app with `?addon=empty` (or `?addon=missing`) for the empty states.
+  async addonCaptures() {
+    await sleep(300)
+    const mode = new URLSearchParams(window.location.search).get('addon')
+    if (mode === 'missing') return { installed: false, wow_dir: null, files: [], captures: [] }
+    if (mode === 'empty') return { installed: true, wow_dir: 'C:\\Games\\World of Warcraft', files: [], captures: [] }
+    const now = Date.now()
+    return {
+      installed: true,
+      wow_dir: 'C:\\Games\\World of Warcraft',
+      files: ['WTF/Account/TESTACCOUNT/SavedVariables/ToonOptimizer.lua'],
+      captures: [
+        {
+          key: 'Testhunter-Testrealm', account: 'TESTACCOUNT', name: 'Testhunter', realm: 'Testrealm', class: 'HUNTER',
+          spec: 'Marksmanship', ilvl: 681, captured_at: new Date(now - 12 * 60_000).toISOString(),
+          saved_slug: TESTHUNTER_SLUG, saved_imported_at: TESTHUNTER_PROFILE.imported_at, newer_than_saved: true,
+        },
+        {
+          key: 'Testalt-Testrealm', account: 'TESTACCOUNT', name: 'Testalt', realm: 'Testrealm', class: 'MAGE',
+          spec: 'Frost', ilvl: 652, captured_at: new Date(now - 3 * 86_400_000).toISOString(),
+          saved_slug: characterSlug('Testalt', 'Testrealm'), saved_imported_at: null, newer_than_saved: true,
+        },
+      ],
+    }
+  },
+  async importAddon(key) {
+    await sleep(600)
+    const status = await mock.addonCaptures()
+    const cap = key ? status.captures.find((c) => c.key === key) : status.captures[0]
+    if (!cap) throw new Error('No addon data found for that character')
+    const base = cap.name === TESTHUNTER_PROFILE.name ? TESTHUNTER_PROFILE : { ...TESTHUNTER_PROFILE, name: cap.name }
+    const profile = withMockScenario({ ...base, source: 'addon' as const, imported_at: new Date().toISOString() })
+    upsertCharacter(profile)
+    return profile
+  },
+  async importAddonAll() {
+    await sleep(900)
+    const status = await mock.addonCaptures()
+    if (!status.captures.length) throw new Error('No addon data found')
+    const out: AddonImportResult[] = []
+    for (const c of status.captures) {
+      if (!c.newer_than_saved) { out.push({ key: c.key, status: 'skipped', detail: 'not newer than saved', profile: null }); continue }
+      out.push({ key: c.key, status: 'imported', detail: null, profile: await mock.importAddon(c.key) })
+    }
+    return out
   },
   async importArmory(region, realm, name) {
     await sleep(900)

@@ -65,6 +65,9 @@ type CharacterProfile = {
   imported_at: string
   warnings: string[]                    // e.g. "3 item(s) could not be resolved (reason: ...) —
                                          // refresh data in Settings"; empty when every item resolved
+  source?: "paste"|"addon"|"armory"|null // how it was imported: POST /api/import/simc -> "paste",
+                                         // /api/import/addon -> "addon", /api/import/armory -> "armory";
+                                         // null on profiles saved before this field existed
 }
 
 type SimOptions = {
@@ -138,6 +141,8 @@ type SimResult = {
 | POST | `/api/data/talents/names` | `{klass, spec, loadout}` | `{ class: string[], spec: string[], hero: string[], hero_tree }` -- selected talent names grouped by section, `" (N)"` suffix above rank 1 |
 | POST | `/api/import/simc` | `{text}` | `CharacterProfile` |
 | GET | `/api/import/armory` | `?region=&realm=&name=` | `CharacterProfile` (best effort, raider.io public) |
+| GET | `/api/import/addon` | | `{installed: boolean, wow_dir: string\|null, files: string[], captures: AddonCapture[]}` -- see "Import from addon" |
+| POST | `/api/import/addon` | `{key?: string\|null, all?: boolean}` (default `{}`) | `CharacterProfile`, or `AddonImportResult[]` when `all: true` -- see "Import from addon" |
 | POST | `/api/sims/quick` | `{profile, options}` | `Job` |
 | POST | `/api/sims/topgear` | `{profile, options, candidate_keys: string[], max_combos: number, smart: boolean, min_ilevel?: number}` | `Job` |
 | POST | `/api/sims/droptimizer` | `{profile, options, sources: DropSource[], upgrade: "drop"|"max"|number, min_ilevel?: number}` | `Job` |
@@ -169,6 +174,50 @@ type DropSource =
 ```
 
 Errors: FastAPI default `{detail: string}` with 4xx/5xx.
+
+### Import from addon [D: addon_import.py]
+
+The in-game ToonOptimizer addon keeps the `/simc` export in SavedVariables, which WoW only writes on
+`/reload`, logout or exit: `<wow_dir>/_retail_/WTF/Account/<ACCOUNT>/SavedVariables/ToonOptimizer.lua`
+(`wow_dir` from Settings; may also point at `_retail_` itself). The addon counts as installed when
+`_retail_/Interface/AddOns/ToonOptimizer/ToonOptimizer.toc` exists.
+
+```ts
+type AddonCapture = {
+  key: string                  // "Name-Realm", as stored by the addon
+  account: string              // WoW account folder the capture came from
+  name: string; realm: string
+  class: string                // e.g. "HUNTER"
+  spec: string; ilvl: number | null
+  captured_at: string          // ISO8601 UTC, from the addon's epoch seconds
+  saved_slug: string           // characters slug this capture maps to
+  saved_imported_at: string | null  // imported_at of the saved profile, null if not saved yet
+  newer_than_saved: boolean    // captured_at > saved_imported_at (true when nothing saved)
+}
+```
+
+- `GET /api/import/addon` -> `{installed, wow_dir (null when unset), files: string[], captures: AddonCapture[]}`.
+  Captures are newest first; a key present in several accounts keeps its newest; entries without a
+  `simc` string are skipped, and a malformed file is skipped with a logged warning. Never errors.
+- `POST /api/import/addon` body `{key?: string|null, all?: boolean}` (body optional). No `key` imports the
+  newest capture; `key` imports that `Name-Realm` (case-insensitive) and always overwrites. Either returns a
+  `CharacterProfile` parsed like `/api/import/simc`, saved to the Characters store with `source: "addon"`
+  and `imported_at` = the capture's `captured_at`.
+  `all: true` instead returns `AddonImportResult[]`, one per capture, newest first, each isolated from the
+  others (one failure never aborts the batch or turns it into a 4xx):
+  ```ts
+  type AddonImportResult = {
+    key: string
+    status: "imported" | "skipped" | "error"  // skipped: saved profile is not older than the capture
+    detail: string | null                     // reason for skipped/error, else null
+    profile: CharacterProfile | null          // only when imported
+  }
+  ```
+  Errors: 404 when there is no addon data ("No ToonOptimizer addon data found. Install the addon, log in,
+  then /reload or log out -- WoW only writes addon data then.") or the key is unknown; 422 when a single
+  `key`/newest import fails to parse (never for `all`).
+- `saved_slug` is derived from the export's `server=` token (like a paste), falling back to the realm part
+  of `key`; `realm` stays the display name.
 
 `smart: true` on `/api/sims/topgear` is experimental: if a GPU surrogate model has been
 trained for the profile's (klass, spec) (`toonopt.surrogate`, `POST /api/surrogate/train`),

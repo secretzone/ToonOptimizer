@@ -15,7 +15,8 @@ few lines. For a full character review use `obvious-upgrades`; for talent questi
    Don't start it yourself.
 2. Character: the one named, or the most recently imported (`GET /api/characters`). Fetch the
    profile with `GET /api/characters/<slug>`. Every sim body needs the full `profile` object.
-   If the import looks older than their last play session, ask for a fresh `/simc` paste.
+   If the import looks older than their last play session, refresh it with the `import-addon`
+   skill first; ask for a fresh `/simc` paste only when the addon has nothing newer.
 3. If `GET /api/status` shows a mismatch, say so. Sims still run.
 
 ## Choosing the sim

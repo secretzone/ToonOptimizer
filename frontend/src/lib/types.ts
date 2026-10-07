@@ -64,7 +64,38 @@ export type Currency = {
  * equipped loadout, "saved" are the other Blizzard loadout slots. */
 export type SavedLoadout = { name: string; string: string; kind: 'active' | 'saved' }
 
+/** One character captured by the ToonOptimizer addon (GET /api/import/addon), newest first. */
+export type AddonCapture = {
+  /** "Name-Realm" */
+  key: string
+  account: string
+  name: string
+  realm: string
+  /** e.g. "HUNTER" */
+  class: string | null
+  spec: string | null
+  ilvl: number | null
+  /** ISO8601 UTC */
+  captured_at: string
+  saved_slug: string
+  saved_imported_at: string | null
+  newer_than_saved: boolean
+}
+
+/** One entry of POST /api/import/addon {all:true}, newest first. */
+export type AddonImportResult = {
+  key: string
+  status: 'imported' | 'skipped' | 'error'
+  detail: string | null
+  /** Only when status is 'imported'. */
+  profile: CharacterProfile | null
+}
+
+export type AddonStatus = { installed: boolean; wow_dir: string | null; files: string[]; captures: AddonCapture[] }
+
 export type CharacterProfile = {
+  /** Where this profile came from. Additive/optional. */
+  source?: 'paste' | 'addon' | 'armory' | null
   name: string
   realm: string
   region: string

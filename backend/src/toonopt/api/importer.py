@@ -2,12 +2,13 @@
 from __future__ import annotations
 
 import logging
+from typing import Literal
 
 import httpx
 from fastapi import APIRouter, HTTPException, Query
 from pydantic import BaseModel
 
-from toonopt import characters
+from toonopt import addon_import, characters, config
 from toonopt.models import CharacterProfile, Item, ItemSource
 from toonopt.simc import profile as profile_mod
 
@@ -42,6 +43,7 @@ def import_simc(req: ImportRequest) -> CharacterProfile:
         raise HTTPException(400, "empty export")
     try:
         profile = profile_mod.parse(req.text)
+        profile.source = "paste"
         _save_character(profile)
         return profile
     except profile_mod.ProfileError as e:
@@ -104,5 +106,45 @@ def import_armory(region: str = Query(...), realm: str = Query(...), name: str =
     prof = profile_from_raiderio(data)
     if not prof.equipped:
         raise HTTPException(404, "raider.io has no gear for this character")
+    prof.source = "armory"
     _save_character(prof)
     return prof
+
+
+class AddonImportRequest(BaseModel):
+    key: str | None = None
+    all: bool = False
+
+
+@router.get("/import/addon")
+def addon_status() -> dict:
+    wow_dir = config.settings.wow_dir
+    return {
+        "installed": addon_import.addon_installed(wow_dir),
+        "wow_dir": wow_dir or None,
+        "files": [str(p) for p in addon_import.savedvariables_files(wow_dir)],
+        "captures": addon_import.list_captures(wow_dir),
+    }
+
+
+class AddonImportResult(BaseModel):
+    key: str
+    status: Literal["imported", "skipped", "error"]
+    detail: str | None = None
+    profile: CharacterProfile | None = None
+
+
+@router.post("/import/addon", response_model=CharacterProfile | list[AddonImportResult])
+def import_addon(req: AddonImportRequest | None = None) -> CharacterProfile | list[AddonImportResult]:
+    req = req or AddonImportRequest()
+    wow_dir = config.settings.wow_dir
+    try:
+        if req.all:
+            if not addon_import.list_captures(wow_dir):
+                raise addon_import.NoAddonData(addon_import.NOT_FOUND_MESSAGE)
+            return [AddonImportResult(**r) for r in addon_import.import_all(wow_dir)]
+        return addon_import.import_capture(req.key, wow_dir)
+    except addon_import.AddonImportError as e:
+        raise HTTPException(404, str(e)) from e
+    except profile_mod.ProfileError as e:
+        raise HTTPException(422, f"could not parse the addon's /simc export: {e}") from e

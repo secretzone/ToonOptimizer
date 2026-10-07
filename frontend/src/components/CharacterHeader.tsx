@@ -42,7 +42,7 @@ export function CharacterHeader({ profile, compact = false }: { profile: Charact
           </div>
           <div className="hidden sm:block">
             <div className="label">Imported</div>
-            <div className="text-sm text-muted">{fmtDate(profile.imported_at)}</div>
+            <div className="text-sm text-muted">{fmtDate(profile.imported_at)}{profile.source ? ` · via ${profile.source}` : ''}</div>
           </div>
         </div>
       </div>

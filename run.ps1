@@ -5,7 +5,8 @@
 .PARAMETER BackendPort  Port for the FastAPI/uvicorn backend (default 8790).
 .PARAMETER FrontendPort Port for the Vite dev server (default 5173).
 .PARAMETER Force        Start even if the target ports already look busy.
-.PARAMETER Stop         Stop this app's processes on -BackendPort/-FrontendPort (default 8790/5173) and exit.
+.PARAMETER InstallAddons Run scripts\Install-Addons.ps1 (companion WoW addons) before starting.
+.PARAMETER Stop        Stop this app's processes on -BackendPort/-FrontendPort (default 8790/5173) and exit.
 .PARAMETER All          With -Stop: also stop every ToonOptimizer uvicorn/vite/simc on ANY port
                         (including other sessions' and agents' test servers). Use with care.
 #>
@@ -16,7 +17,8 @@ param(
   [int]$FrontendPort = 5173,
   [switch]$Force,
   [switch]$Stop,
-  [switch]$All
+  [switch]$All,
+  [switch]$InstallAddons
 )
 $ErrorActionPreference = "Stop"
 $root = Split-Path -Parent $MyInvocation.MyCommand.Path
@@ -138,6 +140,11 @@ function Start-BrowserWhenReady([string]$HealthUrl, [string]$PageUrl) {
 if ($Stop) {
   Invoke-Stop
   return
+}
+
+if ($InstallAddons) {
+  try { & (Join-Path $root "scripts\Install-Addons.ps1") }
+  catch { Write-Warning "Addon install skipped: $($_.Exception.Message)" }
 }
 
 if (-not $Force) {

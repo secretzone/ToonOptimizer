@@ -1,6 +1,6 @@
 // The only module that talks to the backend. Set VITE_MOCK=1 to swap in lib/mock.ts.
 import type {
-  AdvancedBody, AdvisorBody, AdvisorResult, CharacterProfile, CharacterReport, CharacterSummary, ConsumableOption,
+  AddonImportResult, AddonStatus, AdvancedBody, AdvisorBody, AdvisorResult, CharacterProfile, CharacterReport, CharacterSummary, ConsumableOption,
   Consumables, ConsumableOptions, ConsumablesBody, DecodedTalents, DropSource, DroptimizerBody, GearCompareBody,
   GemsBody, HistoryEntry, Item, ItemSearchResult, Job, LootSources, OmniumBody, QuickBody, RawUpgradeTrack,
   Recommendations, ReportListEntry, SeasonData, Settings, SimResult, StatWeightsBody, Status, SurrogateStatus,
@@ -83,6 +83,12 @@ export interface ApiClient {
   decodeTalents(klass: string, spec: string, loadout: string): Promise<DecodedTalents>
   importSimc(text: string): Promise<CharacterProfile>
   importArmory(region: string, realm: string, name: string): Promise<CharacterProfile>
+  /** GET /api/import/addon — characters captured by the ToonOptimizer addon, newest first. */
+  addonCaptures(): Promise<AddonStatus>
+  /** POST /api/import/addon — import one capture (newest when key omitted); 404 no data, 422 parse error. */
+  importAddon(key?: string): Promise<CharacterProfile>
+  /** POST /api/import/addon {all:true} — per-capture results; captures not newer than saved are skipped. */
+  importAddonAll(): Promise<AddonImportResult[]>
   quick(body: QuickBody): Promise<Job>
   topgear(body: TopGearBody): Promise<Job>
   droptimizer(body: DroptimizerBody): Promise<Job>
@@ -244,6 +250,9 @@ const http: ApiClient = {
   talents: (klass, spec) => get(`/api/data/talents/${klass}/${spec}`),
   decodeTalents: (klass, spec, loadout) => post('/api/data/talents/decode', { klass, spec, loadout }),
   importSimc: (text) => post('/api/import/simc', { text }),
+  addonCaptures: () => get('/api/import/addon'),
+  importAddon: (key) => post('/api/import/addon', { key: key ?? null }),
+  importAddonAll: () => post('/api/import/addon', { all: true }),
   importArmory: (region, realm, name) => get(`/api/import/armory${q({ region, realm, name })}`),
   quick: (body) => post('/api/sims/quick', body),
   topgear: (body) => post('/api/sims/topgear', body),

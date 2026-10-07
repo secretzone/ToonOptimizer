@@ -11,6 +11,7 @@ read it before touching a route or `frontend/src/lib/api.ts`.
 - `dungeon-talents`: per-dungeon utility swaps → grouped, named M+ loadouts.
 - `obvious-upgrades`: full character report (advisor + guides + sims), which uses the two
   talent skills.
+- `import-addon`: pull a character from the ToonOptimizer addon's SavedVariables, report changes.
 
 When a skill is added or changed, update README.md's skills table in the same commit.
 
@@ -37,5 +38,9 @@ When a skill is added or changed, update README.md's skills table in the same co
 ## Facts
 - WoW build: read from `<wow_dir>/.build.info` (Settings → WoW folder, auto-detected).
 - SimC: weekly Windows builds from https://github.com/sortbek/simc-builds.
+- In-game addons live in `addons/` (our `ToonOptimizer` addon plus a vendored, unmodified
+  `Simulationcraft`), installed by `scripts/Install-Addons.ps1`. The addon stores the SimC export
+  in `WTF/Account/*/SavedVariables/ToonOptimizer.lua`, which WoW writes only on `/reload`,
+  logout or exit; `toonopt.addon_import` reads it. Pasting `/simc` stays supported.
 - Game data: `https://wago.tools/db2/<Table>/csv?build=<build>`, cached per build.
 - Season rules (raids, tracks, crests, catalyst, consumables): `data/season.json`, maintained by hand.
