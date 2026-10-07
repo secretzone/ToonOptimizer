@@ -2,7 +2,8 @@
 
 - `ToonOptimizer/` saves your SimulationCraft export of each character to SavedVariables
   (`ToonOptimizerDB`) so the app can import it without copy/paste. It captures quietly after
-  gear, talent, spec or bag changes and at login/logout. Commands: `/topt` (capture now),
+  gear, talent, spec, bag or vault changes (about 10 s later) and at login. Give it a few
+  seconds after a change before you `/reload` or log out. Commands: `/topt` (capture now),
   `/topt status`, `/topt on`, `/topt off` (also `/toonopt`).
 - `Simulationcraft/` is a vendored, unmodified copy of the SimulationCraft addon (a dependency
   of ToonOptimizer). See `THIRD_PARTY.md`.

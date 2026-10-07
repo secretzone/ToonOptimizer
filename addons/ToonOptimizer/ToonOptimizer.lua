@@ -6,8 +6,9 @@ ns.version = "1.0.0"
 local DB_VERSION = 1
 local DEBOUNCE = 2
 local FIRST_DELAY = 5
--- WoW writes SavedVariables only on /reload, logout or exit. The logout capture is best-effort
--- (the game may already be tearing down), so changes are also captured shortly after they
+-- WoW writes SavedVariables only on /reload, logout or exit. There is no capture at logout:
+-- by then AceDB has stripped SimulationCraft's saved tables and its export errors out
+-- (bonusrolls.lua, db.char.bonusRolls is nil). So changes are captured shortly after they
 -- happen; the interval only keeps looting from rebuilding the export every few seconds.
 local MIN_INTERVAL = 10
 
@@ -130,8 +131,6 @@ frame:SetScript("OnEvent", function(_, event, arg1)
       waitingRegen = false
       schedule()
     end
-  elseif event == "PLAYER_LOGOUT" then
-    if ToonOptimizerDB and ToonOptimizerDB.settings.auto then capture("logout") end
   else
     schedule()
   end
@@ -141,7 +140,6 @@ frame:RegisterEvent("ADDON_LOADED")
 for _, e in ipairs({
   "PLAYER_ENTERING_WORLD", "PLAYER_EQUIPMENT_CHANGED", "TRAIT_CONFIG_UPDATED",
   "ACTIVE_PLAYER_SPECIALIZATION_CHANGED", "BAG_UPDATE_DELAYED", "WEEKLY_REWARDS_UPDATE",
-  "PLAYER_LOGOUT",
 }) do
   frame:RegisterEvent(e)
 end
